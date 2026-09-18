@@ -1,0 +1,113 @@
+.scanner-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-base);
+  background: rgba(17, 24, 39, 0.85);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+  overflow: hidden;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.scanner-card:hover {
+  border-color: var(--border-glass-hover);
+  box-shadow: var(--scanner-glow);
+}
+
+.scanner-card__accent-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--scanner-color);
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+}
+
+.scanner-card__header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.scanner-card__type-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.scanner-card__type-pill {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  padding: 0.2rem 0.6rem;
+  border-radius: var(--radius-full);
+  background: color-mix(in srgb, var(--scanner-color) 15%, transparent);
+  color: var(--scanner-color);
+  border: 1px solid color-mix(in srgb, var(--scanner-color) 40%, transparent);
+}
+
+.scanner-card__scanner-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--on-surface-variant);
+}
+
+.scanner-card__scanner-label strong {
+  color: var(--on-surface);
+}
+
+.scanner-card__tagline {
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--on-surface);
+}
+
+.scanner-card__description {
+  font-family: var(--font-body);
+  font-size: 12px;
+  color: var(--on-surface-variant);
+  line-height: 1.5;
+}
+
+.scanner-card__metrics {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--space-lg);
+  flex-wrap: wrap;
+}
+
+.scanner-card__divider {
+  width: 1px;
+  height: 40px;
+  background: var(--border-glass);
+  align-self: center;
+}
+
+.scanner-card__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  align-self: flex-start;
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--scanner-color);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid color-mix(in srgb, var(--scanner-color) 30%, transparent);
+  border-radius: var(--radius-md);
+  padding: 0.45rem 1rem;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  margin-top: auto;
+}
+
+.scanner-card__cta:hover {
+  background: color-mix(in srgb, var(--scanner-color) 12%, transparent);
+  border-color: color-mix(in srgb, var(--scanner-color) 60%, transparent);
+}

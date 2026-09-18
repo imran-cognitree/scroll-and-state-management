@@ -1,0 +1,33 @@
+/* MetricStat — large stat numbers per DESIGN.md metric-stat typography */
+.metric-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  min-width: 60px;
+}
+
+.metric-stat__value {
+  font-family: var(--font-display);
+  font-size: 32px;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  transition: color 0.2s ease;
+}
+
+.metric-stat__label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--on-surface-variant);
+}
+
+/* Variants */
+.metric-stat--default  .metric-stat__value { color: var(--on-surface); }
+.metric-stat--critical .metric-stat__value { color: var(--severity-critical); }
+.metric-stat--high     .metric-stat__value { color: var(--severity-high); }
+.metric-stat--medium   .metric-stat__value { color: var(--severity-medium); }
+.metric-stat--low      .metric-stat__value { color: var(--severity-low); }

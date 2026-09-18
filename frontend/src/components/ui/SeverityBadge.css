@@ -1,0 +1,61 @@
+.severity-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 0.2rem 0.55rem;
+  border-radius: var(--radius-sm);
+  white-space: nowrap;
+}
+
+.severity-badge--critical {
+  background: rgba(244, 63, 94, 0.12);
+  color: var(--severity-critical);
+  border: 1px solid rgba(244, 63, 94, 0.3);
+}
+
+.severity-badge--high {
+  background: rgba(249, 115, 22, 0.12);
+  color: var(--severity-high);
+  border: 1px solid rgba(249, 115, 22, 0.3);
+}
+
+.severity-badge--medium {
+  background: rgba(245, 158, 11, 0.12);
+  color: var(--severity-medium);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+.severity-badge--low {
+  background: rgba(16, 185, 129, 0.12);
+  color: var(--severity-low);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+/* Pulse dot for critical */
+.severity-badge__dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--severity-critical);
+  animation: pulse-dot 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse-dot {
+
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.5;
+    transform: scale(1.4);
+  }
+}
