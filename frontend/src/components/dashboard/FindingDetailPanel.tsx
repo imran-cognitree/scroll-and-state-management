@@ -21,6 +21,17 @@ export function FindingDetailPanel({ finding, onClose }: Props) {
     return () => window.removeEventListener('keydown', handleKey);
   }, [finding, onClose]);
 
+  // Lock background scroll while the panel is open so wheel/touch input
+  // over non-scrollable parts of the panel doesn't scroll the page behind it.
+  useEffect(() => {
+    if (!finding) return;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.body.style.overflow = previousOverflow;
+    };
+  }, [finding]);
+
   if (!finding) return null;
 
   const formattedJson = JSON.stringify(finding, null, 2);

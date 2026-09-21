@@ -300,8 +300,8 @@ export function FindingsList({ scanType, onBack }: Props) {
                       <span className="findings__type">{finding.vulnerability_type}</span>
                     </td>
                     <td className="findings__description-cell">
-                      <span className="findings__description">{finding.description}</span>
-                      <span className="findings__location">{finding.location}</span>
+                      <span className="findings__description" title={finding.description}>{finding.description}</span>
+                      <span className="findings__location" title={finding.location}>{finding.location}</span>
                     </td>
                     <td>
                       <StatusBadge status={finding.status} />
