@@ -1,0 +1,3084 @@
+{
+    "total": 63,
+    "p": 1,
+    "ps": 500,
+    "paging": {
+        "pageIndex": 1,
+        "pageSize": 500,
+        "total": 63
+    },
+    "effortTotal": 1651,
+    "issues": [
+        {
+            "key": "d3f57ae4-2869-4f91-93aa-904381878adc",
+            "rule": "terraform:S6258",
+            "severity": "MAJOR",
+            "component": "juice-shop:infrastructure/terraform/networking.tf",
+            "project": "juice-shop",
+            "line": 122,
+            "hash": "017ba19b7416012cbb9a7ac0d926633b",
+            "textRange": {
+                "startLine": 122,
+                "endLine": 122,
+                "startOffset": 9,
+                "endOffset": 17
+            },
+            "flows": [],
+            "status": "OPEN",
+            "message": "Omitting \"access_logs\" makes logs incomplete. Make sure it is safe here.",
+            "effort": "30min",
+            "debt": "30min",
+            "author": "bjoern.kimminich@kuehne-nagel.com",
+            "tags": [
+                "cwe",
+                "gcp",
+                "aws",
+                "former-hotspot"
+            ],
+            "creationDate": "2026-07-09T09:11:43+0000",
+            "updateDate": "2026-09-08T06:05:54+0000",
+            "type": "VULNERABILITY",
+            "scope": "MAIN",
+            "quickFixAvailable": false,
+            "messageFormattings": [],
+            "codeVariants": [],
+            "cleanCodeAttribute": "CONVENTIONAL",
+            "cleanCodeAttributeCategory": "CONSISTENT",
+            "impacts": [
+                {
+                    "softwareQuality": "SECURITY",
+                    "severity": "MEDIUM"
+                }
+            ],
+            "issueStatus": "OPEN",
+            "prioritizedRule": false,
+            "fromSonarQubeUpdate": false,
+            "internalTags": [],
+            "linkedTicketStatus": "NOT_LINKED"
+        },
+        {
+            "key": "97b601f1-7fa6-4248-ac61-462ce7458935",
+            "rule": "terraform:S5332",
+            "severity": "MINOR",
+            "component": "juice-shop:infrastructure/terraform/networking.tf",
+            "project": "juice-shop",
+            "line": 160,
+            "hash": "6227cb343ad5c3d836175b64b23cc4e8",
+            "textRange": {
+                "startLine": 160,
+                "endLine": 160,
+                "startOffset": 2,
+                "endOffset": 28
+            },
+            "flows": [],
+            "status": "OPEN",
+            "message": "Make sure allowing clear-text traffic is safe here.",
+            "effort": "30min",
+            "debt": "30min",
+            "author": "bjoern.kimminich@kuehne-nagel.com",
+            "tags": [
+                "cwe",
+                "gcp",
+                "aws",
+                "azure",
+                "former-hotspot"
+            ],
+            "creationDate": "2026-07-09T09:11:43+0000",
+            "updateDate": "2026-09-08T06:05:54+0000",
+            "type": "VULNERABILITY",
+            "scope": "MAIN",
+            "quickFixAvailable": false,
+            "messageFormattings": [],
+            "codeVariants": [],
+            "cleanCodeAttribute": "COMPLETE",
+            "cleanCodeAttributeCategory": "INTENTIONAL",
+            "impacts": [
+                {
+                    "softwareQuality": "SECURITY",
+                    "severity": "LOW"
+                }
+            ],
+            "issueStatus": "OPEN",
+            "prioritizedRule": false,
+            "fromSonarQubeUpdate": false,
+            "internalTags": [],
+            "linkedTicketStatus": "NOT_LINKED"
+        },
+        {
+            "key": "79ef992b-b48a-4378-8f76-b3499575771f",
+            "rule": "secrets:S6706",
+            "severity": "BLOCKER",
+            "component": "juice-shop:infrastructure/terraform/networking.tf",
+            "project": "juice-shop",
+            "line": 171,
+            "hash": "d31fe53e90107f2b6f68276a9517b301",
+            "textRange": {
+                "startLine": 171,
+                "endLine": 171,
+                "startOffset": 22,
+                "endOffset": 53
+            },
+            "flows": [],
+            "status": "OPEN",
+            "message": "Make sure this private key gets revoked, changed, and removed from the code.",
+            "effort": "30min",
+            "debt": "30min",
+            "author": "bjoern.kimminich@kuehne-nagel.com",
+            "tags": [
+                "cwe",
+                "secret"
+            ],
+            "creationDate": "2026-07-09T09:11:43+0000",
+            "updateDate": "2026-09-08T06:05:54+0000",
+            "type": "VULNERABILITY",
+            "scope": "MAIN",
+            "quickFixAvailable": false,
+            "messageFormattings": [],
+            "codeVariants": [],
+            "cleanCodeAttribute": "TRUSTWORTHY",
+            "cleanCodeAttributeCategory": "RESPONSIBLE",
+            "impacts": [
+                {
+                    "softwareQuality": "SECURITY",
+                    "severity": "BLOCKER"
+                }
+            ],
+            "issueStatus": "OPEN",
+            "prioritizedRule": false,
+            "fromSonarQubeUpdate": false,
+            "internalTags": [],
+            "linkedTicketStatus": "NOT_LINKED"
+        },
+        {
+            "key": "fc06ebf1-8d0e-4037-a2d6-60f7b5cbdc3e",
+            "rule": "terraform:S6258",
+            "severity": "MAJOR",
+            "component": "juice-shop:data/static/codefixes/iacLeakedKeyChallenge_1.tf",
+            "project": "juice-shop",
+            "line": 121,
+            "hash": "017ba19b7416012cbb9a7ac0d926633b",
+            "textRange": {
+                "startLine": 121,
+                "endLine": 121,
+                "startOffset": 9,
+                "endOffset": 17
+            },
+            "flows": [],
+            "status": "OPEN",
+            "message": "Omitting \"access_logs\" makes logs incomplete. Make sure it is safe here.",
+            "effort": "30min",
+            "debt": "30min",
+            "author": "bjoern.kimminich@kuehne-nagel.com",
+            "tags": [
+                "cwe",
+                "gcp",
+                "aws",
+                "former-hotspot"
+            ],
+            "creationDate": "2026-07-08T13:16:53+0000",
+            "updateDate": "2026-09-08T06:05:54+0000",
+            "type": "VULNERABILITY",
+            "scope": "MAIN",
+            "quickFixAvailable": false,
+            "messageFormattings": [],
+            "codeVariants": [],
+            "cleanCodeAttribute": "CONVENTIONAL",
+            "cleanCodeAttributeCategory": "CONSISTENT",
+            "impacts": [
+                {
+                    "softwareQuality": "SECURITY",
+                    "severity": "MEDIUM"
+                }
+            ],
+            "issueStatus": "OPEN",
+            "prioritizedRule": false,
+            "fromSonarQubeUpdate": false,
+            "internalTags": [],
+            "linkedTicketStatus": "NOT_LINKED"
+        },
+        {
+            "key": "0d19d162-25a4-4960-922d-5b0c3bad7579",
+            "rule": "terraform:S5332",
+            "severity": "MINOR",
+            "component": "juice-shop:data/static/codefixes/iacLeakedKeyChallenge_1.tf",
+            "project": "juice-shop",
+            "line": 159,
+            "hash": "6227cb343ad5c3d836175b64b23cc4e8",
+            "textRange": {
+                "startLine": 159,
+                "endLine": 159,
+                "startOffset": 2,
+                "endOffset": 28
+            },
+            "flows": [],
+            "status": "OPEN",
+            "message": "Make sure allowing clear-text traffic is safe here.",
+            "effort": "30min",
+            "debt": "30min",
+            "author": "bjoern.kimminich@kuehne-nagel.com",
+            "tags": [
+                "cwe",
+                "gcp",
+                "aws",
+                "azure",
+                "former-hotspot"
+            ],
+            "creationDate": "2026-07-08T13:16:53+0000",
+            "updateDate": "2026-09-08T06:05:54+0000",
+            "type": "VULNERABILITY",
+            "scope": "MAIN",
+            "quickFixAvailable": false,
+            "messageFormattings": [],
+            "codeVariants": [],
+            "cleanCodeAttribute": "COMPLETE",
+            "cleanCodeAttributeCategory": "INTENTIONAL",
+            "impacts": [
+                {
+                    "softwareQuality": "SECURITY",
+                    "severity": "LOW"
+                }
+            ],
+            "issueStatus": "OPEN",
+            "prioritizedRule": false,
+            "fromSonarQubeUpdate": false,
+            "internalTags": [],
+            "linkedTicketStatus": "NOT_LINKED"
+        },
+        {
+            "key": "190a8bde-5b80-475a-be48-0f6a1c3e3a64",
+            "rule": "terraform:S6258",
+            "severity": "MAJOR",
+            "component": "juice-shop:data/static/codefixes/iacLeakedKeyChallenge_2.tf",
+            "project": "juice-shop",
+            "line": 121,
+            "hash": "017ba19b7416012cbb9a7ac0d926633b",
+            "textRange": {
+                "startLine": 121,
+                "endLine": 121,
+                "startOffset": 9,
+                "endOffset": 17
+            },
+            "flows": [],
+            "status": "OPEN",
+            "message": "Omitting \"access_logs\" makes logs incomplete. Make sure it is safe here.",
+            "effort": "30min",
+            "debt": "30min",
+            "author": "bjoern.kimminich@kuehne-nagel.com",
+            "tags": [
+                "cwe",
+                "gcp",
+                "aws",
+                "former-hotspot"
+            ],
+            "creationDate": "2026-07-08T13:16:53+0000",
+            "updateDate": "2026-09-08T06:05:54+0000",
+            "type": "VULNERABILITY",
+            "scope": "MAIN",
+            "quickFixAvailable": false,
+            "messageFormattings": [],
+            "codeVariants": [],
+            "cleanCodeAttribute": "CONVENTIONAL",
+            "cleanCodeAttributeCategory": "CONSISTENT",
+            "impacts": [
+                {
+                    "softwareQuality": "SECURITY",
+                    "severity": "MEDIUM"
+                }
+            ],
+            "issueStatus": "OPEN",
+            "prioritizedRule": false,
+            "fromSonarQubeUpdate": false,
+            "internalTags": [],
+            "linkedTicketStatus": "NOT_LINKED"
+        },
+        {
+            "key": "4d7face6-c232-499d-a56d-6e545f0b1ddf",
+            "rule": "terraform:S5332",
+            "severity": "MINOR",
+            "component": "juice-shop:data/static/codefixes/iacLeakedKeyChallenge_2.tf",
+            "project": "juice-shop",
+            "line": 159,
+            "hash": "6227cb343ad5c3d836175b64b23cc4e8",
+            "textRange": {
+                "startLine": 159,
+                "endLine": 159,
+                "startOffset": 2,
+                "endOffset": 28
+            },
+            "flows": [],
+            "status": "OPEN",
+            "message": "Make sure allowing clear-text traffic is safe here.",
+            "effort": "30min",
+            "debt": "30min",
+            "author": "bjoern.kimminich@kuehne-nagel.com",
+            "tags": [
+                "cwe",
+                "gcp",
+                "aws",
+                "azure",
+                "former-hotspot"
+            ],
+            "creationDate": "2026-07-08T13:16:53+0000",
+            "updateDate": "2026-09-08T06:05:54+0000",
+            "type": "VULNERABILITY",
+            "scope": "MAIN",
+            "quickFixAvailable": false,
+            "messageFormattings": [],
+            "codeVariants": [],
+            "cleanCodeAttribute": "COMPLETE",
+            "cleanCodeAttributeCategory": "INTENTIONAL",
+            "impacts": [
+                {
+                    "softwareQuality": "SECURITY",
+                    "severity": "LOW"
+                }
+            ],
+            "issueStatus": "OPEN",
+            "prioritizedRule": false,
+            "fromSonarQubeUpdate": false,
+            "internalTags": [],
+            "linkedTicketStatus": "NOT_LINKED"
+        },
+        {
+            "key": "e46cf679-1ba5-4afa-bcf2-9c05224fb3fb",
+            "rule": "terraform:S6258",
+            "severity": "MAJOR",
+            "component": "juice-shop:data/static/codefixes/iacLeakedKeyChallenge_3_correct.tf",
+            "project": "juice-shop",
+            "line": 121,
+            "hash": "017ba19b7416012cbb9a7ac0d926633b",
+            "textRange": {
+                "startLine": 121,
+                "endLine": 121,
+                "startOffset": 9,
+                "endOffset": 17
+            },
+            "flows": [],
+            "status": "OPEN",
+            "message": "Omitting \"access_logs\" makes logs incomplete. Make sure it is safe here.",
+            "effort": "30min",
+            "debt": "30min",
+            "author": "bjoern.kimminich@kuehne-nagel.com",
+            "tags": [
+                "cwe",
+                "gcp",
+                "aws",
+                "former-hotspot"
+            ],
+            "creationDate": "2026-07-08T13:16:53+0000",
+            "updateDate": "2026-09-08T06:05:54+0000",
+            "type": "VULNERABILITY",
+            "scope": "MAIN",
+            "quickFixAvailable": false,
+            "messageFormattings": [],
+            "codeVariants": [],
+            "cleanCodeAttribute": "CONVENTIONAL",
+            "cleanCodeAttributeCategory": "CONSISTENT",
+            "impacts": [
+                {
+                    "softwareQuality": "SECURITY",
+                    "severity": "MEDIUM"
+                }
+            ],
+            "issueStatus": "OPEN",
+            "prioritizedRule": false,
+            "fromSonarQubeUpdate": false,
+            "internalTags": [],
+            "linkedTicketStatus": "NOT_LINKED"
+        },
+        {
+            "key": "760398af-348a-4309-8e92-f6ab78a7e954",
+            "rule": "terraform:S5332",
+            "severity": "MINOR",
+            "component": "juice-shop:data/static/codefixes/iacLeakedKeyChallenge_3_correct.tf",
+            "project": "juice-shop",
+            "line": 159,
+            "hash": "6227cb343ad5c3d836175b64b23cc4e8",
+            "textRange": {
+                "startLine": 159,
+                "endLine": 159,
+                "startOffset": 2,
+                "endOffset": 28
+            },
+            "flows": [],
+            "status": "OPEN",
+            "message": "Make sure allowing clear-text traffic is safe here.",
+            "effort": "30min",
+            "debt": "30min",
+            "author": "bjoern.kimminich@kuehne-nagel.com",
+            "tags": [
+                "cwe",
+                "gcp",
+                "aws",
+                "azure",
+                "former-hotspot"
+            ],
+            "creationDate": "2026-07-08T13:16:53+0000",
+            "updateDate": "2026-09-08T06:05:54+0000",
+            "type": "VULNERABILITY",
+            "scope": "MAIN",
+            "quickFixAvailable": false,
+            "messageFormattings": [],
+            "codeVariants": [],
+            "cleanCodeAttribute": "COMPLETE",
+            "cleanCodeAttributeCategory": "INTENTIONAL",
+            "impacts": [
+                {
+                    "softwareQuality": "SECURITY",
+                    "severity": "LOW"
+                }
+            ],
+            "issueStatus": "OPEN",
+            "prioritizedRule": false,
+            "fromSonarQubeUpdate": false,
+            "internalTags": [],
+            "linkedTicketStatus": "NOT_LINKED"
+        },
+        {
+            "key": "e5c0bb1d-8df4-4779-bca1-06e9e5e9a0b6",
+            "rule": "secrets:S6706",
+            "severity": "BLOCKER",
+            "component": "juice-shop:terraform/networking.tf",
+            "project": "juice-shop",
+            "line": 171,
+            "hash": "d31fe53e90107f2b6f68276a9517b301",
+            "textRange": {
+                "startLine": 171,
+                "endLine": 171,
+                "startOffset": 22,
+                "endOffset": 53
+            },
+            "flows": [],
+            "status": "OPEN",
+            "message": "Make sure this private key gets revoked, changed, and removed from the code.",
+            "effort": "30min",
+            "debt": "30min",
+            "author": "bjoern.kimminich@kuehne-nagel.com",
+            "tags": [
+                "cwe",
+                "secret"
+            ],
+            "creationDate": "2026-07-08T13:16:53+0000",
+            "updateDate": "2026-09-08T06:05:54+0000",
+            "type": "VULNERABILITY",
+            "scope": "MAIN",
+            "quickFixAvailable": false,
+            "messageFormattings": [],
+            "codeVariants": [],
+            "cleanCodeAttribute": "TRUSTWORTHY",
+            "cleanCodeAttributeCategory": "RESPONSIBLE",
+            "impacts": [
+                {
+                    "softwareQuality": "SECURITY",
+                    "severity": "BLOCKER"
+                }
+            ],
+            "issueStatus": "OPEN",
+            "prioritizedRule": false,
+            "fromSonarQubeUpdate": false,
+            "internalTags": [],
+            "linkedTicketStatus": "NOT_LINKED"
+        },
+        {
+            "key": "91e7a71a-9efd-4a95-9404-6e462c561138",
+            "rule": "terraform:S6258",
+            "severity": "MAJOR",
+            "component": "juice-shop:terraform/networking.tf",
+            "project": "juice-shop",
+            "line": 122,
+            "hash": "017ba19b7416012cbb9a7ac0d926633b",
+            "textRange": {
+                "startLine": 122,
+                "endLine": 122,
+                "startOffset": 9,
+                "endOffset": 17
+            },
+            "flows": [],
+            "status": "OPEN",
+            "message": "Omitting \"access_logs\" makes logs incomplete. Make sure it is safe here.",
+            "effort": "30min",
+            "debt": "30min",
+            "author": "bjoern.kimminich@kuehne-nagel.com",
+            "tags": [
+                "cwe",
+                "gcp",
+                "aws",
+                "former-hotspot"
+            ],
+            "creationDate": "2026-07-07T09:27:31+0000",
+            "updateDate": "2026-09-08T06:05:54+0000",
+            "type": "VULNERABILITY",
+            "scope": "MAIN",
+            "quickFixAvailable": false,
+            "messageFormattings": [],
+            "codeVariants": [],
+            "cleanCodeAttribute": "CONVENTIONAL",
+            "cleanCodeAttributeCategory": "CONSISTENT",
+            "impacts": [
+                {
+                    "softwareQuality": "SECURITY",
+                    "severity": "MEDIUM"
+                }
+            ],
+            "issueStatus": "OPEN",
+            "prioritizedRule": false,
+            "fromSonarQubeUpdate": false,
+            "internalTags": [],
+            "linkedTicketStatus": "NOT_LINKED"
+        },
+        {
+            "key": "75ab8399-3d9d-41d1-9322-b4139cb08d84",
+            "rule": "terraform:S5332",
+            "severity": "MINOR",
+            "component": "juice-shop:terraform/networking.tf",
+            "project": "juice-shop",
+            "line": 160,
+            "hash": "6227cb343ad5c3d836175b64b23cc4e8",
+            "textRange": {
+                "startLine": 160,
+                "endLine": 160,
+                "startOffset": 2,
+                "endOffset": 28
+            },
+            "flows": [],
+            "status": "OPEN",
+            "message": "Make sure allowing clear-text traffic is safe here.",
+            "effort": "30min",
+            "debt": "30min",
+            "author": "bjoern.kimminich@kuehne-nagel.com",
+            "tags": [
+                "cwe",
+                "gcp",
+                "aws",
+                "azure",
+                "former-hotspot"
+            ],
+            "creationDate": "2026-07-07T09:27:31+0000",
+            "updateDate": "2026-09-08T06:05:54+0000",
+            "type": "VULNERABILITY",
+            "scope": "MAIN",
+            "quickFixAvailable": false,
+            "messageFormattings": [],
+            "codeVariants": [],
+            "cleanCodeAttribute": "COMPLETE",
+            "cleanCodeAttributeCategory": "INTENTIONAL",
+            "impacts": [
+                {
+                    "softwareQuality": "SECURITY",
+                    "severity": "LOW"
+                }
+            ],
+            "issueStatus": "OPEN",
+            "prioritizedRule": false,
+            "fromSonarQubeUpdate": false,
+            "internalTags": [],
+            "linkedTicketStatus": "NOT_LINKED"
+        },
+        {
+            "key": "347d72da-2aeb-4f4b-86fd-bbfbfca181bb",
+            "rule": "javascript:S4036",
+            "severity": "MINOR",
+            "component": "juice-shop:scripts/package.mjs",
+            "project": "juice-shop",
+            "line": 20,
+            "hash": "ab2805254589258b1d2da53c4b29b83e",
+            "textRange": {
+                "startLine": 20,
+                "endLine": 20,
+                "startOffset": 32,
+                "endOffset": 45
+            },
+            "flows": [],
+            "status": "OPEN",
+            "message": "Make sure the \"PATH\" variable only contains fixed, unwriteable directories.",
+            "effort": "15min",
+            "debt": "15min",
+            "author": "jannik.hollenbach@owasp.org",
+            "tags": [
+                "cwe",
+                "former-hotspot"
+            ],
+            "creationDate": "2026-06-26T11:14:05+0000",
+            "updateDate": "2026-09-08T06:05:54+0000",
+            "type": "VULNERABILITY",
+            "scope": "MAIN",
+            "quickFixAvailable": false,
+            "messageFormattings": [],
+            "codeVariants": [],
+            "cleanCodeAttribute": "COMPLETE",
+            "cleanCodeAttributeCategory": "INTENTIONAL",
+            "impacts": [
+                {
+                    "softwareQuality": "SECURITY",
+                    "severity": "LOW"
+                }
+            ],
+            "issueStatus": "OPEN",
+            "prioritizedRule": false,
+            "fromSonarQubeUpdate": false,
+            "internalTags": [],
+            "linkedTicketStatus": "NOT_LINKED"
+        },
+        {
+            "key": "22ff7f5b-5577-4b34-b813-c709f4611df7",
+            "rule": "javascript:S4790",
+            "severity": "CRITICAL",
+            "component": "juice-shop:scripts/package.mjs",
+            "project": "juice-shop",
+            "line": 121,
+            "hash": "9dfa2211215b30ffe3d97ef9f9315237",
+            "textRange": {
+                "startLine": 121,
+                "endLine": 121,
+                "startOffset": 15,
+                "endOffset": 32
+            },
+            "flows": [],
+            "status": "OPEN",
+            "message": "Make sure this weak hash algorithm is not used in a sensitive context here.",
+            "effort": "30min",
+            "debt": "30min",
+            "author": "jannik.hollenbach@owasp.org",
+            "tags": [
+                "cwe",
+                "former-hotspot"
+            ],
+            "creationDate": "2026-06-26T11:14:05+0000",
+            "updateDate": "2026-09-08T06:05:54+0000",
+            "type": "VULNERABILITY",
+            "scope": "MAIN",
+            "quickFixAvailable": false,
+            "messageFormattings": [],
+            "codeVariants": [],
+            "cleanCodeAttribute": "TRUSTWORTHY",
+            "cleanCodeAttributeCategory": "RESPONSIBLE",
+            "impacts": [
+                {
+                    "softwareQuality": "SECURITY",
+                    "severity": "HIGH"
+                }
+            ],
+            "issueStatus": "OPEN",
+            "prioritizedRule": false,
+            "fromSonarQubeUpdate": false,
+            "internalTags": [],
+            "linkedTicketStatus": "NOT_LINKED"
+        },
+        {
+            "key": "ff3b6958-bd38-4b95-978a-2d573061d380",
+            "rule": "typescript:S5332",
+            "severity": "MINOR",
+            "component": "juice-shop:data/datacreator.ts",
+            "project": "juice-shop",
+            "line": 86,
+            "hash": "3a03347bac59fe81991dc3dda486579f",
+            "textRange": {
+                "startLine": 86,
+                "endLine": 86,
+                "startOffset": 38,
+                "endOffset": 70
+            },
+            "flows": [],
+            "status": "OPEN",
+            "message": "Using http protocol is insecure. Use https instead.",
+            "effort": "30min",
+            "debt": "30min",
+            "author": "bjoern.kimminich@kuehne-nagel.com",
+            "tags": [
+                "cwe",
+                "former-hotspot"
+            ],
+            "creationDate": "2026-06-22T07:10:00+0000",
+            "updateDate": "2026-09-08T06:05:54+0000",
+            "type": "VULNERABILITY",
+            "scope": "MAIN",
+            "quickFixAvailable": false,
+            "messageFormattings": [],
+            "codeVariants": [],
+            "cleanCodeAttribute": "COMPLETE",
+            "cleanCodeAttributeCategory": "INTENTIONAL",
+            "impacts": [
+                {
+                    "softwareQuality": "SECURITY",
+                    "severity": "LOW"
+                }
+            ],
+            "issueStatus": "OPEN",
+            "prioritizedRule": false,
+            "fromSonarQubeUpdate": false,
+            "internalTags": [],
+            "linkedTicketStatus": "NOT_LINKED"
+        },
+        {
+            "key": "3fc843ce-004e-44bf-ae9a-2e130734a48d",
+            "rule": "typescript:S5332",
+            "severity": "MINOR",
+            "component": "juice-shop:data/datacreator.ts",
+            "project": "juice-shop",
+            "line": 173,
+            "hash": "2e1ef6dc20616376379913496f20a655",
+            "textRange": {
+                "startLine": 173,
+                "endLine": 173,
+                "startOffset": 19,
+                "endOffset": 51
+            },
+            "flows": [],
+            "status": "OPEN",
+            "message": "Using http protocol is insecure. Use https instead.",
+            "effort": "30min",
+            "debt": "30min",
+            "author": "bjoern.kimminich@kuehne-nagel.com",
+            "tags": [
+                "cwe",
+                "former-hotspot"
+            ],
+            "creationDate": "2026-06-22T07:10:00+0000",
+            "updateDate": "2026-09-08T06:05:54+0000",
+            "type": "VULNERABILITY",
+            "scope": "MAIN",
+            "quickFixAvailable": false,
+            "messageFormattings": [],
+            "codeVariants": [],
+            "cleanCodeAttribute": "COMPLETE",
+            "cleanCodeAttributeCategory": "INTENTIONAL",
+            "impacts": [
+                {
+                    "softwareQuality": "SECURITY",
+                    "severity": "LOW"
+                }
+            ],
+            "issueStatus": "OPEN",
+            "prioritizedRule": false,
+            "fromSonarQubeUpdate": false,
+            "internalTags": [],
+            "linkedTicketStatus": "NOT_LINKED"
+        },
+        {
+            "key": "990070c7-704c-421e-bdaf-77533b25f227",
+            "rule": "typescript:S1523",
+            "severity": "CRITICAL",
+            "component": "juice-shop:lib/xml.ts",
+            "project": "juice-shop",
+            "line": 38,
+            "hash": "a145e57bd515fd18c9306c5f619e9e13",
+            "textRange": {
+                "startLine": 38,
+                "endLine": 38,
+                "startOffset": 17,
+                "endOffset": 32
+            },
+            "flows": [],
+            "status": "OPEN",
+            "message": "Make sure that this dynamic injection or execution of code is safe.",
+            "effort": "30min",
+            "debt": "30min",
+            "author": "jannik.hollenbach@owasp.org",
+            "tags": [
+                "cwe",
+                "former-hotspot"
+            ],
+            "creationDate": "2026-06-05T12:09:40+0000",
+            "updateDate": "2026-09-08T06:05:54+0000",
+            "type": "VULNERABILITY",
+            "scope": "MAIN",
+            "quickFixAvailable": false,
+            "messageFormattings": [],
+            "codeVariants": [],
+            "cleanCodeAttribute": "TRUSTWORTHY",
+            "cleanCodeAttributeCategory": "RESPONSIBLE",
+            "impacts": [
+                {
+                    "softwareQuality": "MAINTAINABILITY",
+                    "severity": "LOW"
+                },
+                {
+                    "softwareQuality": "SECURITY",
+                    "severity": "HIGH"
+                }
+            ],
+            "issueStatus": "OPEN",
+            "prioritizedRule": false,
+            "fromSonarQubeUpdate": false,
+            "internalTags": [],
+            "linkedTicketStatus": "NOT_LINKED"
+        },
+        {
+            "key": "8b398b3a-6b88-4f37-9ee1-fc9e178a7d99",
+            "rule": "typescript:S1523",
+            "severity": "CRITICAL",
+            "component": "juice-shop:routes/fileUpload.ts",
+            "project": "juice-shop",
+            "line": 109,
+            "hash": "59e6962f957f4ba8a5d9dba31b87a689",
+            "textRange": {
+                "startLine": 109,
+                "endLine": 109,
+                "startOffset": 27,
+                "endOffset": 42
+            },
+            "flows": [],
+            "status": "OPEN",
+            "message": "Make sure that this dynamic injection or execution of code is safe.",
+            "effort": "30min",
+            "debt": "30min",
+            "author": "bjoern.kimminich@kuehne-nagel.com",
+            "tags": [
+                "cwe",
+                "former-hotspot"
+            ],
+            "creationDate": "2025-03-04T10:51:10+0000",
+            "updateDate": "2026-09-08T06:05:54+0000",
+            "type": "VULNERABILITY",
+            "scope": "MAIN",
+            "quickFixAvailable": false,
+            "messageFormattings": [],
+            "codeVariants": [],
+            "cleanCodeAttribute": "TRUSTWORTHY",
+            "cleanCodeAttributeCategory": "RESPONSIBLE",
+            "impacts": [
+                {
+                    "softwareQuality": "MAINTAINABILITY",
+                    "severity": "LOW"
+                },
+                {
+                    "softwareQuality": "SECURITY",
+                    "severity": "HIGH"
+                }
+            ],
+            "issueStatus": "OPEN",
+            "prioritizedRule": false,
+            "fromSonarQubeUpdate": false,
+            "internalTags": [],
+            "linkedTicketStatus": "NOT_LINKED"
+        },
+        {
+            "key": "d82399c2-1893-49b3-98f9-1eb7ebbf8667",
+            "rule": "typescript:S2245",
+            "severity": "MAJOR",
+            "component": "juice-shop:data/datacreator.ts",
+            "project": "juice-shop",
+            "line": 323,
+            "hash": "d4c1f14fd168dae4fe2d8baa41bd3bdf",
+            "textRange": {
+                "startLine": 323,
+                "endLine": 323,
+                "startOffset": 49,
+                "endOffset": 62
+            },
+            "flows": [],
+            "status": "OPEN",
+            "message": "Make sure that using this pseudorandom number generator is safe here.",
+            "effort": "10min",
+            "debt": "10min",
+            "author": "bjoern.kimminich@kuehne-nagel.com",
+            "tags": [
+                "cwe",
+                "former-hotspot"
+            ],
+            "creationDate": "2023-09-19T15:38:35+0000",
+            "updateDate": "2026-09-08T06:05:54+0000",
+            "type": "VULNERABILITY",
+            "scope": "MAIN",
+            "quickFixAvailable": false,
+            "messageFormattings": [],
+            "codeVariants": [],
+            "cleanCodeAttribute": "TRUSTWORTHY",
+            "cleanCodeAttributeCategory": "RESPONSIBLE",
+            "impacts": [
+                {
+                    "softwareQuality": "SECURITY",
+                    "severity": "MEDIUM"
+                }
+            ],
+            "issueStatus": "OPEN",
+            "prioritizedRule": false,
+            "fromSonarQubeUpdate": false,
+            "internalTags": [],
+            "linkedTicketStatus": "NOT_LINKED"
+        },
+        {
+            "key": "3401ebc8-c3b6-47be-bdc5-51af7691cf31",
+            "rule": "typescript:S4790",
+            "severity": "CRITICAL",
+            "component": "juice-shop:lib/insecurity.ts",
+            "project": "juice-shop",
+            "line": 41,
+            "hash": "e308ef3ae31bbb37c1e3439461cf4705",
+            "textRange": {
+                "startLine": 41,
+                "endLine": 41,
+                "startOffset": 38,
+                "endOffset": 55
+            },
+            "flows": [],
+            "status": "OPEN",
+            "message": "Make sure this weak hash algorithm is not used in a sensitive context here.",
+            "effort": "30min",
+            "debt": "30min",
+            "author": "jannik@hollenbach.de",
+            "tags": [
+                "cwe",
+                "former-hotspot"
+            ],
+            "creationDate": "2023-05-06T16:23:06+0000",
+            "updateDate": "2026-09-08T06:05:54+0000",
+            "type": "VULNERABILITY",
+            "scope": "MAIN",
+            "quickFixAvailable": false,
+            "messageFormattings": [],
+            "codeVariants": [],
+            "cleanCodeAttribute": "TRUSTWORTHY",
+            "cleanCodeAttributeCategory": "RESPONSIBLE",
+            "impacts": [
+                {
+                    "softwareQuality": "SECURITY",
+                    "severity": "HIGH"
+                }
+            ],
+            "issueStatus": "OPEN",
+            "prioritizedRule": false,
+            "fromSonarQubeUpdate": false,
+            "internalTags": [],
+            "linkedTicketStatus": "NOT_LINKED"
+        },
+        {
+            "key": "9101fd7c-4d34-4c8b-a07a-0f838f54ac3a",
+            "rule": "typescript:S6437",
+            "severity": "BLOCKER",
+            "component": "juice-shop:lib/insecurity.ts",
+            "project": "juice-shop",
+            "line": 42,
+            "hash": "f0812a9968209c58008afba7878097b7",
+            "textRange": {
+                "startLine": 42,
+                "endLine": 42,
+                "startOffset": 38,
+                "endOffset": 55
+            },
+            "flows": [],
+            "status": "OPEN",
+            "message": "Revoke and change this password, as it is compromised.",
+            "effort": "1h",
+            "debt": "1h",
+            "author": "jannik@hollenbach.de",
+            "tags": [
+                "cwe",
+                "secret"
+            ],
+            "creationDate": "2023-05-06T16:23:06+0000",
+            "updateDate": "2026-09-08T06:05:54+0000",
+            "type": "VULNERABILITY",
+            "scope": "MAIN",
+            "quickFixAvailable": false,
+            "messageFormattings": [],
+            "codeVariants": [],
+            "cleanCodeAttribute": "TRUSTWORTHY",
+            "cleanCodeAttributeCategory": "RESPONSIBLE",
+            "impacts": [
+                {
+                    "softwareQuality": "SECURITY",
+                    "severity": "BLOCKER"
+                }
+            ],
+            "issueStatus": "OPEN",
+            "prioritizedRule": false,
+            "fromSonarQubeUpdate": false,
+            "internalTags": [],
+            "linkedTicketStatus": "NOT_LINKED"
+        },
+        {
+            "key": "7123debb-c5ae-43b6-9ae6-c7adfcaceee2",
+            "rule": "typescript:S2245",
+            "severity": "MAJOR",
+            "component": "juice-shop:lib/insecurity.ts",
+            "project": "juice-shop",
+            "line": 53,
+            "hash": "401de32e15cbfc50cd691c3c1ee24359",
+            "textRange": {
+                "startLine": 53,
+                "endLine": 53,
+                "startOffset": 55,
+                "endOffset": 68
+            },
+            "flows": [],
+            "status": "OPEN",
+            "message": "Make sure that using this pseudorandom number generator is safe here.",
+            "effort": "10min",
+            "debt": "10min",
+            "author": "jannik@hollenbach.de",
+            "tags": [
+                "cwe",
+                "former-hotspot"
+            ],
+            "creationDate": "2023-05-06T16:23:06+0000",
+            "updateDate": "2026-09-08T06:05:54+0000",
+            "type": "VULNERABILITY",
+            "scope": "MAIN",
+            "quickFixAvailable": false,
+            "messageFormattings": [],
+            "codeVariants": [],
+            "cleanCodeAttribute": "TRUSTWORTHY",
+            "cleanCodeAttributeCategory": "RESPONSIBLE",
+            "impacts": [
+                {
+                    "softwareQuality": "SECURITY",
+                    "severity": "MEDIUM"
+                }
+            ],
+            "issueStatus": "OPEN",
+            "prioritizedRule": false,
+            "fromSonarQubeUpdate": false,
+            "internalTags": [],
+            "linkedTicketStatus": "NOT_LINKED"
+        },
+        {
+            "key": "206172d2-8880-4959-9225-239229264599",
+            "rule": "secrets:S6706",
+            "severity": "BLOCKER",
+            "component": "juice-shop:lib/insecurity.ts",
+            "project": "juice-shop",
+            "line": 21,
+            "hash": "648b1c2b0817f9c92f0cadebbe3e4bdf",
+            "textRange": {
+                "startLine": 21,
+                "endLine": 21,
+                "startOffset": 20,
+                "endOffset": 51
+            },
+            "flows": [],
+            "status": "OPEN",
+            "message": "Make sure this private key gets revoked, changed, and removed from the code.",
+            "effort": "30min",
+            "debt": "30min",
+            "author": "spalriwalau@gmail.com",
+            "tags": [
+                "cwe",
+                "secret"
+            ],
+            "creationDate": "2022-05-03T08:47:40+0000",
+            "updateDate": "2026-09-08T06:05:54+0000",
+            "type": "VULNERABILITY",
+            "scope": "MAIN",
+            "quickFixAvailable": false,
+            "messageFormattings": [],
+            "codeVariants": [],
+            "cleanCodeAttribute": "TRUSTWORTHY",
+            "cleanCodeAttributeCategory": "RESPONSIBLE",
+            "impacts": [
+                {
+                    "softwareQuality": "SECURITY",
+                    "severity": "BLOCKER"
+                }
+            ],
+            "issueStatus": "OPEN",
+            "prioritizedRule": false,
+            "fromSonarQubeUpdate": false,
+            "internalTags": [],
+            "linkedTicketStatus": "NOT_LINKED"
+        },
+        {
+            "key": "5e0724f5-b0aa-4062-8746-6c1b74b59362",
+            "rule": "typescript:S5332",
+            "severity": "MINOR",
+            "component": "juice-shop:lib/insecurity.ts",
+            "project": "juice-shop",
+            "line": 127,
+            "hash": "51158762d81e66b30147edd3369986dc",
+            "textRange": {
+                "startLine": 127,
+                "endLine": 127,
+                "startOffset": 2,
+                "endOffset": 41
+            },
+            "flows": [],
+            "status": "OPEN",
+            "message": "Using http protocol is insecure. Use https instead.",
+            "effort": "30min",
+            "debt": "30min",
+            "author": "spalriwalau@gmail.com",
+            "tags": [
+                "cwe",
+                "former-hotspot"
+            ],
+            "creationDate": "2022-05-03T08:47:40+0000",
+            "updateDate": "2026-09-08T06:05:54+0000",
+            "type": "VULNERABILITY",
+            "scope": "MAIN",
+            "quickFixAvailable": false,
+            "messageFormattings": [],
+            "codeVariants": [],
+            "cleanCodeAttribute": "COMPLETE",
+            "cleanCodeAttributeCategory": "INTENTIONAL",
+            "impacts": [
+                {
+                    "softwareQuality": "SECURITY",
+                    "severity": "LOW"
+                }
+            ],
+            "issueStatus": "OPEN",
+            "prioritizedRule": false,
+            "fromSonarQubeUpdate": false,
+            "internalTags": [],
+            "linkedTicketStatus": "NOT_LINKED"
+        },
+        {
+            "key": "f16d9be5-5145-49f6-8288-4d50af15326f",
+            "rule": "typescript:S5332",
+            "severity": "MINOR",
+            "component": "juice-shop:lib/insecurity.ts",
+            "project": "juice-shop",
+            "line": 128,
+            "hash": "e76995f5be75a68851d29271f4a38ab1",
+            "textRange": {
+                "startLine": 128,
+                "endLine": 128,
+                "startOffset": 2,
+                "endOffset": 40
+            },
+            "flows": [],
+            "status": "OPEN",
+            "message": "Using http protocol is insecure. Use https instead.",
+            "effort": "30min",
+            "debt": "30min",
+            "author": "spalriwalau@gmail.com",
+            "tags": [
+                "cwe",
+                "former-hotspot"
+            ],
+            "creationDate": "2022-05-03T08:47:40+0000",
+            "updateDate": "2026-09-08T06:05:54+0000",
+            "type": "VULNERABILITY",
+            "scope": "MAIN",
+            "quickFixAvailable": false,
+            "messageFormattings": [],
+            "codeVariants": [],
+            "cleanCodeAttribute": "COMPLETE",
+            "cleanCodeAttributeCategory": "INTENTIONAL",
+            "impacts": [
+                {
+                    "softwareQuality": "SECURITY",
+                    "severity": "LOW"
+                }
+            ],
+            "issueStatus": "OPEN",
+            "prioritizedRule": false,
+            "fromSonarQubeUpdate": false,
+            "internalTags": [],
+            "linkedTicketStatus": "NOT_LINKED"
+        },
+        {
+            "key": "8f980fb2-ea48-4997-9f04-5b0787da8f8a",
+            "rule": "typescript:S5332",
+            "severity": "MINOR",
+            "component": "juice-shop:lib/insecurity.ts",
+            "project": "juice-shop",
+            "line": 130,
+            "hash": "45a0715f63aa279b6adb6414e8ece77c",
+            "textRange": {
+                "startLine": 130,
+                "endLine": 130,
+                "startOffset": 2,
+                "endOffset": 33
+            },
+            "flows": [],
+            "status": "OPEN",
+            "message": "Using http protocol is insecure. Use https instead.",
+            "effort": "30min",
+            "debt": "30min",
+            "author": "spalriwalau@gmail.com",
+            "tags": [
+                "cwe",
+                "former-hotspot"
+            ],
+            "creationDate": "2022-05-03T08:47:40+0000",
+            "updateDate": "2026-09-08T06:05:54+0000",
+            "type": "VULNERABILITY",
+            "scope": "MAIN",
+            "quickFixAvailable": false,
+            "messageFormattings": [],
+            "codeVariants": [],
+            "cleanCodeAttribute": "COMPLETE",
+            "cleanCodeAttributeCategory": "INTENTIONAL",
+            "impacts": [
+                {
+                    "softwareQuality": "SECURITY",
+                    "severity": "LOW"
+                }
+            ],
+            "issueStatus": "OPEN",
+            "prioritizedRule": false,
+            "fromSonarQubeUpdate": false,
+            "internalTags": [],
+            "linkedTicketStatus": "NOT_LINKED"
+        },
+        {
+            "key": "2517fb8d-9904-46ce-af85-049a30b57621",
+            "rule": "typescript:S2245",
+            "severity": "MAJOR",
+            "component": "juice-shop:data/datacreator.ts",
+            "project": "juice-shop",
+            "line": 381,
+            "hash": "cdbb376283aad3aff61b3e6ca9bf24f4",
+            "textRange": {
+                "startLine": 381,
+                "endLine": 381,
+                "startOffset": 48,
+                "endOffset": 61
+            },
+            "flows": [],
+            "status": "OPEN",
+            "message": "Make sure that using this pseudorandom number generator is safe here.",
+            "effort": "10min",
+            "debt": "10min",
+            "author": "bjoern.kimminich@gmx.de",
+            "tags": [
+                "cwe",
+                "former-hotspot"
+            ],
+            "creationDate": "2022-01-12T07:30:12+0000",
+            "updateDate": "2026-09-08T06:05:54+0000",
+            "type": "VULNERABILITY",
+            "scope": "MAIN",
+            "quickFixAvailable": false,
+            "messageFormattings": [],
+            "codeVariants": [],
+            "cleanCodeAttribute": "TRUSTWORTHY",
+            "cleanCodeAttributeCategory": "RESPONSIBLE",
+            "impacts": [
+                {
+                    "softwareQuality": "SECURITY",
+                    "severity": "MEDIUM"
+                }
+            ],
+            "issueStatus": "OPEN",
+            "prioritizedRule": false,
+            "fromSonarQubeUpdate": false,
+            "internalTags": [],
+            "linkedTicketStatus": "NOT_LINKED"
+        },
+        {
+            "key": "451852cc-4a8b-49e7-be98-813395f38f24",
+            "rule": "typescript:S5332",
+            "severity": "MINOR",
+            "component": "juice-shop:data/static/codefixes/redirectChallenge_1.ts",
+            "project": "juice-shop",
+            "line": 6,
+            "hash": "51158762d81e66b30147edd3369986dc",
+            "textRange": {
+                "startLine": 6,
+                "endLine": 6,
+                "startOffset": 2,
+                "endOffset": 41
+            },
+            "flows": [],
+            "status": "OPEN",
+            "message": "Using http protocol is insecure. Use https instead.",
+            "effort": "30min",
+            "debt": "30min",
+            "author": "bjoern.kimminich@gmx.de",
+            "tags": [
+                "cwe",
+                "former-hotspot"
+            ],
+            "creationDate": "2021-08-03T16:13:40+0000",
+            "updateDate": "2026-09-08T06:05:54+0000",
+            "type": "VULNERABILITY",
+            "scope": "MAIN",
+            "quickFixAvailable": false,
+            "messageFormattings": [],
+            "codeVariants": [],
+            "cleanCodeAttribute": "COMPLETE",
+            "cleanCodeAttributeCategory": "INTENTIONAL",
+            "impacts": [
+                {
+                    "softwareQuality": "SECURITY",
+                    "severity": "LOW"
+                }
+            ],
+            "issueStatus": "OPEN",
+            "prioritizedRule": false,
+            "fromSonarQubeUpdate": false,
+            "internalTags": [],
+            "linkedTicketStatus": "NOT_LINKED"
+        },
+        {
+            "key": "78aff7ac-f770-46e6-ae49-4c7bef4e30af",
+            "rule": "typescript:S5332",
+            "severity": "MINOR",
+            "component": "juice-shop:data/static/codefixes/redirectChallenge_1.ts",
+            "project": "juice-shop",
+            "line": 7,
+            "hash": "e76995f5be75a68851d29271f4a38ab1",
+            "textRange": {
+                "startLine": 7,
+                "endLine": 7,
+                "startOffset": 2,
+                "endOffset": 40
+            },
+            "flows": [],
+            "status": "OPEN",
+            "message": "Using http protocol is insecure. Use https instead.",
+            "effort": "30min",
+            "debt": "30min",
+            "author": "bjoern.kimminich@gmx.de",
+            "tags": [
+                "cwe",
+                "former-hotspot"
+            ],
+            "creationDate": "2021-08-03T16:13:40+0000",
+            "updateDate": "2026-09-08T06:05:54+0000",
+            "type": "VULNERABILITY",
+            "scope": "MAIN",
+            "quickFixAvailable": false,
+            "messageFormattings": [],
+            "codeVariants": [],
+            "cleanCodeAttribute": "COMPLETE",
+            "cleanCodeAttributeCategory": "INTENTIONAL",
+            "impacts": [
+                {
+                    "softwareQuality": "SECURITY",
+                    "severity": "LOW"
+                }
+            ],
+            "issueStatus": "OPEN",
+            "prioritizedRule": false,
+            "fromSonarQubeUpdate": false,
+            "internalTags": [],
+            "linkedTicketStatus": "NOT_LINKED"
+        },
+        {
+            "key": "fb3182cc-3d0c-4535-a0d4-c19e3b60a4ee",
+            "rule": "typescript:S5332",
+            "severity": "MINOR",
+            "component": "juice-shop:data/static/codefixes/redirectChallenge_1.ts",
+            "project": "juice-shop",
+            "line": 9,
+            "hash": "45a0715f63aa279b6adb6414e8ece77c",
+            "textRange": {
+                "startLine": 9,
+                "endLine": 9,
+                "startOffset": 2,
+                "endOffset": 33
+            },
+            "flows": [],
+            "status": "OPEN",
+            "message": "Using http protocol is insecure. Use https instead.",
+            "effort": "30min",
+            "debt": "30min",
+            "author": "bjoern.kimminich@gmx.de",
+            "tags": [
+                "cwe",
+                "former-hotspot"
+            ],
+            "creationDate": "2021-08-03T16:13:40+0000",
+            "updateDate": "2026-09-08T06:05:54+0000",
+            "type": "VULNERABILITY",
+            "scope": "MAIN",
+            "quickFixAvailable": false,
+            "messageFormattings": [],
+            "codeVariants": [],
+            "cleanCodeAttribute": "COMPLETE",
+            "cleanCodeAttributeCategory": "INTENTIONAL",
+            "impacts": [
+                {
+                    "softwareQuality": "SECURITY",
+                    "severity": "LOW"
+                }
+            ],
+            "issueStatus": "OPEN",
+            "prioritizedRule": false,
+            "fromSonarQubeUpdate": false,
+            "internalTags": [],
+            "linkedTicketStatus": "NOT_LINKED"
+        },
+        {
+            "key": "f9e58a75-da1a-4653-9070-9c773d3fb9bb",
+            "rule": "typescript:S5332",
+            "severity": "MINOR",
+            "component": "juice-shop:data/static/codefixes/redirectChallenge_2.ts",
+            "project": "juice-shop",
+            "line": 6,
+            "hash": "51158762d81e66b30147edd3369986dc",
+            "textRange": {
+                "startLine": 6,
+                "endLine": 6,
+                "startOffset": 2,
+                "endOffset": 41
+            },
+            "flows": [],
+            "status": "OPEN",
+            "message": "Using http protocol is insecure. Use https instead.",
+            "effort": "30min",
+            "debt": "30min",
+            "author": "bjoern.kimminich@gmx.de",
+            "tags": [
+                "cwe",
+                "former-hotspot"
+            ],
+            "creationDate": "2021-08-03T16:13:40+0000",
+            "updateDate": "2026-09-08T06:05:54+0000",
+            "type": "VULNERABILITY",
+            "scope": "MAIN",
+            "quickFixAvailable": false,
+            "messageFormattings": [],
+            "codeVariants": [],
+            "cleanCodeAttribute": "COMPLETE",
+            "cleanCodeAttributeCategory": "INTENTIONAL",
+            "impacts": [
+                {
+                    "softwareQuality": "SECURITY",
+                    "severity": "LOW"
+                }
+            ],
+            "issueStatus": "OPEN",
+            "prioritizedRule": false,
+            "fromSonarQubeUpdate": false,
+            "internalTags": [],
+            "linkedTicketStatus": "NOT_LINKED"
+        },
+        {
+            "key": "d5883977-5177-4bda-9e98-437c2d4e280d",
+            "rule": "typescript:S5332",
+            "severity": "MINOR",
+            "component": "juice-shop:data/static/codefixes/redirectChallenge_2.ts",
+            "project": "juice-shop",
+            "line": 7,
+            "hash": "e76995f5be75a68851d29271f4a38ab1",
+            "textRange": {
+                "startLine": 7,
+                "endLine": 7,
+                "startOffset": 2,
+                "endOffset": 40
+            },
+            "flows": [],
+            "status": "OPEN",
+            "message": "Using http protocol is insecure. Use https instead.",
+            "effort": "30min",
+            "debt": "30min",
+            "author": "bjoern.kimminich@gmx.de",
+            "tags": [
+                "cwe",
+                "former-hotspot"
+            ],
+            "creationDate": "2021-08-03T16:13:40+0000",
+            "updateDate": "2026-09-08T06:05:54+0000",
+            "type": "VULNERABILITY",
+            "scope": "MAIN",
+            "quickFixAvailable": false,
+            "messageFormattings": [],
+            "codeVariants": [],
+            "cleanCodeAttribute": "COMPLETE",
+            "cleanCodeAttributeCategory": "INTENTIONAL",
+            "impacts": [
+                {
+                    "softwareQuality": "SECURITY",
+                    "severity": "LOW"
+                }
+            ],
+            "issueStatus": "OPEN",
+            "prioritizedRule": false,
+            "fromSonarQubeUpdate": false,
+            "internalTags": [],
+            "linkedTicketStatus": "NOT_LINKED"
+        },
+        {
+            "key": "27ce9c1d-29c3-4ce4-9b0f-30e07b3a7a01",
+            "rule": "typescript:S5332",
+            "severity": "MINOR",
+            "component": "juice-shop:data/static/codefixes/redirectChallenge_2.ts",
+            "project": "juice-shop",
+            "line": 9,
+            "hash": "45a0715f63aa279b6adb6414e8ece77c",
+            "textRange": {
+                "startLine": 9,
+                "endLine": 9,
+                "startOffset": 2,
+                "endOffset": 33
+            },
+            "flows": [],
+            "status": "OPEN",
+            "message": "Using http protocol is insecure. Use https instead.",
+            "effort": "30min",
+            "debt": "30min",
+            "author": "bjoern.kimminich@gmx.de",
+            "tags": [
+                "cwe",
+                "former-hotspot"
+            ],
+            "creationDate": "2021-08-03T16:13:40+0000",
+            "updateDate": "2026-09-08T06:05:54+0000",
+            "type": "VULNERABILITY",
+            "scope": "MAIN",
+            "quickFixAvailable": false,
+            "messageFormattings": [],
+            "codeVariants": [],
+            "cleanCodeAttribute": "COMPLETE",
+            "cleanCodeAttributeCategory": "INTENTIONAL",
+            "impacts": [
+                {
+                    "softwareQuality": "SECURITY",
+                    "severity": "LOW"
+                }
+            ],
+            "issueStatus": "OPEN",
+            "prioritizedRule": false,
+            "fromSonarQubeUpdate": false,
+            "internalTags": [],
+            "linkedTicketStatus": "NOT_LINKED"
+        },
+        {
+            "key": "d46fc6ea-e9e0-41cb-94aa-7d081242814a",
+            "rule": "typescript:S5332",
+            "severity": "MINOR",
+            "component": "juice-shop:data/static/codefixes/redirectChallenge_3.ts",
+            "project": "juice-shop",
+            "line": 6,
+            "hash": "51158762d81e66b30147edd3369986dc",
+            "textRange": {
+                "startLine": 6,
+                "endLine": 6,
+                "startOffset": 2,
+                "endOffset": 41
+            },
+            "flows": [],
+            "status": "OPEN",
+            "message": "Using http protocol is insecure. Use https instead.",
+            "effort": "30min",
+            "debt": "30min",
+            "author": "bjoern.kimminich@gmx.de",
+            "tags": [
+                "cwe",
+                "former-hotspot"
+            ],
+            "creationDate": "2021-08-03T16:13:40+0000",
+            "updateDate": "2026-09-08T06:05:54+0000",
+            "type": "VULNERABILITY",
+            "scope": "MAIN",
+            "quickFixAvailable": false,
+            "messageFormattings": [],
+            "codeVariants": [],
+            "cleanCodeAttribute": "COMPLETE",
+            "cleanCodeAttributeCategory": "INTENTIONAL",
+            "impacts": [
+                {
+                    "softwareQuality": "SECURITY",
+                    "severity": "LOW"
+                }
+            ],
+            "issueStatus": "OPEN",
+            "prioritizedRule": false,
+            "fromSonarQubeUpdate": false,
+            "internalTags": [],
+            "linkedTicketStatus": "NOT_LINKED"
+        },
+        {
+            "key": "d1b2520d-9674-44b9-a414-507cff764f25",
+            "rule": "typescript:S5332",
+            "severity": "MINOR",
+            "component": "juice-shop:data/static/codefixes/redirectChallenge_3.ts",
+            "project": "juice-shop",
+            "line": 7,
+            "hash": "e76995f5be75a68851d29271f4a38ab1",
+            "textRange": {
+                "startLine": 7,
+                "endLine": 7,
+                "startOffset": 2,
+                "endOffset": 40
+            },
+            "flows": [],
+            "status": "OPEN",
+            "message": "Using http protocol is insecure. Use https instead.",
+            "effort": "30min",
+            "debt": "30min",
+            "author": "bjoern.kimminich@gmx.de",
+            "tags": [
+                "cwe",
+                "former-hotspot"
+            ],
+            "creationDate": "2021-08-03T16:13:40+0000",
+            "updateDate": "2026-09-08T06:05:54+0000",
+            "type": "VULNERABILITY",
+            "scope": "MAIN",
+            "quickFixAvailable": false,
+            "messageFormattings": [],
+            "codeVariants": [],
+            "cleanCodeAttribute": "COMPLETE",
+            "cleanCodeAttributeCategory": "INTENTIONAL",
+            "impacts": [
+                {
+                    "softwareQuality": "SECURITY",
+                    "severity": "LOW"
+                }
+            ],
+            "issueStatus": "OPEN",
+            "prioritizedRule": false,
+            "fromSonarQubeUpdate": false,
+            "internalTags": [],
+            "linkedTicketStatus": "NOT_LINKED"
+        },
+        {
+            "key": "ca958fcf-bc66-49d3-828a-af22d8b4062a",
+            "rule": "typescript:S5332",
+            "severity": "MINOR",
+            "component": "juice-shop:data/static/codefixes/redirectChallenge_3.ts",
+            "project": "juice-shop",
+            "line": 9,
+            "hash": "45a0715f63aa279b6adb6414e8ece77c",
+            "textRange": {
+                "startLine": 9,
+                "endLine": 9,
+                "startOffset": 2,
+                "endOffset": 33
+            },
+            "flows": [],
+            "status": "OPEN",
+            "message": "Using http protocol is insecure. Use https instead.",
+            "effort": "30min",
+            "debt": "30min",
+            "author": "bjoern.kimminich@gmx.de",
+            "tags": [
+                "cwe",
+                "former-hotspot"
+            ],
+            "creationDate": "2021-08-03T16:13:40+0000",
+            "updateDate": "2026-09-08T06:05:54+0000",
+            "type": "VULNERABILITY",
+            "scope": "MAIN",
+            "quickFixAvailable": false,
+            "messageFormattings": [],
+            "codeVariants": [],
+            "cleanCodeAttribute": "COMPLETE",
+            "cleanCodeAttributeCategory": "INTENTIONAL",
+            "impacts": [
+                {
+                    "softwareQuality": "SECURITY",
+                    "severity": "LOW"
+                }
+            ],
+            "issueStatus": "OPEN",
+            "prioritizedRule": false,
+            "fromSonarQubeUpdate": false,
+            "internalTags": [],
+            "linkedTicketStatus": "NOT_LINKED"
+        },
+        {
+            "key": "b6dcbe08-8fb8-412b-81b4-de9d9c896ceb",
+            "rule": "typescript:S5332",
+            "severity": "MINOR",
+            "component": "juice-shop:data/static/codefixes/redirectChallenge_4_correct.ts",
+            "project": "juice-shop",
+            "line": 6,
+            "hash": "51158762d81e66b30147edd3369986dc",
+            "textRange": {
+                "startLine": 6,
+                "endLine": 6,
+                "startOffset": 2,
+                "endOffset": 41
+            },
+            "flows": [],
+            "status": "OPEN",
+            "message": "Using http protocol is insecure. Use https instead.",
+            "effort": "30min",
+            "debt": "30min",
+            "author": "bjoern.kimminich@gmx.de",
+            "tags": [
+                "cwe",
+                "former-hotspot"
+            ],
+            "creationDate": "2021-08-03T16:13:40+0000",
+            "updateDate": "2026-09-08T06:05:54+0000",
+            "type": "VULNERABILITY",
+            "scope": "MAIN",
+            "quickFixAvailable": false,
+            "messageFormattings": [],
+            "codeVariants": [],
+            "cleanCodeAttribute": "COMPLETE",
+            "cleanCodeAttributeCategory": "INTENTIONAL",
+            "impacts": [
+                {
+                    "softwareQuality": "SECURITY",
+                    "severity": "LOW"
+                }
+            ],
+            "issueStatus": "OPEN",
+            "prioritizedRule": false,
+            "fromSonarQubeUpdate": false,
+            "internalTags": [],
+            "linkedTicketStatus": "NOT_LINKED"
+        },
+        {
+            "key": "b6a98eba-a3aa-4d42-b402-8ce5dacd5849",
+            "rule": "typescript:S5332",
+            "severity": "MINOR",
+            "component": "juice-shop:data/static/codefixes/redirectChallenge_4_correct.ts",
+            "project": "juice-shop",
+            "line": 7,
+            "hash": "e76995f5be75a68851d29271f4a38ab1",
+            "textRange": {
+                "startLine": 7,
+                "endLine": 7,
+                "startOffset": 2,
+                "endOffset": 40
+            },
+            "flows": [],
+            "status": "OPEN",
+            "message": "Using http protocol is insecure. Use https instead.",
+            "effort": "30min",
+            "debt": "30min",
+            "author": "bjoern.kimminich@gmx.de",
+            "tags": [
+                "cwe",
+                "former-hotspot"
+            ],
+            "creationDate": "2021-08-03T16:13:40+0000",
+            "updateDate": "2026-09-08T06:05:54+0000",
+            "type": "VULNERABILITY",
+            "scope": "MAIN",
+            "quickFixAvailable": false,
+            "messageFormattings": [],
+            "codeVariants": [],
+            "cleanCodeAttribute": "COMPLETE",
+            "cleanCodeAttributeCategory": "INTENTIONAL",
+            "impacts": [
+                {
+                    "softwareQuality": "SECURITY",
+                    "severity": "LOW"
+                }
+            ],
+            "issueStatus": "OPEN",
+            "prioritizedRule": false,
+            "fromSonarQubeUpdate": false,
+            "internalTags": [],
+            "linkedTicketStatus": "NOT_LINKED"
+        },
+        {
+            "key": "29d3ab89-938f-4aa6-92db-a15389a51c37",
+            "rule": "typescript:S5332",
+            "severity": "MINOR",
+            "component": "juice-shop:data/static/codefixes/redirectChallenge_4_correct.ts",
+            "project": "juice-shop",
+            "line": 9,
+            "hash": "45a0715f63aa279b6adb6414e8ece77c",
+            "textRange": {
+                "startLine": 9,
+                "endLine": 9,
+                "startOffset": 2,
+                "endOffset": 33
+            },
+            "flows": [],
+            "status": "OPEN",
+            "message": "Using http protocol is insecure. Use https instead.",
+            "effort": "30min",
+            "debt": "30min",
+            "author": "bjoern.kimminich@gmx.de",
+            "tags": [
+                "cwe",
+                "former-hotspot"
+            ],
+            "creationDate": "2021-08-03T16:13:40+0000",
+            "updateDate": "2026-09-08T06:05:54+0000",
+            "type": "VULNERABILITY",
+            "scope": "MAIN",
+            "quickFixAvailable": false,
+            "messageFormattings": [],
+            "codeVariants": [],
+            "cleanCodeAttribute": "COMPLETE",
+            "cleanCodeAttributeCategory": "INTENTIONAL",
+            "impacts": [
+                {
+                    "softwareQuality": "SECURITY",
+                    "severity": "LOW"
+                }
+            ],
+            "issueStatus": "OPEN",
+            "prioritizedRule": false,
+            "fromSonarQubeUpdate": false,
+            "internalTags": [],
+            "linkedTicketStatus": "NOT_LINKED"
+        },
+        {
+            "key": "f7381353-8fa9-49fa-9045-64bcee5dd334",
+            "rule": "typescript:S5332",
+            "severity": "MINOR",
+            "component": "juice-shop:data/static/codefixes/redirectCryptoCurrencyChallenge_1.ts",
+            "project": "juice-shop",
+            "line": 5,
+            "hash": "51158762d81e66b30147edd3369986dc",
+            "textRange": {
+                "startLine": 5,
+                "endLine": 5,
+                "startOffset": 2,
+                "endOffset": 41
+            },
+            "flows": [],
+            "status": "OPEN",
+            "message": "Using http protocol is insecure. Use https instead.",
+            "effort": "30min",
+            "debt": "30min",
+            "author": "bjoern.kimminich@gmx.de",
+            "tags": [
+                "cwe",
+                "former-hotspot"
+            ],
+            "creationDate": "2021-08-03T16:13:40+0000",
+            "updateDate": "2026-09-08T06:05:54+0000",
+            "type": "VULNERABILITY",
+            "scope": "MAIN",
+            "quickFixAvailable": false,
+            "messageFormattings": [],
+            "codeVariants": [],
+            "cleanCodeAttribute": "COMPLETE",
+            "cleanCodeAttributeCategory": "INTENTIONAL",
+            "impacts": [
+                {
+                    "softwareQuality": "SECURITY",
+                    "severity": "LOW"
+                }
+            ],
+            "issueStatus": "OPEN",
+            "prioritizedRule": false,
+            "fromSonarQubeUpdate": false,
+            "internalTags": [],
+            "linkedTicketStatus": "NOT_LINKED"
+        },
+        {
+            "key": "e70977ac-32ef-416c-a64b-18d3eb38a820",
+            "rule": "typescript:S5332",
+            "severity": "MINOR",
+            "component": "juice-shop:data/static/codefixes/redirectCryptoCurrencyChallenge_1.ts",
+            "project": "juice-shop",
+            "line": 6,
+            "hash": "e76995f5be75a68851d29271f4a38ab1",
+            "textRange": {
+                "startLine": 6,
+                "endLine": 6,
+                "startOffset": 2,
+                "endOffset": 40
+            },
+            "flows": [],
+            "status": "OPEN",
+            "message": "Using http protocol is insecure. Use https instead.",
+            "effort": "30min",
+            "debt": "30min",
+            "author": "bjoern.kimminich@gmx.de",
+            "tags": [
+                "cwe",
+                "former-hotspot"
+            ],
+            "creationDate": "2021-08-03T16:13:40+0000",
+            "updateDate": "2026-09-08T06:05:54+0000",
+            "type": "VULNERABILITY",
+            "scope": "MAIN",
+            "quickFixAvailable": false,
+            "messageFormattings": [],
+            "codeVariants": [],
+            "cleanCodeAttribute": "COMPLETE",
+            "cleanCodeAttributeCategory": "INTENTIONAL",
+            "impacts": [
+                {
+                    "softwareQuality": "SECURITY",
+                    "severity": "LOW"
+                }
+            ],
+            "issueStatus": "OPEN",
+            "prioritizedRule": false,
+            "fromSonarQubeUpdate": false,
+            "internalTags": [],
+            "linkedTicketStatus": "NOT_LINKED"
+        },
+        {
+            "key": "02f2b8b6-6fe4-44e6-9f3f-e2f4da3d6869",
+            "rule": "typescript:S5332",
+            "severity": "MINOR",
+            "component": "juice-shop:data/static/codefixes/redirectCryptoCurrencyChallenge_1.ts",
+            "project": "juice-shop",
+            "line": 8,
+            "hash": "45a0715f63aa279b6adb6414e8ece77c",
+            "textRange": {
+                "startLine": 8,
+                "endLine": 8,
+                "startOffset": 2,
+                "endOffset": 33
+            },
+            "flows": [],
+            "status": "OPEN",
+            "message": "Using http protocol is insecure. Use https instead.",
+            "effort": "30min",
+            "debt": "30min",
+            "author": "bjoern.kimminich@gmx.de",
+            "tags": [
+                "cwe",
+                "former-hotspot"
+            ],
+            "creationDate": "2021-08-03T16:13:40+0000",
+            "updateDate": "2026-09-08T06:05:54+0000",
+            "type": "VULNERABILITY",
+            "scope": "MAIN",
+            "quickFixAvailable": false,
+            "messageFormattings": [],
+            "codeVariants": [],
+            "cleanCodeAttribute": "COMPLETE",
+            "cleanCodeAttributeCategory": "INTENTIONAL",
+            "impacts": [
+                {
+                    "softwareQuality": "SECURITY",
+                    "severity": "LOW"
+                }
+            ],
+            "issueStatus": "OPEN",
+            "prioritizedRule": false,
+            "fromSonarQubeUpdate": false,
+            "internalTags": [],
+            "linkedTicketStatus": "NOT_LINKED"
+        },
+        {
+            "key": "2af868d0-8855-4c54-ade6-8c81974bb6f4",
+            "rule": "typescript:S5332",
+            "severity": "MINOR",
+            "component": "juice-shop:data/static/codefixes/redirectCryptoCurrencyChallenge_2.ts",
+            "project": "juice-shop",
+            "line": 5,
+            "hash": "51158762d81e66b30147edd3369986dc",
+            "textRange": {
+                "startLine": 5,
+                "endLine": 5,
+                "startOffset": 2,
+                "endOffset": 41
+            },
+            "flows": [],
+            "status": "OPEN",
+            "message": "Using http protocol is insecure. Use https instead.",
+            "effort": "30min",
+            "debt": "30min",
+            "author": "bjoern.kimminich@gmx.de",
+            "tags": [
+                "cwe",
+                "former-hotspot"
+            ],
+            "creationDate": "2021-08-03T16:13:40+0000",
+            "updateDate": "2026-09-08T06:05:54+0000",
+            "type": "VULNERABILITY",
+            "scope": "MAIN",
+            "quickFixAvailable": false,
+            "messageFormattings": [],
+            "codeVariants": [],
+            "cleanCodeAttribute": "COMPLETE",
+            "cleanCodeAttributeCategory": "INTENTIONAL",
+            "impacts": [
+                {
+                    "softwareQuality": "SECURITY",
+                    "severity": "LOW"
+                }
+            ],
+            "issueStatus": "OPEN",
+            "prioritizedRule": false,
+            "fromSonarQubeUpdate": false,
+            "internalTags": [],
+            "linkedTicketStatus": "NOT_LINKED"
+        },
+        {
+            "key": "ff26c564-ef23-4244-89c2-9361708c0621",
+            "rule": "typescript:S5332",
+            "severity": "MINOR",
+            "component": "juice-shop:data/static/codefixes/redirectCryptoCurrencyChallenge_2.ts",
+            "project": "juice-shop",
+            "line": 6,
+            "hash": "e76995f5be75a68851d29271f4a38ab1",
+            "textRange": {
+                "startLine": 6,
+                "endLine": 6,
+                "startOffset": 2,
+                "endOffset": 40
+            },
+            "flows": [],
+            "status": "OPEN",
+            "message": "Using http protocol is insecure. Use https instead.",
+            "effort": "30min",
+            "debt": "30min",
+            "author": "bjoern.kimminich@gmx.de",
+            "tags": [
+                "cwe",
+                "former-hotspot"
+            ],
+            "creationDate": "2021-08-03T16:13:40+0000",
+            "updateDate": "2026-09-08T06:05:54+0000",
+            "type": "VULNERABILITY",
+            "scope": "MAIN",
+            "quickFixAvailable": false,
+            "messageFormattings": [],
+            "codeVariants": [],
+            "cleanCodeAttribute": "COMPLETE",
+            "cleanCodeAttributeCategory": "INTENTIONAL",
+            "impacts": [
+                {
+                    "softwareQuality": "SECURITY",
+                    "severity": "LOW"
+                }
+            ],
+            "issueStatus": "OPEN",
+            "prioritizedRule": false,
+            "fromSonarQubeUpdate": false,
+            "internalTags": [],
+            "linkedTicketStatus": "NOT_LINKED"
+        },
+        {
+            "key": "83a102b9-1df7-42ba-abdd-d54155bd0d32",
+            "rule": "typescript:S5332",
+            "severity": "MINOR",
+            "component": "juice-shop:data/static/codefixes/redirectCryptoCurrencyChallenge_2.ts",
+            "project": "juice-shop",
+            "line": 8,
+            "hash": "45a0715f63aa279b6adb6414e8ece77c",
+            "textRange": {
+                "startLine": 8,
+                "endLine": 8,
+                "startOffset": 2,
+                "endOffset": 33
+            },
+            "flows": [],
+            "status": "OPEN",
+            "message": "Using http protocol is insecure. Use https instead.",
+            "effort": "30min",
+            "debt": "30min",
+            "author": "bjoern.kimminich@gmx.de",
+            "tags": [
+                "cwe",
+                "former-hotspot"
+            ],
+            "creationDate": "2021-08-03T16:13:40+0000",
+            "updateDate": "2026-09-08T06:05:54+0000",
+            "type": "VULNERABILITY",
+            "scope": "MAIN",
+            "quickFixAvailable": false,
+            "messageFormattings": [],
+            "codeVariants": [],
+            "cleanCodeAttribute": "COMPLETE",
+            "cleanCodeAttributeCategory": "INTENTIONAL",
+            "impacts": [
+                {
+                    "softwareQuality": "SECURITY",
+                    "severity": "LOW"
+                }
+            ],
+            "issueStatus": "OPEN",
+            "prioritizedRule": false,
+            "fromSonarQubeUpdate": false,
+            "internalTags": [],
+            "linkedTicketStatus": "NOT_LINKED"
+        },
+        {
+            "key": "2ddea4a6-21a9-4fd8-a059-8afdc5d7d64d",
+            "rule": "typescript:S5332",
+            "severity": "MINOR",
+            "component": "juice-shop:data/static/codefixes/redirectCryptoCurrencyChallenge_3_correct.ts",
+            "project": "juice-shop",
+            "line": 3,
+            "hash": "51158762d81e66b30147edd3369986dc",
+            "textRange": {
+                "startLine": 3,
+                "endLine": 3,
+                "startOffset": 2,
+                "endOffset": 41
+            },
+            "flows": [],
+            "status": "OPEN",
+            "message": "Using http protocol is insecure. Use https instead.",
+            "effort": "30min",
+            "debt": "30min",
+            "author": "bjoern.kimminich@gmx.de",
+            "tags": [
+                "cwe",
+                "former-hotspot"
+            ],
+            "creationDate": "2021-08-03T16:13:40+0000",
+            "updateDate": "2026-09-08T06:05:54+0000",
+            "type": "VULNERABILITY",
+            "scope": "MAIN",
+            "quickFixAvailable": false,
+            "messageFormattings": [],
+            "codeVariants": [],
+            "cleanCodeAttribute": "COMPLETE",
+            "cleanCodeAttributeCategory": "INTENTIONAL",
+            "impacts": [
+                {
+                    "softwareQuality": "SECURITY",
+                    "severity": "LOW"
+                }
+            ],
+            "issueStatus": "OPEN",
+            "prioritizedRule": false,
+            "fromSonarQubeUpdate": false,
+            "internalTags": [],
+            "linkedTicketStatus": "NOT_LINKED"
+        },
+        {
+            "key": "f148da4b-9794-4b3c-9e2e-da154c2f47d8",
+            "rule": "typescript:S5332",
+            "severity": "MINOR",
+            "component": "juice-shop:data/static/codefixes/redirectCryptoCurrencyChallenge_3_correct.ts",
+            "project": "juice-shop",
+            "line": 4,
+            "hash": "e76995f5be75a68851d29271f4a38ab1",
+            "textRange": {
+                "startLine": 4,
+                "endLine": 4,
+                "startOffset": 2,
+                "endOffset": 40
+            },
+            "flows": [],
+            "status": "OPEN",
+            "message": "Using http protocol is insecure. Use https instead.",
+            "effort": "30min",
+            "debt": "30min",
+            "author": "bjoern.kimminich@gmx.de",
+            "tags": [
+                "cwe",
+                "former-hotspot"
+            ],
+            "creationDate": "2021-08-03T16:13:40+0000",
+            "updateDate": "2026-09-08T06:05:54+0000",
+            "type": "VULNERABILITY",
+            "scope": "MAIN",
+            "quickFixAvailable": false,
+            "messageFormattings": [],
+            "codeVariants": [],
+            "cleanCodeAttribute": "COMPLETE",
+            "cleanCodeAttributeCategory": "INTENTIONAL",
+            "impacts": [
+                {
+                    "softwareQuality": "SECURITY",
+                    "severity": "LOW"
+                }
+            ],
+            "issueStatus": "OPEN",
+            "prioritizedRule": false,
+            "fromSonarQubeUpdate": false,
+            "internalTags": [],
+            "linkedTicketStatus": "NOT_LINKED"
+        },
+        {
+            "key": "507a14cd-9131-421a-8b7d-711a7e1364b4",
+            "rule": "typescript:S5332",
+            "severity": "MINOR",
+            "component": "juice-shop:data/static/codefixes/redirectCryptoCurrencyChallenge_3_correct.ts",
+            "project": "juice-shop",
+            "line": 6,
+            "hash": "45a0715f63aa279b6adb6414e8ece77c",
+            "textRange": {
+                "startLine": 6,
+                "endLine": 6,
+                "startOffset": 2,
+                "endOffset": 33
+            },
+            "flows": [],
+            "status": "OPEN",
+            "message": "Using http protocol is insecure. Use https instead.",
+            "effort": "30min",
+            "debt": "30min",
+            "author": "bjoern.kimminich@gmx.de",
+            "tags": [
+                "cwe",
+                "former-hotspot"
+            ],
+            "creationDate": "2021-08-03T16:13:40+0000",
+            "updateDate": "2026-09-08T06:05:54+0000",
+            "type": "VULNERABILITY",
+            "scope": "MAIN",
+            "quickFixAvailable": false,
+            "messageFormattings": [],
+            "codeVariants": [],
+            "cleanCodeAttribute": "COMPLETE",
+            "cleanCodeAttributeCategory": "INTENTIONAL",
+            "impacts": [
+                {
+                    "softwareQuality": "SECURITY",
+                    "severity": "LOW"
+                }
+            ],
+            "issueStatus": "OPEN",
+            "prioritizedRule": false,
+            "fromSonarQubeUpdate": false,
+            "internalTags": [],
+            "linkedTicketStatus": "NOT_LINKED"
+        },
+        {
+            "key": "715d4693-0ab6-43e1-b9c3-1020ef7f01d0",
+            "rule": "typescript:S5332",
+            "severity": "MINOR",
+            "component": "juice-shop:data/static/codefixes/redirectCryptoCurrencyChallenge_4.ts",
+            "project": "juice-shop",
+            "line": 5,
+            "hash": "51158762d81e66b30147edd3369986dc",
+            "textRange": {
+                "startLine": 5,
+                "endLine": 5,
+                "startOffset": 2,
+                "endOffset": 41
+            },
+            "flows": [],
+            "status": "OPEN",
+            "message": "Using http protocol is insecure. Use https instead.",
+            "effort": "30min",
+            "debt": "30min",
+            "author": "bjoern.kimminich@gmx.de",
+            "tags": [
+                "cwe",
+                "former-hotspot"
+            ],
+            "creationDate": "2021-08-03T16:13:40+0000",
+            "updateDate": "2026-09-08T06:05:54+0000",
+            "type": "VULNERABILITY",
+            "scope": "MAIN",
+            "quickFixAvailable": false,
+            "messageFormattings": [],
+            "codeVariants": [],
+            "cleanCodeAttribute": "COMPLETE",
+            "cleanCodeAttributeCategory": "INTENTIONAL",
+            "impacts": [
+                {
+                    "softwareQuality": "SECURITY",
+                    "severity": "LOW"
+                }
+            ],
+            "issueStatus": "OPEN",
+            "prioritizedRule": false,
+            "fromSonarQubeUpdate": false,
+            "internalTags": [],
+            "linkedTicketStatus": "NOT_LINKED"
+        },
+        {
+            "key": "1880fe7d-6f04-4c6a-9794-07a11d9efb7c",
+            "rule": "typescript:S5332",
+            "severity": "MINOR",
+            "component": "juice-shop:data/static/codefixes/redirectCryptoCurrencyChallenge_4.ts",
+            "project": "juice-shop",
+            "line": 6,
+            "hash": "e76995f5be75a68851d29271f4a38ab1",
+            "textRange": {
+                "startLine": 6,
+                "endLine": 6,
+                "startOffset": 2,
+                "endOffset": 40
+            },
+            "flows": [],
+            "status": "OPEN",
+            "message": "Using http protocol is insecure. Use https instead.",
+            "effort": "30min",
+            "debt": "30min",
+            "author": "bjoern.kimminich@gmx.de",
+            "tags": [
+                "cwe",
+                "former-hotspot"
+            ],
+            "creationDate": "2021-08-03T16:13:40+0000",
+            "updateDate": "2026-09-08T06:05:54+0000",
+            "type": "VULNERABILITY",
+            "scope": "MAIN",
+            "quickFixAvailable": false,
+            "messageFormattings": [],
+            "codeVariants": [],
+            "cleanCodeAttribute": "COMPLETE",
+            "cleanCodeAttributeCategory": "INTENTIONAL",
+            "impacts": [
+                {
+                    "softwareQuality": "SECURITY",
+                    "severity": "LOW"
+                }
+            ],
+            "issueStatus": "OPEN",
+            "prioritizedRule": false,
+            "fromSonarQubeUpdate": false,
+            "internalTags": [],
+            "linkedTicketStatus": "NOT_LINKED"
+        },
+        {
+            "key": "ffd0297d-df34-48fc-ade9-2607b55efaf8",
+            "rule": "typescript:S5332",
+            "severity": "MINOR",
+            "component": "juice-shop:data/static/codefixes/redirectCryptoCurrencyChallenge_4.ts",
+            "project": "juice-shop",
+            "line": 8,
+            "hash": "45a0715f63aa279b6adb6414e8ece77c",
+            "textRange": {
+                "startLine": 8,
+                "endLine": 8,
+                "startOffset": 2,
+                "endOffset": 33
+            },
+            "flows": [],
+            "status": "OPEN",
+            "message": "Using http protocol is insecure. Use https instead.",
+            "effort": "30min",
+            "debt": "30min",
+            "author": "bjoern.kimminich@gmx.de",
+            "tags": [
+                "cwe",
+                "former-hotspot"
+            ],
+            "creationDate": "2021-08-03T16:13:40+0000",
+            "updateDate": "2026-09-08T06:05:54+0000",
+            "type": "VULNERABILITY",
+            "scope": "MAIN",
+            "quickFixAvailable": false,
+            "messageFormattings": [],
+            "codeVariants": [],
+            "cleanCodeAttribute": "COMPLETE",
+            "cleanCodeAttributeCategory": "INTENTIONAL",
+            "impacts": [
+                {
+                    "softwareQuality": "SECURITY",
+                    "severity": "LOW"
+                }
+            ],
+            "issueStatus": "OPEN",
+            "prioritizedRule": false,
+            "fromSonarQubeUpdate": false,
+            "internalTags": [],
+            "linkedTicketStatus": "NOT_LINKED"
+        },
+        {
+            "key": "ee8ea079-6783-4a32-be75-95c050ca29c8",
+            "rule": "typescript:S5693",
+            "severity": "MAJOR",
+            "component": "juice-shop:server.ts",
+            "project": "juice-shop",
+            "line": 719,
+            "hash": "09a1a4375027087f405f2aa58a47f5c3",
+            "textRange": {
+                "startLine": 719,
+                "endLine": 719,
+                "startOffset": 21,
+                "endOffset": 27
+            },
+            "flows": [],
+            "status": "OPEN",
+            "message": "Make sure the content length limit is safe here.",
+            "effort": "5min",
+            "debt": "5min",
+            "author": "adityaberasia@gmail.com",
+            "tags": [
+                "cwe",
+                "express.js",
+                "former-hotspot"
+            ],
+            "creationDate": "2021-02-24T21:11:50+0000",
+            "updateDate": "2026-09-08T06:05:54+0000",
+            "type": "VULNERABILITY",
+            "scope": "MAIN",
+            "quickFixAvailable": false,
+            "messageFormattings": [],
+            "codeVariants": [],
+            "cleanCodeAttribute": "TRUSTWORTHY",
+            "cleanCodeAttributeCategory": "RESPONSIBLE",
+            "impacts": [
+                {
+                    "softwareQuality": "SECURITY",
+                    "severity": "MEDIUM"
+                }
+            ],
+            "issueStatus": "OPEN",
+            "prioritizedRule": false,
+            "fromSonarQubeUpdate": false,
+            "internalTags": [],
+            "linkedTicketStatus": "NOT_LINKED"
+        },
+        {
+            "key": "495071c0-dbb9-4555-959b-4a3b37e7664b",
+            "rule": "typescript:S2245",
+            "severity": "MAJOR",
+            "component": "juice-shop:routes/captcha.ts",
+            "project": "juice-shop",
+            "line": 14,
+            "hash": "855d70a344cca7998ac7d0b4e17802a2",
+            "textRange": {
+                "startLine": 14,
+                "endLine": 14,
+                "startOffset": 34,
+                "endOffset": 47
+            },
+            "flows": [],
+            "status": "OPEN",
+            "message": "Make sure that using this pseudorandom number generator is safe here.",
+            "effort": "10min",
+            "debt": "10min",
+            "author": "bjoern.kimminich@gmx.de",
+            "tags": [
+                "cwe",
+                "former-hotspot"
+            ],
+            "creationDate": "2020-12-25T11:27:43+0000",
+            "updateDate": "2026-09-08T06:05:54+0000",
+            "type": "VULNERABILITY",
+            "scope": "MAIN",
+            "quickFixAvailable": false,
+            "messageFormattings": [],
+            "codeVariants": [],
+            "cleanCodeAttribute": "TRUSTWORTHY",
+            "cleanCodeAttributeCategory": "RESPONSIBLE",
+            "impacts": [
+                {
+                    "softwareQuality": "SECURITY",
+                    "severity": "MEDIUM"
+                }
+            ],
+            "issueStatus": "OPEN",
+            "prioritizedRule": false,
+            "fromSonarQubeUpdate": false,
+            "internalTags": [],
+            "linkedTicketStatus": "NOT_LINKED"
+        },
+        {
+            "key": "fafeffd3-580e-4a94-83c4-9b7707841c1b",
+            "rule": "typescript:S2245",
+            "severity": "MAJOR",
+            "component": "juice-shop:routes/captcha.ts",
+            "project": "juice-shop",
+            "line": 15,
+            "hash": "25b422709a7a8566591d3352f275acc7",
+            "textRange": {
+                "startLine": 15,
+                "endLine": 15,
+                "startOffset": 35,
+                "endOffset": 48
+            },
+            "flows": [],
+            "status": "OPEN",
+            "message": "Make sure that using this pseudorandom number generator is safe here.",
+            "effort": "10min",
+            "debt": "10min",
+            "author": "bjoern.kimminich@gmx.de",
+            "tags": [
+                "cwe",
+                "former-hotspot"
+            ],
+            "creationDate": "2020-12-25T11:27:43+0000",
+            "updateDate": "2026-09-08T06:05:54+0000",
+            "type": "VULNERABILITY",
+            "scope": "MAIN",
+            "quickFixAvailable": false,
+            "messageFormattings": [],
+            "codeVariants": [],
+            "cleanCodeAttribute": "TRUSTWORTHY",
+            "cleanCodeAttributeCategory": "RESPONSIBLE",
+            "impacts": [
+                {
+                    "softwareQuality": "SECURITY",
+                    "severity": "MEDIUM"
+                }
+            ],
+            "issueStatus": "OPEN",
+            "prioritizedRule": false,
+            "fromSonarQubeUpdate": false,
+            "internalTags": [],
+            "linkedTicketStatus": "NOT_LINKED"
+        },
+        {
+            "key": "d5ba9d31-e881-4df5-b261-4691e00af214",
+            "rule": "typescript:S2245",
+            "severity": "MAJOR",
+            "component": "juice-shop:routes/captcha.ts",
+            "project": "juice-shop",
+            "line": 16,
+            "hash": "151fb71a891c88ecc19dcf5e047ba3e4",
+            "textRange": {
+                "startLine": 16,
+                "endLine": 16,
+                "startOffset": 34,
+                "endOffset": 47
+            },
+            "flows": [],
+            "status": "OPEN",
+            "message": "Make sure that using this pseudorandom number generator is safe here.",
+            "effort": "10min",
+            "debt": "10min",
+            "author": "bjoern.kimminich@gmx.de",
+            "tags": [
+                "cwe",
+                "former-hotspot"
+            ],
+            "creationDate": "2020-12-25T11:27:43+0000",
+            "updateDate": "2026-09-08T06:05:54+0000",
+            "type": "VULNERABILITY",
+            "scope": "MAIN",
+            "quickFixAvailable": false,
+            "messageFormattings": [],
+            "codeVariants": [],
+            "cleanCodeAttribute": "TRUSTWORTHY",
+            "cleanCodeAttributeCategory": "RESPONSIBLE",
+            "impacts": [
+                {
+                    "softwareQuality": "SECURITY",
+                    "severity": "MEDIUM"
+                }
+            ],
+            "issueStatus": "OPEN",
+            "prioritizedRule": false,
+            "fromSonarQubeUpdate": false,
+            "internalTags": [],
+            "linkedTicketStatus": "NOT_LINKED"
+        },
+        {
+            "key": "dbc3a17a-0011-4ace-99d6-045be2aaba85",
+            "rule": "typescript:S2245",
+            "severity": "MAJOR",
+            "component": "juice-shop:routes/captcha.ts",
+            "project": "juice-shop",
+            "line": 18,
+            "hash": "dfcc36227175cdf9f7a60e48e578050b",
+            "textRange": {
+                "startLine": 18,
+                "endLine": 18,
+                "startOffset": 48,
+                "endOffset": 61
+            },
+            "flows": [],
+            "status": "OPEN",
+            "message": "Make sure that using this pseudorandom number generator is safe here.",
+            "effort": "10min",
+            "debt": "10min",
+            "author": "bjoern.kimminich@gmx.de",
+            "tags": [
+                "cwe",
+                "former-hotspot"
+            ],
+            "creationDate": "2020-12-25T11:27:43+0000",
+            "updateDate": "2026-09-08T06:05:54+0000",
+            "type": "VULNERABILITY",
+            "scope": "MAIN",
+            "quickFixAvailable": false,
+            "messageFormattings": [],
+            "codeVariants": [],
+            "cleanCodeAttribute": "TRUSTWORTHY",
+            "cleanCodeAttributeCategory": "RESPONSIBLE",
+            "impacts": [
+                {
+                    "softwareQuality": "SECURITY",
+                    "severity": "MEDIUM"
+                }
+            ],
+            "issueStatus": "OPEN",
+            "prioritizedRule": false,
+            "fromSonarQubeUpdate": false,
+            "internalTags": [],
+            "linkedTicketStatus": "NOT_LINKED"
+        },
+        {
+            "key": "69337eba-1af5-4e65-9f2a-d6a91aa86f9d",
+            "rule": "typescript:S2245",
+            "severity": "MAJOR",
+            "component": "juice-shop:routes/captcha.ts",
+            "project": "juice-shop",
+            "line": 19,
+            "hash": "499873f071e069c69b01e038f9aa9614",
+            "textRange": {
+                "startLine": 19,
+                "endLine": 19,
+                "startOffset": 49,
+                "endOffset": 62
+            },
+            "flows": [],
+            "status": "OPEN",
+            "message": "Make sure that using this pseudorandom number generator is safe here.",
+            "effort": "10min",
+            "debt": "10min",
+            "author": "bjoern.kimminich@gmx.de",
+            "tags": [
+                "cwe",
+                "former-hotspot"
+            ],
+            "creationDate": "2020-12-25T11:27:43+0000",
+            "updateDate": "2026-09-08T06:05:54+0000",
+            "type": "VULNERABILITY",
+            "scope": "MAIN",
+            "quickFixAvailable": false,
+            "messageFormattings": [],
+            "codeVariants": [],
+            "cleanCodeAttribute": "TRUSTWORTHY",
+            "cleanCodeAttributeCategory": "RESPONSIBLE",
+            "impacts": [
+                {
+                    "softwareQuality": "SECURITY",
+                    "severity": "MEDIUM"
+                }
+            ],
+            "issueStatus": "OPEN",
+            "prioritizedRule": false,
+            "fromSonarQubeUpdate": false,
+            "internalTags": [],
+            "linkedTicketStatus": "NOT_LINKED"
+        },
+        {
+            "key": "125380a1-ac64-44e9-9867-d595d9f56ef5",
+            "rule": "typescript:S1523",
+            "severity": "CRITICAL",
+            "component": "juice-shop:routes/captcha.ts",
+            "project": "juice-shop",
+            "line": 22,
+            "hash": "0d2538aa1bc15c1355522a945628756f",
+            "textRange": {
+                "startLine": 22,
+                "endLine": 22,
+                "startOffset": 19,
+                "endOffset": 23
+            },
+            "flows": [],
+            "status": "OPEN",
+            "message": "Make sure that this dynamic injection or execution of code is safe.",
+            "effort": "30min",
+            "debt": "30min",
+            "author": "bjoern.kimminich@gmx.de",
+            "tags": [
+                "cwe",
+                "former-hotspot"
+            ],
+            "creationDate": "2020-12-25T11:27:43+0000",
+            "updateDate": "2026-09-08T06:05:54+0000",
+            "type": "VULNERABILITY",
+            "scope": "MAIN",
+            "quickFixAvailable": false,
+            "messageFormattings": [],
+            "codeVariants": [],
+            "cleanCodeAttribute": "TRUSTWORTHY",
+            "cleanCodeAttributeCategory": "RESPONSIBLE",
+            "impacts": [
+                {
+                    "softwareQuality": "MAINTAINABILITY",
+                    "severity": "LOW"
+                },
+                {
+                    "softwareQuality": "SECURITY",
+                    "severity": "HIGH"
+                }
+            ],
+            "issueStatus": "OPEN",
+            "prioritizedRule": false,
+            "fromSonarQubeUpdate": false,
+            "internalTags": [],
+            "linkedTicketStatus": "NOT_LINKED"
+        },
+        {
+            "key": "23f5dce7-b4a5-4621-9f19-b0948cf5f404",
+            "rule": "typescript:S1523",
+            "severity": "CRITICAL",
+            "component": "juice-shop:routes/userProfile.ts",
+            "project": "juice-shop",
+            "line": 65,
+            "hash": "d0d562cd1420387071601fcb693cc3bf",
+            "textRange": {
+                "startLine": 65,
+                "endLine": 65,
+                "startOffset": 21,
+                "endOffset": 25
+            },
+            "flows": [],
+            "status": "OPEN",
+            "message": "Make sure that this dynamic injection or execution of code is safe.",
+            "effort": "30min",
+            "debt": "30min",
+            "author": "bjoern.kimminich@kuehne-nagel.com",
+            "tags": [
+                "cwe",
+                "former-hotspot"
+            ],
+            "creationDate": "2019-07-24T18:02:15+0000",
+            "updateDate": "2026-09-08T06:05:54+0000",
+            "type": "VULNERABILITY",
+            "scope": "MAIN",
+            "quickFixAvailable": false,
+            "messageFormattings": [],
+            "codeVariants": [],
+            "cleanCodeAttribute": "TRUSTWORTHY",
+            "cleanCodeAttributeCategory": "RESPONSIBLE",
+            "impacts": [
+                {
+                    "softwareQuality": "MAINTAINABILITY",
+                    "severity": "LOW"
+                },
+                {
+                    "softwareQuality": "SECURITY",
+                    "severity": "HIGH"
+                }
+            ],
+            "issueStatus": "OPEN",
+            "prioritizedRule": false,
+            "fromSonarQubeUpdate": false,
+            "internalTags": [],
+            "linkedTicketStatus": "NOT_LINKED"
+        },
+        {
+            "key": "fa897cbc-daeb-4cf8-8a55-aee7124374bb",
+            "rule": "typescript:S2245",
+            "severity": "MAJOR",
+            "component": "juice-shop:data/datacreator.ts",
+            "project": "juice-shop",
+            "line": 755,
+            "hash": "bebe824149ade63fbe941bee80e1598d",
+            "textRange": {
+                "startLine": 755,
+                "endLine": 755,
+                "startOffset": 23,
+                "endOffset": 36
+            },
+            "flows": [],
+            "status": "OPEN",
+            "message": "Make sure that using this pseudorandom number generator is safe here.",
+            "effort": "10min",
+            "debt": "10min",
+            "author": "agrawal.arpit14@gmail.com",
+            "tags": [
+                "cwe",
+                "former-hotspot"
+            ],
+            "creationDate": "2019-07-19T14:52:09+0000",
+            "updateDate": "2026-09-08T06:05:54+0000",
+            "type": "VULNERABILITY",
+            "scope": "MAIN",
+            "quickFixAvailable": false,
+            "messageFormattings": [],
+            "codeVariants": [],
+            "cleanCodeAttribute": "TRUSTWORTHY",
+            "cleanCodeAttributeCategory": "RESPONSIBLE",
+            "impacts": [
+                {
+                    "softwareQuality": "SECURITY",
+                    "severity": "MEDIUM"
+                }
+            ],
+            "issueStatus": "OPEN",
+            "prioritizedRule": false,
+            "fromSonarQubeUpdate": false,
+            "internalTags": [],
+            "linkedTicketStatus": "NOT_LINKED"
+        },
+        {
+            "key": "e7d7b057-7033-4629-8405-3420a4b697e7",
+            "rule": "typescript:S1523",
+            "severity": "CRITICAL",
+            "component": "juice-shop:routes/b2bOrder.ts",
+            "project": "juice-shop",
+            "line": 23,
+            "hash": "98154e3cc2ff63f171a5c66382945237",
+            "textRange": {
+                "startLine": 23,
+                "endLine": 23,
+                "startOffset": 8,
+                "endOffset": 23
+            },
+            "flows": [],
+            "status": "OPEN",
+            "message": "Make sure that this dynamic injection or execution of code is safe.",
+            "effort": "30min",
+            "debt": "30min",
+            "author": "bjoern.kimminich@kuehne-nagel.com",
+            "tags": [
+                "cwe",
+                "former-hotspot"
+            ],
+            "creationDate": "2018-01-25T13:22:25+0000",
+            "updateDate": "2026-09-08T06:05:54+0000",
+            "type": "VULNERABILITY",
+            "scope": "MAIN",
+            "quickFixAvailable": false,
+            "messageFormattings": [],
+            "codeVariants": [],
+            "cleanCodeAttribute": "TRUSTWORTHY",
+            "cleanCodeAttributeCategory": "RESPONSIBLE",
+            "impacts": [
+                {
+                    "softwareQuality": "MAINTAINABILITY",
+                    "severity": "LOW"
+                },
+                {
+                    "softwareQuality": "SECURITY",
+                    "severity": "HIGH"
+                }
+            ],
+            "issueStatus": "OPEN",
+            "prioritizedRule": false,
+            "fromSonarQubeUpdate": false,
+            "internalTags": [],
+            "linkedTicketStatus": "NOT_LINKED"
+        },
+        {
+            "key": "1c36c29b-cd37-4c13-9380-c235baa59d5f",
+            "rule": "typescript:S2245",
+            "severity": "MAJOR",
+            "component": "juice-shop:data/datacreator.ts",
+            "project": "juice-shop",
+            "line": 305,
+            "hash": "d5dc42e5a9d0d70b05ad861df59041fc",
+            "textRange": {
+                "startLine": 305,
+                "endLine": 305,
+                "startOffset": 74,
+                "endOffset": 87
+            },
+            "flows": [],
+            "status": "OPEN",
+            "message": "Make sure that using this pseudorandom number generator is safe here.",
+            "effort": "10min",
+            "debt": "10min",
+            "author": "bjoern.kimminich@gmx.de",
+            "tags": [
+                "cwe",
+                "former-hotspot"
+            ],
+            "creationDate": "2017-08-28T06:06:12+0000",
+            "updateDate": "2026-09-08T06:05:54+0000",
+            "type": "VULNERABILITY",
+            "scope": "MAIN",
+            "quickFixAvailable": false,
+            "messageFormattings": [],
+            "codeVariants": [],
+            "cleanCodeAttribute": "TRUSTWORTHY",
+            "cleanCodeAttributeCategory": "RESPONSIBLE",
+            "impacts": [
+                {
+                    "softwareQuality": "SECURITY",
+                    "severity": "MEDIUM"
+                }
+            ],
+            "issueStatus": "OPEN",
+            "prioritizedRule": false,
+            "fromSonarQubeUpdate": false,
+            "internalTags": [],
+            "linkedTicketStatus": "NOT_LINKED"
+        },
+        {
+            "key": "22da8a76-882b-40c4-9206-5258d319ea27",
+            "rule": "typescript:S4507",
+            "severity": "MINOR",
+            "component": "juice-shop:server.ts",
+            "project": "juice-shop",
+            "line": 701,
+            "hash": "533a0b15edff243b4be47bebbce7d622",
+            "textRange": {
+                "startLine": 701,
+                "endLine": 701,
+                "startOffset": 10,
+                "endOffset": 24
+            },
+            "flows": [],
+            "status": "OPEN",
+            "message": "Make sure this debug feature is deactivated before delivering the code in production.",
+            "effort": "1min",
+            "debt": "1min",
+            "author": "bjoern.kimminich@gmx.de",
+            "tags": [
+                "cwe",
+                "error-handling",
+                "debug",
+                "user-experience",
+                "express.js",
+                "former-hotspot"
+            ],
+            "creationDate": "2016-09-11T22:52:59+0000",
+            "updateDate": "2026-09-08T06:05:54+0000",
+            "type": "VULNERABILITY",
+            "scope": "MAIN",
+            "quickFixAvailable": false,
+            "messageFormattings": [],
+            "codeVariants": [],
+            "cleanCodeAttribute": "CONVENTIONAL",
+            "cleanCodeAttributeCategory": "CONSISTENT",
+            "impacts": [
+                {
+                    "softwareQuality": "SECURITY",
+                    "severity": "LOW"
+                }
+            ],
+            "issueStatus": "OPEN",
+            "prioritizedRule": false,
+            "fromSonarQubeUpdate": false,
+            "internalTags": [],
+            "linkedTicketStatus": "NOT_LINKED"
+        }
+    ],
+    "components": [
+        {
+            "key": "juice-shop:data/static/codefixes/redirectChallenge_4_correct.ts",
+            "enabled": true,
+            "qualifier": "FIL",
+            "name": "redirectChallenge_4_correct.ts",
+            "longName": "data/static/codefixes/redirectChallenge_4_correct.ts",
+            "path": "data/static/codefixes/redirectChallenge_4_correct.ts"
+        },
+        {
+            "key": "juice-shop:data/static/codefixes/redirectCryptoCurrencyChallenge_1.ts",
+            "enabled": true,
+            "qualifier": "FIL",
+            "name": "redirectCryptoCurrencyChallenge_1.ts",
+            "longName": "data/static/codefixes/redirectCryptoCurrencyChallenge_1.ts",
+            "path": "data/static/codefixes/redirectCryptoCurrencyChallenge_1.ts"
+        },
+        {
+            "key": "juice-shop:data/static/codefixes/redirectCryptoCurrencyChallenge_4.ts",
+            "enabled": true,
+            "qualifier": "FIL",
+            "name": "redirectCryptoCurrencyChallenge_4.ts",
+            "longName": "data/static/codefixes/redirectCryptoCurrencyChallenge_4.ts",
+            "path": "data/static/codefixes/redirectCryptoCurrencyChallenge_4.ts"
+        },
+        {
+            "key": "juice-shop:data/static/codefixes/redirectCryptoCurrencyChallenge_2.ts",
+            "enabled": true,
+            "qualifier": "FIL",
+            "name": "redirectCryptoCurrencyChallenge_2.ts",
+            "longName": "data/static/codefixes/redirectCryptoCurrencyChallenge_2.ts",
+            "path": "data/static/codefixes/redirectCryptoCurrencyChallenge_2.ts"
+        },
+        {
+            "key": "juice-shop:scripts/package.mjs",
+            "enabled": true,
+            "qualifier": "FIL",
+            "name": "package.mjs",
+            "longName": "scripts/package.mjs",
+            "path": "scripts/package.mjs"
+        },
+        {
+            "key": "juice-shop:data/static/codefixes/redirectChallenge_1.ts",
+            "enabled": true,
+            "qualifier": "FIL",
+            "name": "redirectChallenge_1.ts",
+            "longName": "data/static/codefixes/redirectChallenge_1.ts",
+            "path": "data/static/codefixes/redirectChallenge_1.ts"
+        },
+        {
+            "key": "juice-shop:data/static/codefixes/iacLeakedKeyChallenge_1.tf",
+            "enabled": true,
+            "qualifier": "FIL",
+            "name": "iacLeakedKeyChallenge_1.tf",
+            "longName": "data/static/codefixes/iacLeakedKeyChallenge_1.tf",
+            "path": "data/static/codefixes/iacLeakedKeyChallenge_1.tf"
+        },
+        {
+            "key": "juice-shop:data/static/codefixes/redirectChallenge_3.ts",
+            "enabled": true,
+            "qualifier": "FIL",
+            "name": "redirectChallenge_3.ts",
+            "longName": "data/static/codefixes/redirectChallenge_3.ts",
+            "path": "data/static/codefixes/redirectChallenge_3.ts"
+        },
+        {
+            "key": "juice-shop:data/static/codefixes/iacLeakedKeyChallenge_2.tf",
+            "enabled": true,
+            "qualifier": "FIL",
+            "name": "iacLeakedKeyChallenge_2.tf",
+            "longName": "data/static/codefixes/iacLeakedKeyChallenge_2.tf",
+            "path": "data/static/codefixes/iacLeakedKeyChallenge_2.tf"
+        },
+        {
+            "key": "juice-shop:data/static/codefixes/iacLeakedKeyChallenge_3_correct.tf",
+            "enabled": true,
+            "qualifier": "FIL",
+            "name": "iacLeakedKeyChallenge_3_correct.tf",
+            "longName": "data/static/codefixes/iacLeakedKeyChallenge_3_correct.tf",
+            "path": "data/static/codefixes/iacLeakedKeyChallenge_3_correct.tf"
+        },
+        {
+            "key": "juice-shop:infrastructure/terraform/networking.tf",
+            "enabled": true,
+            "qualifier": "FIL",
+            "name": "networking.tf",
+            "longName": "infrastructure/terraform/networking.tf",
+            "path": "infrastructure/terraform/networking.tf"
+        },
+        {
+            "key": "juice-shop:lib/insecurity.ts",
+            "enabled": true,
+            "qualifier": "FIL",
+            "name": "insecurity.ts",
+            "longName": "lib/insecurity.ts",
+            "path": "lib/insecurity.ts"
+        },
+        {
+            "key": "juice-shop:data/static/codefixes/redirectCryptoCurrencyChallenge_3_correct.ts",
+            "enabled": true,
+            "qualifier": "FIL",
+            "name": "redirectCryptoCurrencyChallenge_3_correct.ts",
+            "longName": "data/static/codefixes/redirectCryptoCurrencyChallenge_3_correct.ts",
+            "path": "data/static/codefixes/redirectCryptoCurrencyChallenge_3_correct.ts"
+        },
+        {
+            "key": "juice-shop:routes/b2bOrder.ts",
+            "enabled": true,
+            "qualifier": "FIL",
+            "name": "b2bOrder.ts",
+            "longName": "routes/b2bOrder.ts",
+            "path": "routes/b2bOrder.ts"
+        },
+        {
+            "key": "juice-shop:data/datacreator.ts",
+            "enabled": true,
+            "qualifier": "FIL",
+            "name": "datacreator.ts",
+            "longName": "data/datacreator.ts",
+            "path": "data/datacreator.ts"
+        },
+        {
+            "key": "juice-shop",
+            "enabled": true,
+            "qualifier": "TRK",
+            "name": "OWASP Juice Shop",
+            "longName": "OWASP Juice Shop"
+        },
+        {
+            "key": "juice-shop:routes/userProfile.ts",
+            "enabled": true,
+            "qualifier": "FIL",
+            "name": "userProfile.ts",
+            "longName": "routes/userProfile.ts",
+            "path": "routes/userProfile.ts"
+        },
+        {
+            "key": "juice-shop:data/static/codefixes/redirectChallenge_2.ts",
+            "enabled": true,
+            "qualifier": "FIL",
+            "name": "redirectChallenge_2.ts",
+            "longName": "data/static/codefixes/redirectChallenge_2.ts",
+            "path": "data/static/codefixes/redirectChallenge_2.ts"
+        },
+        {
+            "key": "juice-shop:lib/xml.ts",
+            "enabled": true,
+            "qualifier": "FIL",
+            "name": "xml.ts",
+            "longName": "lib/xml.ts",
+            "path": "lib/xml.ts"
+        },
+        {
+            "key": "juice-shop:terraform/networking.tf",
+            "enabled": true,
+            "qualifier": "FIL",
+            "name": "networking.tf",
+            "longName": "terraform/networking.tf",
+            "path": "terraform/networking.tf"
+        },
+        {
+            "key": "juice-shop:routes/fileUpload.ts",
+            "enabled": true,
+            "qualifier": "FIL",
+            "name": "fileUpload.ts",
+            "longName": "routes/fileUpload.ts",
+            "path": "routes/fileUpload.ts"
+        },
+        {
+            "key": "juice-shop:routes/captcha.ts",
+            "enabled": true,
+            "qualifier": "FIL",
+            "name": "captcha.ts",
+            "longName": "routes/captcha.ts",
+            "path": "routes/captcha.ts"
+        },
+        {
+            "key": "juice-shop:server.ts",
+            "enabled": true,
+            "qualifier": "FIL",
+            "name": "server.ts",
+            "longName": "server.ts",
+            "path": "server.ts"
+        }
+    ],
+    "facets": []
+}

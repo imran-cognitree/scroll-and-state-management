@@ -1,0 +1,80 @@
+{
+    "rule": {
+        "key": "terraform:S6258",
+        "repo": "terraform",
+        "name": "Cloud resources logging should not be disabled",
+        "createdAt": "2026-09-08T05:33:42+0000",
+        "severity": "MAJOR",
+        "status": "READY",
+        "isTemplate": false,
+        "tags": [],
+        "sysTags": [
+            "cwe",
+            "gcp",
+            "aws",
+            "former-hotspot"
+        ],
+        "lang": "terraform",
+        "langName": "Terraform",
+        "params": [],
+        "defaultDebtRemFnType": "CONSTANT_ISSUE",
+        "debtRemFnType": "CONSTANT_ISSUE",
+        "type": "VULNERABILITY",
+        "defaultRemFnType": "CONSTANT_ISSUE",
+        "defaultRemFnBaseEffort": "30min",
+        "remFnType": "CONSTANT_ISSUE",
+        "remFnBaseEffort": "30min",
+        "remFnOverloaded": false,
+        "scope": "MAIN",
+        "isExternal": false,
+        "descriptionSections": [
+            {
+                "key": "how_to_fix",
+                "content": "<p>The following code is vulnerable because logging is not enabled for the resource, which prevents security and operational teams from detecting and\ninvestigating incidents.</p>\n<h4>Noncompliant code example</h4>\n<p>For Amazon <a href=\"https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket\">S3 access requests</a>:</p>\n<pre data-diff-id=\"1\" data-diff-type=\"noncompliant\">\nresource \"aws_s3_bucket\" \"example\" { # Noncompliant\n  bucket = \"example\"\n}\n</pre>\n<p>For Amazon <a href=\"https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/api_gateway_stage\">API Gateway stages</a>:</p>\n<pre data-diff-id=\"2\" data-diff-type=\"noncompliant\">\nresource \"aws_api_gateway_stage\" \"example\" { # Noncompliant\n  xray_tracing_enabled = false # Noncompliant\n}\n</pre>\n<h4>Compliant solution</h4>\n<p>For Amazon <a href=\"https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket\">S3 access requests</a>:</p>\n<pre data-diff-id=\"1\" data-diff-type=\"compliant\">\nresource \"aws_s3_bucket\" \"example\" {\n  bucket = \"example\"\n}\n\nresource \"aws_s3_bucket_logging\" \"example\" {\n  bucket = aws_s3_bucket.example.id\n\n  target_bucket = aws_s3_bucket.logs.id\n  target_prefix = \"testing-logs\"\n}\n\n# Set up a logging bucket\nresource \"aws_s3_bucket\" \"logs\" {\n  bucket = \"example_logstorage\"\n}\n\ndata \"aws_iam_policy_document\" \"logs\" {\n  statement {\n      sid    = \"s3-log-delivery\"\n      effect = \"Allow\"\n\n      principals {\n        type        = \"Service\"\n        identifiers = [\"logging.s3.amazonaws.com\"]\n      }\n\n      actions = [\"s3:PutObject\"]\n\n      resources = [\n        \"${aws_s3_bucket.logs.arn}/*\",\n      ]\n    }\n}\n\nresource \"aws_s3_bucket_policy\" \"logs\" {\n  bucket = aws_s3_bucket.logs.id\n  policy = data.aws_iam_policy_document.logs.json\n}\n</pre>\n<p>For Amazon <a href=\"https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/api_gateway_stage\">API Gateway stages</a>:</p>\n<pre data-diff-id=\"2\" data-diff-type=\"compliant\">\nresource \"aws_api_gateway_stage\" \"example\" {\n  xray_tracing_enabled = true\n\n  access_log_settings {\n    destination_arn = \"arn:aws:logs:eu-west-1:123456789:example\"\n    format = \"...\"\n  }\n}\n</pre>",
+                "context": {
+                    "displayName": "AWS",
+                    "key": "aws"
+                }
+            },
+            {
+                "key": "introduction",
+                "content": "<p>Disabling or omitting logging for cloud resources prevents operational and security teams from detecting and investigating security incidents.</p>"
+            },
+            {
+                "key": "how_to_fix",
+                "content": "<p>The following code is vulnerable because logging is not enabled for the resource, which prevents security and operational teams from detecting and\ninvestigating incidents.</p>\n<h4>Noncompliant code example</h4>\n<p>For GCP <a href=\"https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_subnetwork/\">VPC Subnetwork</a>:</p>\n<pre data-diff-id=\"4\" data-diff-type=\"noncompliant\">\nresource \"google_compute_subnetwork\" \"example\" { # Noncompliant\n  name          = \"example\"\n  ip_cidr_range = \"10.2.0.0/16\"\n  region        = \"us-central1\"\n  network       = google_compute_network.example.id\n}\n</pre>\n<p>For GCP <a href=\"https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/sql_database_instance/\">SQL Database\nInstance</a>:</p>\n<pre data-diff-id=\"5\" data-diff-type=\"noncompliant\">\nresource \"google_sql_database_instance\" \"example\" {\n  name = \"example\"\n\n  settings { # Noncompliant\n    tier = \"db-f1-micro\"\n    ip_configuration {\n      require_ssl  = true\n      ipv4_enabled = true\n    }\n  }\n}\n</pre>\n<h4>Compliant solution</h4>\n<p>For GCP <a href=\"https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_subnetwork/\">VPC Subnetwork</a>:</p>\n<pre data-diff-id=\"4\" data-diff-type=\"compliant\">\nresource \"google_compute_subnetwork\" \"example\" {\n  name          = \"example\"\n  ip_cidr_range = \"10.2.0.0/16\"\n  region        = \"us-central1\"\n  network       = google_compute_network.example.id\n\n  log_config {\n    aggregation_interval = \"INTERVAL_10_MIN\"\n    flow_sampling        = 0.5\n    metadata             = \"INCLUDE_ALL_METADATA\"\n  }\n}\n</pre>\n<p>For GCP <a href=\"https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/sql_database_instance/\">SQL Database\nInstance</a>:</p>\n<pre data-diff-id=\"5\" data-diff-type=\"compliant\">\nresource \"google_sql_database_instance\" \"example\" {\n  name             = \"example\"\n\n  settings {\n    ip_configuration {\n      require_ssl  = true\n      ipv4_enabled = true\n    }\n    database_flags {\n      name  = \"log_connections\"\n      value = \"on\"\n    }\n    database_flags {\n      name  = \"log_disconnections\"\n      value = \"on\"\n    }\n    database_flags {\n      name  = \"log_checkpoints\"\n      value = \"on\"\n    }\n    database_flags {\n      name  = \"log_lock_waits\"\n      value = \"on\"\n    }\n  }\n}\n</pre>",
+                "context": {
+                    "displayName": "GCP",
+                    "key": "gcp"
+                }
+            },
+            {
+                "key": "root_cause",
+                "content": "<p>Logging provides operational and security teams with a real-time feed of events from the information system. When logging is disabled or not\nconfigured for a cloud resource, security incidents can go undetected and leave no forensic trail for investigators. This rule raises an issue when a\ncloud resource that is essential to the infrastructure \u2014 such as a storage bucket, database, load balancer, or API gateway \u2014 has logging explicitly\ndisabled or omitted.</p>\n<h3>What is the potential impact?</h3>\n<p>Without logs, security teams lose the ability to detect and respond to intrusions in real time. In the event of an incident, investigators cannot\nreconstruct a timeline of attacker activity, making it impossible to determine the scope of a breach, identify compromised data, or attribute actions\nto a specific actor.</p>"
+            },
+            {
+                "key": "resources",
+                "content": "<h3>Documentation</h3>\n<ul>\n  <li><a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/ServerLogs.html\">AWS Documentation</a> - Logging requests using server access\n  logging</li>\n  <li><a href=\"https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket\">Terraform Registry</a> - aws_s3_bucket</li>\n  <li><a href=\"https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/api_gateway_stage\">Terraform Registry</a> -\n  aws_api_gateway_stage</li>\n  <li><a href=\"https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/msk_cluster\">Terraform Registry</a> - aws_msk_cluster</li>\n  <li><a href=\"https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/mq_broker\">Terraform Registry</a> - aws_mq_broker</li>\n  <li><a href=\"https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/docdb_cluster\">Terraform Registry</a> -\n  aws_docdb_cluster</li>\n  <li><a href=\"https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/app_service\">Terraform Registry</a> -\n  azurerm_app_service</li>\n  <li><a href=\"https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_subnetwork/\">Terraform Registry</a> -\n  google_compute_subnetwork</li>\n  <li><a href=\"https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/sql_database_instance/\">Terraform Registry</a> -\n  google_sql_database_instance</li>\n  <li><a href=\"https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/container_cluster/\">Terraform Registry</a> -\n  google_container_cluster</li>\n</ul>\n<h3>Standards</h3>\n<ul>\n  <li>CWE - <a href=\"https://cwe.mitre.org/data/definitions/778\">CWE-778 - Insufficient Logging</a></li>\n</ul>"
+            },
+            {
+                "key": "how_to_fix",
+                "content": "<p>The following code is vulnerable because logging is not enabled for the resource, which prevents security and operational teams from detecting and\ninvestigating incidents.</p>\n<p>For Azure <a href=\"https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/app_service\">App Services</a>:</p>\n<h4>Noncompliant code example</h4>\n<pre data-diff-id=\"3\" data-diff-type=\"noncompliant\">\nresource \"azurerm_app_service\" \"example\" {\n  logs {\n    application_logs {\n      file_system_level = \"Off\" # Noncompliant\n      azure_blob_storage {\n        level = \"Off\"           # Noncompliant\n      }\n    }\n  }\n}\n</pre>\n<h4>Compliant solution</h4>\n<pre data-diff-id=\"3\" data-diff-type=\"compliant\">\nresource \"azurerm_app_service\" \"example\" {\n logs {\n    http_logs {\n      file_system {\n        retention_in_days = 90\n        retention_in_mb   = 100\n      }\n    }\n\n application_logs {\n      file_system_level = \"Error\"\n      azure_blob_storage {\n        retention_in_days = 90\n        level             = \"Error\"\n      }\n    }\n  }\n}\n</pre>",
+                "context": {
+                    "displayName": "Azure",
+                    "key": "azure"
+                }
+            }
+        ],
+        "educationPrinciples": [],
+        "updatedAt": "2026-09-08T05:33:42+0000",
+        "cleanCodeAttribute": "CONVENTIONAL",
+        "cleanCodeAttributeCategory": "CONSISTENT",
+        "impacts": [
+            {
+                "softwareQuality": "SECURITY",
+                "severity": "MEDIUM"
+            }
+        ]
+    },
+    "actives": []
+}

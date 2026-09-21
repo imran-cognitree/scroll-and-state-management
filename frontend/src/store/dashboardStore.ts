@@ -16,6 +16,7 @@ interface DashboardState {
   // Filters
   selectedProject: string;   // 'all' or project name
   selectedStatus: string;    // 'all' | 'Open' | 'In Progress' | 'Resolved'
+  selectedSeverity: string;  // 'all' | 'Critical' | 'High' | 'Medium' | 'Low'
   selectedScanType: ScanType | 'all';
   sortOrder: SortOrder;
   currentPage: number;
@@ -25,6 +26,7 @@ interface DashboardState {
   loadData: (data: DashboardData) => void;
   setProjectFilter: (project: string) => void;
   setStatusFilter: (status: string) => void;
+  setSeverityFilter: (severity: string) => void;
   setScanTypeFilter: (type: ScanType | 'all') => void;
   setSortOrder: (order: SortOrder) => void;
   setPage: (page: number) => void;
@@ -38,6 +40,7 @@ export const useDashboardStore = create<DashboardState>((set) => ({
   isLoaded: false,
   selectedProject: 'all',
   selectedStatus: 'all',
+  selectedSeverity: 'all',
   selectedScanType: 'all',
   sortOrder: 'severity-desc',
   currentPage: 1,
@@ -49,6 +52,7 @@ export const useDashboardStore = create<DashboardState>((set) => ({
 
   setProjectFilter: (project) => set({ selectedProject: project, currentPage: 1 }),
   setStatusFilter: (status) => set({ selectedStatus: status, currentPage: 1 }),
+  setSeverityFilter: (severity) => set({ selectedSeverity: severity, currentPage: 1 }),
   setScanTypeFilter: (type) => set({ selectedScanType: type, currentPage: 1 }),
   setSortOrder: (order) => set({ sortOrder: order, currentPage: 1 }),
   setPage: (page) => set({ currentPage: page }),

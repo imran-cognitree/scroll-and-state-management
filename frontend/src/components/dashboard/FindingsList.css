@@ -111,12 +111,24 @@
 .findings__row {
   border-bottom: 1px solid var(--border-glass);
   transition: background 0.12s ease;
+  cursor: pointer;
 }
 
 .findings__row:last-child { border-bottom: none; }
 
 .findings__row:hover {
   background: var(--bg-surface-elevated);
+}
+
+/* Selected row highlight */
+.findings__row--selected {
+  background: rgba(6, 182, 212, 0.06) !important;
+  box-shadow: inset 3px 0 0 var(--scanner-sca) !important;
+}
+
+.findings__row:focus-visible {
+  outline: 2px solid var(--scanner-sca);
+  outline-offset: -2px;
 }
 
 /* Left severity accent on hover */

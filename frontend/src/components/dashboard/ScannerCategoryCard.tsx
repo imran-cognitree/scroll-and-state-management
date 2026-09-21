@@ -1,11 +1,12 @@
 import { ArrowRight } from 'lucide-react';
 import { MetricStat } from './MetricStat';
-import type { ScanType } from '../../store/types';
+import { ToolBarChart } from './ToolBarChart';
+import type { ToolBar } from './ToolBarChart';
+import type { ScanType, Severity } from '../../store/types';
 import './ScannerCategoryCard.css';
 
 interface ScannerMeta {
   type: ScanType;
-  scanner: string;
   tagline: string;
   description: string;
   color: string;
@@ -15,28 +16,33 @@ interface ScannerMeta {
 const SCANNER_META: Record<ScanType, ScannerMeta> = {
   SCA: {
     type: 'SCA',
-    scanner: 'Trivy',
     tagline: 'Software Composition Analysis',
     description: 'Open-source dependency CVEs & package manifests',
     color: 'var(--scanner-sca)',
-    glow:  'var(--glow-sca)',
+    glow: 'var(--glow-sca)',
   },
   SAST: {
     type: 'SAST',
-    scanner: 'Semgrep',
     tagline: 'Static Application Security Testing',
     description: 'Source-level code flaws, AST syntax & hardcoded secrets',
     color: 'var(--scanner-sast)',
-    glow:  'var(--glow-sast)',
+    glow: 'var(--glow-sast)',
   },
   DAST: {
-    type: 'SAST',
-    scanner: 'OWASP ZAP',
+    type: 'DAST',
     tagline: 'Dynamic Application Security Testing',
     description: 'Runtime endpoint fuzzing, injection checks & headers',
     color: 'var(--scanner-dast)',
-    glow:  'var(--glow-dast)',
+    glow: 'var(--glow-dast)',
   },
+};
+
+// Colors for individual tools within a scan type
+const TOOL_BAR_COLORS: Record<string, string> = {
+  Trivy:      'var(--scanner-sca)',
+  Grype:      '#818cf8',
+  Semgrep:    'var(--scanner-sast)',
+  'OWASP ZAP': 'var(--scanner-dast)',
 };
 
 interface Props {
@@ -48,11 +54,25 @@ interface Props {
     Medium: number;
     Low: number;
   };
+  toolBreakdown: ToolBar[];
   onViewFindings?: (type: ScanType) => void;
+  onSeverityClick?: (type: ScanType, severity: Severity) => void;
 }
 
-export function ScannerCategoryCard({ type, counts, onViewFindings }: Props) {
+export function ScannerCategoryCard({
+  type,
+  counts,
+  toolBreakdown,
+  onViewFindings,
+  onSeverityClick,
+}: Props) {
   const meta = SCANNER_META[type];
+
+  // Attach colors to bar items
+  const coloredBars: ToolBar[] = toolBreakdown.map((b) => ({
+    ...b,
+    color: TOOL_BAR_COLORS[b.tool] ?? meta.color,
+  }));
 
   return (
     <div
@@ -67,7 +87,7 @@ export function ScannerCategoryCard({ type, counts, onViewFindings }: Props) {
           <div className="scanner-card__type-row">
             <span className="scanner-card__type-pill">{type}</span>
             <span className="scanner-card__scanner-label">
-              Scanner: <strong>{meta.scanner}</strong>
+              {toolBreakdown.map((b) => b.tool).join(' · ')}
             </span>
           </div>
           <h3 className="scanner-card__tagline">{meta.tagline}</h3>
@@ -75,16 +95,42 @@ export function ScannerCategoryCard({ type, counts, onViewFindings }: Props) {
         </div>
       </div>
 
+      {/* Severity metrics — clickable */}
       <div className="scanner-card__metrics">
         <MetricStat label="TOTAL" value={counts.total} />
         <div className="scanner-card__divider" />
-        <MetricStat label="CRITICAL" value={counts.Critical} variant="critical" />
-        <MetricStat label="HIGH"     value={counts.High}     variant="high" />
-        <MetricStat label="MEDIUM"   value={counts.Medium}   variant="medium" />
+        <MetricStat
+          label="CRITICAL"
+          value={counts.Critical}
+          variant="critical"
+          onClick={onSeverityClick ? () => onSeverityClick(type, 'Critical') : undefined}
+        />
+        <MetricStat
+          label="HIGH"
+          value={counts.High}
+          variant="high"
+          onClick={onSeverityClick ? () => onSeverityClick(type, 'High') : undefined}
+        />
+        <MetricStat
+          label="MEDIUM"
+          value={counts.Medium}
+          variant="medium"
+          onClick={onSeverityClick ? () => onSeverityClick(type, 'Medium') : undefined}
+        />
         {counts.Low > 0 && (
-          <MetricStat label="LOW" value={counts.Low} variant="low" />
+          <MetricStat
+            label="LOW"
+            value={counts.Low}
+            variant="low"
+            onClick={onSeverityClick ? () => onSeverityClick(type, 'Low') : undefined}
+          />
         )}
       </div>
+
+      {/* Tool breakdown bar chart */}
+      {coloredBars.length > 1 && (
+        <ToolBarChart bars={coloredBars} total={counts.total} />
+      )}
 
       <button
         className="scanner-card__cta"

@@ -4,7 +4,7 @@ import { useDataLoader } from './store/useDataLoader';
 import { useDashboardStore } from './store/dashboardStore';
 import { VulnerabilityOverview } from './components/dashboard/VulnerabilityOverview';
 import { FindingsList } from './components/dashboard/FindingsList';
-import type { ScanType } from './store/types';
+import type { ScanType, Severity } from './store/types';
 import './styles/index.css';
 import './App.css';
 
@@ -14,6 +14,7 @@ export default function App() {
   useDataLoader();
 
   const isLoaded = useDashboardStore((s) => s.isLoaded);
+  const setSeverityFilter = useDashboardStore((s) => s.setSeverityFilter);
   const [activeView, setActiveView] = useState<View>('overview');
 
   if (!isLoaded) {
@@ -25,11 +26,17 @@ export default function App() {
     );
   }
 
-  const handleViewFindings = (type: ScanType) => {
+  /**
+   * Navigate to the findings view for a given scan type.
+   * Optionally pre-apply a severity filter (e.g. when clicking a metric number).
+   */
+  const handleViewFindings = (type: ScanType, severity?: Severity) => {
+    setSeverityFilter(severity ?? 'all');
     setActiveView(type);
   };
 
   const handleBack = () => {
+    setSeverityFilter('all');
     setActiveView('overview');
   };
 
@@ -48,7 +55,7 @@ export default function App() {
         <nav className="sidebar__nav">
           <button
             className={`sidebar__nav-item ${activeView === 'overview' ? 'sidebar__nav-item--active' : ''}`}
-            onClick={() => setActiveView('overview')}
+            onClick={() => handleBack()}
             id="nav-dashboard"
           >
             <LayoutDashboard size={16} />
@@ -56,16 +63,36 @@ export default function App() {
           </button>
           <button
             className={`sidebar__nav-item ${activeView !== 'overview' ? 'sidebar__nav-item--active' : ''}`}
-            onClick={() => activeView === 'overview' ? setActiveView('SCA') : undefined}
+            onClick={() => activeView === 'overview' ? handleViewFindings('SCA') : undefined}
             id="nav-vulnerabilities"
           >
             <AlertTriangle size={16} />
             <span>Vulnerability Overview</span>
           </button>
-          {/* <button className="sidebar__nav-item" id="nav-monitoring" disabled>
-            <Activity size={16} />
-            <span>Active Monitoring</span>
-          </button> */}
+          <button
+            className={`sidebar__nav-item ${activeView !== 'overview' ? 'sidebar__nav-item--active' : ''}`}
+            onClick={() => activeView === 'overview' ? handleViewFindings('SCA') : undefined}
+            id="nav-vulnerabilities"
+          >
+            <AlertTriangle size={16} />
+            <span>SCA</span>
+          </button>
+          <button
+            className={`sidebar__nav-item ${activeView !== 'overview' ? 'sidebar__nav-item--active' : ''}`}
+            onClick={() => activeView === 'overview' ? handleViewFindings('SCA') : undefined}
+            id="nav-vulnerabilities"
+          >
+            <AlertTriangle size={16} />
+            <span>SAST</span>
+          </button>
+          <button
+            className={`sidebar__nav-item ${activeView !== 'overview' ? 'sidebar__nav-item--active' : ''}`}
+            onClick={() => activeView === 'overview' ? handleViewFindings('SCA') : undefined}
+            id="nav-vulnerabilities"
+          >
+            <AlertTriangle size={16} />
+            <span>DAST</span>
+          </button>
         </nav>
 
         {/* Breadcrumb */}
