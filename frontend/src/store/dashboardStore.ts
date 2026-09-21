@@ -18,6 +18,8 @@ interface DashboardState {
   selectedStatus: string;    // 'all' | 'Open' | 'In Progress' | 'Resolved'
   selectedSeverity: string;  // 'all' | 'Critical' | 'High' | 'Medium' | 'Low'
   selectedScanType: ScanType | 'all';
+  selectedTool: string;      // 'all' or scanner name (e.g. 'Trivy')
+  searchQuery: string;
   sortOrder: SortOrder;
   currentPage: number;
   pageSize: number;
@@ -28,8 +30,11 @@ interface DashboardState {
   setStatusFilter: (status: string) => void;
   setSeverityFilter: (severity: string) => void;
   setScanTypeFilter: (type: ScanType | 'all') => void;
+  setToolFilter: (tool: string) => void;
+  setSearchQuery: (query: string) => void;
   setSortOrder: (order: SortOrder) => void;
   setPage: (page: number) => void;
+  setPageSize: (size: number) => void;
   /** Increment currentPage to load the next batch for infinite scroll */
   loadMorePage: () => void;
 }
@@ -42,6 +47,8 @@ export const useDashboardStore = create<DashboardState>((set) => ({
   selectedStatus: 'all',
   selectedSeverity: 'all',
   selectedScanType: 'all',
+  selectedTool: 'all',
+  searchQuery: '',
   sortOrder: 'severity-desc',
   currentPage: 1,
   pageSize: 10,
@@ -54,8 +61,11 @@ export const useDashboardStore = create<DashboardState>((set) => ({
   setStatusFilter: (status) => set({ selectedStatus: status, currentPage: 1 }),
   setSeverityFilter: (severity) => set({ selectedSeverity: severity, currentPage: 1 }),
   setScanTypeFilter: (type) => set({ selectedScanType: type, currentPage: 1 }),
+  setToolFilter: (tool) => set({ selectedTool: tool, currentPage: 1 }),
+  setSearchQuery: (query) => set({ searchQuery: query, currentPage: 1 }),
   setSortOrder: (order) => set({ sortOrder: order, currentPage: 1 }),
   setPage: (page) => set({ currentPage: page }),
+  setPageSize: (size) => set({ pageSize: size, currentPage: 1 }),
   loadMorePage: () => set((state) => ({ currentPage: state.currentPage + 1 })),
 }));
 

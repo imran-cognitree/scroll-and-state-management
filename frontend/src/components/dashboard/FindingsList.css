@@ -107,6 +107,64 @@
   text-align: left;
 }
 
+/* Severity column header with sort toggle */
+.findings__severity-header {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.findings__sort-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-sm);
+  padding: 2px;
+  color: var(--on-surface-variant);
+  cursor: pointer;
+  transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+}
+
+.findings__sort-toggle:hover {
+  color: var(--scanner-sca);
+  border-color: var(--border-glass-hover);
+  background: color-mix(in srgb, var(--scanner-sca) 12%, transparent);
+}
+
+.findings__sort-toggle:focus-visible {
+  outline: 2px solid var(--scanner-sca);
+  outline-offset: 1px;
+}
+
+/* Category pill (shown on the combined "All Findings" view) */
+.findings__category-pill {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  padding: 0.2rem 0.5rem;
+  border-radius: var(--radius-full);
+  display: inline-block;
+  white-space: nowrap;
+}
+.findings__category-pill--sca {
+  background: color-mix(in srgb, var(--scanner-sca) 15%, transparent);
+  color: var(--scanner-sca);
+  border: 1px solid color-mix(in srgb, var(--scanner-sca) 40%, transparent);
+}
+.findings__category-pill--sast {
+  background: color-mix(in srgb, var(--scanner-sast) 15%, transparent);
+  color: var(--scanner-sast);
+  border: 1px solid color-mix(in srgb, var(--scanner-sast) 40%, transparent);
+}
+.findings__category-pill--dast {
+  background: color-mix(in srgb, var(--scanner-dast) 15%, transparent);
+  color: var(--scanner-dast);
+  border: 1px solid color-mix(in srgb, var(--scanner-dast) 40%, transparent);
+}
+
 /* Rows */
 .findings__row {
   border-bottom: 1px solid var(--border-glass);

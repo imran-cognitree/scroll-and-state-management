@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useDashboardStore } from '../store/dashboardStore';
 import type { DashboardData } from '../store/types';
-import rawData from '../data/dummy-vulnerability-findings.json';
+import rawData from '../data/vulnerability-findings.json';
 
 /** Loads the mock JSON into Zustand store on mount */
 export function useDataLoader() {

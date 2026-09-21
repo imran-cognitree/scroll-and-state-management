@@ -39,9 +39,11 @@ const SCANNER_META: Record<ScanType, ScannerMeta> = {
 
 // Colors for individual tools within a scan type
 const TOOL_BAR_COLORS: Record<string, string> = {
-  Trivy:      'var(--scanner-sca)',
-  Grype:      '#818cf8',
-  Semgrep:    'var(--scanner-sast)',
+  Trivy:       'var(--scanner-sca)',
+  Grype:       '#818cf8',
+  Semgrep:     'var(--scanner-sast)',
+  SonarQube:   '#c4b5fd',
+  Wapiti:      '#fbbf24',
   'OWASP ZAP': 'var(--scanner-dast)',
 };
 

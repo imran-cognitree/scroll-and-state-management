@@ -8,7 +8,7 @@ import type { ScanType, Severity } from './store/types';
 import './styles/index.css';
 import './App.css';
 
-type View = 'overview' | ScanType;
+type View = 'overview' | ScanType | 'all';
 
 export default function App() {
   useDataLoader();
@@ -27,10 +27,10 @@ export default function App() {
   }
 
   /**
-   * Navigate to the findings view for a given scan type.
+   * Navigate to the findings view for a given scan type ('all' shows every finding).
    * Optionally pre-apply a severity filter (e.g. when clicking a metric number).
    */
-  const handleViewFindings = (type: ScanType, severity?: Severity) => {
+  const handleViewFindings = (type: ScanType | 'all', severity?: Severity) => {
     setSeverityFilter(severity ?? 'all');
     setActiveView(type);
   };
@@ -62,33 +62,33 @@ export default function App() {
             <span>Dashboard</span>
           </button>
           <button
-            className={`sidebar__nav-item ${activeView !== 'overview' ? 'sidebar__nav-item--active' : ''}`}
-            onClick={() => activeView === 'overview' ? handleViewFindings('SCA') : undefined}
-            id="nav-vulnerabilities"
+            className={`sidebar__nav-item ${activeView === 'all' ? 'sidebar__nav-item--active' : ''}`}
+            onClick={() => handleViewFindings('all')}
+            id="nav-all-findings"
           >
             <AlertTriangle size={16} />
-            <span>Vulnerability Overview</span>
+            <span>All Findings</span>
           </button>
           <button
-            className={`sidebar__nav-item ${activeView !== 'overview' ? 'sidebar__nav-item--active' : ''}`}
-            onClick={() => activeView === 'overview' ? handleViewFindings('SCA') : undefined}
-            id="nav-vulnerabilities"
+            className={`sidebar__nav-item ${activeView === 'SCA' ? 'sidebar__nav-item--active' : ''}`}
+            onClick={() => handleViewFindings('SCA')}
+            id="nav-sca"
           >
             <AlertTriangle size={16} />
             <span>SCA</span>
           </button>
           <button
-            className={`sidebar__nav-item ${activeView !== 'overview' ? 'sidebar__nav-item--active' : ''}`}
-            onClick={() => activeView === 'overview' ? handleViewFindings('SCA') : undefined}
-            id="nav-vulnerabilities"
+            className={`sidebar__nav-item ${activeView === 'SAST' ? 'sidebar__nav-item--active' : ''}`}
+            onClick={() => handleViewFindings('SAST')}
+            id="nav-sast"
           >
             <AlertTriangle size={16} />
             <span>SAST</span>
           </button>
           <button
-            className={`sidebar__nav-item ${activeView !== 'overview' ? 'sidebar__nav-item--active' : ''}`}
-            onClick={() => activeView === 'overview' ? handleViewFindings('SCA') : undefined}
-            id="nav-vulnerabilities"
+            className={`sidebar__nav-item ${activeView === 'DAST' ? 'sidebar__nav-item--active' : ''}`}
+            onClick={() => handleViewFindings('DAST')}
+            id="nav-dast"
           >
             <AlertTriangle size={16} />
             <span>DAST</span>
@@ -99,7 +99,11 @@ export default function App() {
         <div className="sidebar__breadcrumb">
           <span>/</span>
           <span>
-            {activeView === 'overview' ? 'Vulnerability Overview' : `Vulnerability Findings — ${activeView}`}
+            {activeView === 'overview'
+              ? 'Vulnerability Overview'
+              : activeView === 'all'
+                ? 'All Findings'
+                : `Vulnerability Findings — ${activeView}`}
           </span>
         </div>
       </aside>
@@ -110,7 +114,7 @@ export default function App() {
           {activeView === 'overview' ? (
             <VulnerabilityOverview onViewFindings={handleViewFindings} />
           ) : (
-            <FindingsList scanType={activeView as ScanType} onBack={handleBack} />
+            <FindingsList scanType={activeView} onBack={handleBack} />
           )}
         </div>
       </main>
