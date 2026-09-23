@@ -35,7 +35,6 @@ interface DashboardState {
   setSortOrder: (order: SortOrder) => void;
   setPage: (page: number) => void;
   setPageSize: (size: number) => void;
-  /** Increment currentPage to load the next batch for infinite scroll */
   loadMorePage: () => void;
 }
 
@@ -53,7 +52,6 @@ export const useDashboardStore = create<DashboardState>((set) => ({
   currentPage: 1,
   pageSize: 10,
 
-  // Actions
   loadData: (data) =>
     set({ metadata: data.metadata, allFindings: data.findings, isLoaded: true }),
 
@@ -79,21 +77,3 @@ export function computeSeverityCounts(findings: Finding[]) {
   };
 }
 
-export function filterAndSort(
-  findings: Finding[],
-  opts: {
-    project: string;
-    status: string;
-    scanType: ScanType | 'all';
-    sortOrder: SortOrder;
-  }
-): Finding[] {
-  let results = findings;
-  if (opts.project !== 'all') results = results.filter((f) => f.project === opts.project);
-  if (opts.status !== 'all') results = results.filter((f) => f.status === opts.status);
-  if (opts.scanType !== 'all') results = results.filter((f) => f.type === opts.scanType);
-  return [...results].sort((a, b) => {
-    const diff = SEVERITY_ORDER[a.severity] - SEVERITY_ORDER[b.severity];
-    return opts.sortOrder === 'severity-desc' ? diff : -diff;
-  });
-}

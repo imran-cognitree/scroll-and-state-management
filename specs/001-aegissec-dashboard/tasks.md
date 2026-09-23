@@ -1,4 +1,4 @@
-# Tasks: AegisSec Dashboard
+# Tasks: Cognitree Dashboard
 
 **Input**: Design documents from `/specs/001-aegissec-dashboard/`
 

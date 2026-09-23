@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Shield, LayoutDashboard, AlertTriangle } from 'lucide-react';
+import { Shield, LayoutDashboard, SquareTerminal, Zap, List, Cable } from 'lucide-react';
 import { useDataLoader } from './store/useDataLoader';
 import { useDashboardStore } from './store/dashboardStore';
 import { VulnerabilityOverview } from './components/dashboard/VulnerabilityOverview';
@@ -21,7 +21,7 @@ export default function App() {
     return (
       <div className="app-loading" role="status" aria-label="Loading dashboard">
         <Shield size={32} className="app-loading__icon" />
-        <span>Loading AegisSec...</span>
+        <span>Loading Cognitree...</span>
       </div>
     );
   }
@@ -47,7 +47,7 @@ export default function App() {
         <div className="sidebar__brand">
           <Shield size={22} className="sidebar__brand-icon" />
           <div>
-            <span className="sidebar__brand-name">AegisSec</span>
+            <span className="sidebar__brand-name">Cognitree</span>
             <span className="sidebar__brand-category">APPSEC</span>
           </div>
         </div>
@@ -66,7 +66,7 @@ export default function App() {
             onClick={() => handleViewFindings('all')}
             id="nav-all-findings"
           >
-            <AlertTriangle size={16} />
+            <List size={16} />
             <span>All Findings</span>
           </button>
           <button
@@ -74,7 +74,7 @@ export default function App() {
             onClick={() => handleViewFindings('SCA')}
             id="nav-sca"
           >
-            <AlertTriangle size={16} />
+            <Cable size={16} />
             <span>SCA</span>
           </button>
           <button
@@ -82,7 +82,7 @@ export default function App() {
             onClick={() => handleViewFindings('SAST')}
             id="nav-sast"
           >
-            <AlertTriangle size={16} />
+            <SquareTerminal size={16} />
             <span>SAST</span>
           </button>
           <button
@@ -90,7 +90,7 @@ export default function App() {
             onClick={() => handleViewFindings('DAST')}
             id="nav-dast"
           >
-            <AlertTriangle size={16} />
+            <Zap size={16} />
             <span>DAST</span>
           </button>
         </nav>

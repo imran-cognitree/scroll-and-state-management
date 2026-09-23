@@ -1,4 +1,4 @@
-# Specification Quality Checklist: AegisSec Vulnerability Management Dashboard
+# Specification Quality Checklist: Cognitree Vulnerability Management Dashboard
 
 **Purpose**: Validate specification completeness and quality before proceeding to planning
 **Created**: 2026-09-10

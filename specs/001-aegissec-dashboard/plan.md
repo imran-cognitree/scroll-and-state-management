@@ -1,4 +1,4 @@
-# Implementation Plan: AegisSec Vulnerability Management Dashboard
+# Implementation Plan: Cognitree Vulnerability Management Dashboard
 
 **Branch**: `[001-aegissec-dashboard]` | **Date**: 2026-09-10 | **Spec**: [spec.md](file:///Users/imran/Workplace/Cognitree/frontend-exercise/scroll-and-state-management/specs/001-aegissec-dashboard/spec.md)
 
@@ -6,7 +6,7 @@
 
 ## Summary
 
-Implement the AegisSec Vulnerability Management Dashboard using React.js, Vite, Radix UI, and Zustand. The dashboard will feature a dark mode "Glassmorphism" aesthetic driven by Vanilla CSS variables mapping exactly to the `data/DESIGN.md` specification. It will pull from the `dummy-vulnerability-findings.json` dataset to render aggregated metrics and a detailed paginated data table.
+Implement the Cognitree Vulnerability Management Dashboard using React.js, Vite, Radix UI, and Zustand. The dashboard will feature a dark mode "Glassmorphism" aesthetic driven by Vanilla CSS variables mapping exactly to the `data/DESIGN.md` specification. It will pull from the `dummy-vulnerability-findings.json` dataset to render aggregated metrics and a detailed paginated data table.
 
 ## Technical Context
 

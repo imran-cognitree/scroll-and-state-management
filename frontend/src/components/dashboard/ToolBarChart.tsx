@@ -16,7 +16,7 @@ export function ToolBarChart({ bars, total }: Props) {
 
   return (
     <div className="tool-bar-chart" aria-label="Tool breakdown chart">
-      <span className="tool-bar-chart__label">BY TOOL</span>
+      <span className="tool-bar-chart__label">BY SOURCE</span>
       <div className="tool-bar-chart__rows">
         {bars.map((bar) => {
           const pct = total > 0 ? Math.round((bar.count / total) * 100) : 0;

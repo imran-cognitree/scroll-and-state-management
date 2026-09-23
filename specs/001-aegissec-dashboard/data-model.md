@@ -1,4 +1,4 @@
-# Data Model: AegisSec Dashboard
+# Data Model: Cognitree Dashboard
 
 ## Core Entities
 

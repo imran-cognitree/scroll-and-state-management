@@ -1,4 +1,4 @@
-# Feature Specification: AegisSec Vulnerability Management Dashboard
+# Feature Specification: Cognitree Vulnerability Management Dashboard
 
 **Feature Branch**: `[###-aegissec-dashboard]`
 
@@ -6,7 +6,7 @@
 
 **Status**: Draft
 
-**Input**: User description: "Implement the AegisSec Vulnerability Management Dashboard as per the Figma design. The application needs two main views. First, a 'Vulnerability Overview' page that displays aggregated vulnerability counts (Total Findings) and breaks them down by scanner type: SCA (Trivy), SAST (Semgrep), and DAST (OWASP ZAP). Each scanner section should display metrics for Critical, High, Medium, and Low severities. It must also include a filter by Project (e.g., group, payment, user). Second, a detailed 'Vulnerability Findings' list view (e.g., for SCA/Trivy) that displays a paginated list of vulnerabilities (10 items per page). Each list item must display the Severity, custom ID (e.g., SCA-001), CVE number, Scanner, Status (Open, In Progress, Resolved), Package name, current version, fixed-in version, Vulnerability Type, and a short description. This list must support sorting by Severity (High to Low) and filtering by Project and Status."
+**Input**: User description: "Implement the Cognitree Vulnerability Management Dashboard as per the Figma design. The application needs two main views. First, a 'Vulnerability Overview' page that displays aggregated vulnerability counts (Total Findings) and breaks them down by scanner type: SCA (Trivy), SAST (Semgrep), and DAST (OWASP ZAP). Each scanner section should display metrics for Critical, High, Medium, and Low severities. It must also include a filter by Project (e.g., group, payment, user). Second, a detailed 'Vulnerability Findings' list view (e.g., for SCA/Trivy) that displays a paginated list of vulnerabilities (10 items per page). Each list item must display the Severity, custom ID (e.g., SCA-001), CVE number, Scanner, Status (Open, In Progress, Resolved), Package name, current version, fixed-in version, Vulnerability Type, and a short description. This list must support sorting by Severity (High to Low) and filtering by Project and Status."
 
 ## User Scenarios & Testing *(mandatory)*
 
