@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Shield, LayoutDashboard, SquareTerminal, Zap, List, Cable, LogOut } from 'lucide-react';
 import { QueryClientProvider } from '@tanstack/react-query';
-import { useDataLoader } from './store/useDataLoader';
 import { useDashboardStore } from './store/dashboardStore';
 import { VulnerabilityOverview } from './components/dashboard/VulnerabilityOverview';
 import { FindingsList } from './components/dashboard/FindingsList';
@@ -17,9 +16,7 @@ import './App.css';
 type View = 'overview' | ScanType | 'all' | 'admin';
 
 function AppContent() {
-  useDataLoader();
 
-  const isLoaded = useDashboardStore((s) => s.isLoaded);
   const setSeverityFilter = useDashboardStore((s) => s.setSeverityFilter);
   const [activeView, setActiveView] = useState<View>('overview');
   const [isAuthenticated, setIsAuthenticated] = useState(isLoggedIn());
@@ -44,15 +41,6 @@ function AppContent() {
 
   if (!isAuthenticated) {
     return <LoginPage onLoginSuccess={handleLoginSuccess} />;
-  }
-
-  if (!isLoaded) {
-    return (
-      <div className="app-loading" role="status" aria-label="Loading dashboard">
-        <Shield size={32} className="app-loading__icon" />
-        <span>Loading Cognitree...</span>
-      </div>
-    );
   }
 
   /**
@@ -86,6 +74,16 @@ function AppContent() {
         </div>
 
         <nav className="sidebar__nav">
+          {isAdminUser && (
+            <button
+              className={`sidebar__nav-item ${activeView === 'admin' ? 'sidebar__nav-item--active' : ''}`}
+              onClick={handleAdminView}
+              id="nav-admin"
+            >
+              <Shield size={16} />
+              <span>Admin</span>
+            </button>
+          )}
           <button
             className={`sidebar__nav-item ${activeView === 'overview' ? 'sidebar__nav-item--active' : ''}`}
             onClick={() => handleBack()}
@@ -126,16 +124,6 @@ function AppContent() {
             <Zap size={16} />
             <span>DAST</span>
           </button>
-          {isAdminUser && (
-            <button
-              className={`sidebar__nav-item ${activeView === 'admin' ? 'sidebar__nav-item--active' : ''}`}
-              onClick={handleAdminView}
-              id="nav-admin"
-            >
-              <Shield size={16} />
-              <span>Admin View</span>
-            </button>
-          )}
         </nav>
 
         {/* Breadcrumb & Logout */}

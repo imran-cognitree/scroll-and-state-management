@@ -44,7 +44,7 @@ export type ScanType = z.infer<typeof ScanTypeSchema>;
 
 export const FindingBaseSchema = z.object({
   _id: z.string().optional(),
-  id: z.string(),
+  id: z.string().optional(),
   type: ScanTypeSchema,
   project: z.string(),
   vulnerability_id: z.string(),
@@ -60,16 +60,21 @@ export const FindingBaseSchema = z.object({
   detected_at: z.string(),
 });
 
-export const FindingSchema = FindingBaseSchema.omit({ _id: true });
-export type Finding = z.infer<typeof FindingSchema>;
+// Derive the canonical id from either 'id' or '_id'
+export function normalizeFindingId(f: { id?: string; _id?: string }): string {
+  return f.id ?? f._id ?? '';
+}
+
+export const FindingSchema = FindingBaseSchema;
+export type Finding = z.infer<typeof FindingSchema> & { id: string };
 
 export const FindingDetailSchema = FindingBaseSchema.extend({
   raw_data: z.record(z.string(), z.any()).optional(),
 });
-export type FindingDetail = z.infer<typeof FindingDetailSchema>;
+export type FindingDetail = z.infer<typeof FindingDetailSchema> & { id: string };
 
 export const FindingStatusUpdateSchema = z.object({
-  status: StatusSchema,
+  status: z.string(),
 });
 
 export type FindingStatusUpdate = z.infer<typeof FindingStatusUpdateSchema>;
