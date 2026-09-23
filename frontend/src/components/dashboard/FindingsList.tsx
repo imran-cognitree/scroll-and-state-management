@@ -1,12 +1,13 @@
 import { useState, useEffect, useRef, useCallback, useMemo } from 'react';
-import { ChevronLeft, Loader2, ArrowUp, ArrowDown, Trash2, Pencil } from 'lucide-react';
-import { useDeleteFinding, useUpdateFinding } from '../../hooks/useFindings';
+import { ChevronLeft, Loader2, ArrowUp, ArrowDown, Trash2, Pencil, AlertCircle, RefreshCw } from 'lucide-react';
+import { useInfiniteFindings, useDeleteFinding, useUpdateFinding } from '../../hooks/useFindings';
 import { useDashboardStore } from '../../store/dashboardStore';
 import { SeverityBadge } from '../ui/SeverityBadge';
 import { StatusBadge } from '../ui/StatusBadge';
 import { FilterDropdown } from '../ui/FilterDropdown';
 import { SearchInput } from '../ui/SearchInput';
 import { FindingDetailPanel } from './FindingDetailPanel';
+import { Modal } from '../ui/Modal';
 import type { ScanType, Finding } from '../../store/types';
 import './FindingsList.css';
 
@@ -45,36 +46,54 @@ const SCANNER_NAMES: Record<ScanType | 'all', string> = {
   all: 'All Scanners',
 };
 
-export function FindingsList({ scanType, onBack, isAdmin = false }: Props) {
-  const deleteFinding = useDeleteFinding();
-  const updateFinding = useUpdateFinding();
-  const metadata        = useDashboardStore((s) => s.metadata);
-  const selectedProject = useDashboardStore((s) => s.selectedProject);
-  const selectedStatus  = useDashboardStore((s) => s.selectedStatus);
-  const selectedSeverity = useDashboardStore((s) => s.selectedSeverity);
-  const selectedTool    = useDashboardStore((s) => s.selectedTool);
-  const searchQuery     = useDashboardStore((s) => s.searchQuery);
-  const sortOrder       = useDashboardStore((s) => s.sortOrder);
-  const currentPage     = useDashboardStore((s) => s.currentPage);
-  const pageSize        = useDashboardStore((s) => s.pageSize);
-  const setProject      = useDashboardStore((s) => s.setProjectFilter);
-  const setStatus       = useDashboardStore((s) => s.setStatusFilter);
-  const setSeverity     = useDashboardStore((s) => s.setSeverityFilter);
-  const setScanType     = useDashboardStore((s) => s.setScanTypeFilter);
-  const setTool         = useDashboardStore((s) => s.setToolFilter);
-  const setSearchQuery  = useDashboardStore((s) => s.setSearchQuery);
-  const setSortOrder    = useDashboardStore((s) => s.setSortOrder);
-  const setPageSize     = useDashboardStore((s) => s.setPageSize);
-  const loadMorePage    = useDashboardStore((s) => s.loadMorePage);
-  const allFindings     = useDashboardStore((s) => s.allFindings);
+// ── Row skeleton ──────────────────────────────────────────────────────────────
+function TableRowSkeleton({ cols }: { cols: number }) {
+  return (
+    <tr className="findings__row findings__row--skeleton" aria-hidden="true">
+      {Array.from({ length: cols }).map((_, i) => (
+        <td key={i}>
+          <div className="skeleton skeleton--cell" />
+        </td>
+      ))}
+    </tr>
+  );
+}
 
-  // Selected finding for detail panel
-  const [selectedFinding, setSelectedFinding] = useState<Finding | null>(null);
+const STATUS_CHOICES = ['Open', 'In Progress', 'Resolved'] as const;
+
+// ── Main component ────────────────────────────────────────────────────────────
+export function FindingsList({ scanType, onBack, isAdmin = false }: Props) {
+  const deleteFinding  = useDeleteFinding();
+  const updateFinding  = useUpdateFinding();
+
+  // Modal state
+  const [deleteTarget, setDeleteTarget] = useState<Finding | null>(null);
+  const [editTarget,   setEditTarget]   = useState<Finding | null>(null);
+  const [editStatus,   setEditStatus]   = useState<string>('');
+
+  const selectedProject  = useDashboardStore((s) => s.selectedProject);
+  const selectedStatus   = useDashboardStore((s) => s.selectedStatus);
+  const selectedSeverity = useDashboardStore((s) => s.selectedSeverity);
+  const selectedTool     = useDashboardStore((s) => s.selectedTool);
+  const searchQuery      = useDashboardStore((s) => s.searchQuery);
+  const sortOrder        = useDashboardStore((s) => s.sortOrder);
+  const pageSize         = useDashboardStore((s) => s.pageSize);
+  const setProject       = useDashboardStore((s) => s.setProjectFilter);
+  const setStatus        = useDashboardStore((s) => s.setStatusFilter);
+  const setSeverity      = useDashboardStore((s) => s.setSeverityFilter);
+  const setScanType      = useDashboardStore((s) => s.setScanTypeFilter);
+  const setTool          = useDashboardStore((s) => s.setToolFilter);
+  const setSearchQuery   = useDashboardStore((s) => s.setSearchQuery);
+  const setSortOrder     = useDashboardStore((s) => s.setSortOrder);
+  const setPageSize      = useDashboardStore((s) => s.setPageSize);
+
+  // Selected finding for detail panel (stores just the id; panel fetches full detail)
+  const [selectedFindingId, setSelectedFindingId] = useState<string | null>(null);
 
   // Sentinel ref for IntersectionObserver
   const sentinelRef = useRef<HTMLDivElement | null>(null);
 
-  // Reset page + set scan type filter when view mounts; reset tool/search on scan type change
+  // Reset scan type filter on mount / when scanType prop changes
   useEffect(() => {
     setScanType(scanType);
     setTool('all');
@@ -87,27 +106,37 @@ export function FindingsList({ scanType, onBack, isAdmin = false }: Props) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [scanType]);
 
+  // ── Infinite query ─────────────────────────────────────────────────────────
+  const {
+    data,
+    isLoading,
+    isFetchingNextPage,
+    hasNextPage,
+    fetchNextPage,
+    isError,
+    refetch,
+  } = useInfiniteFindings({
+    project:  selectedProject  !== 'all' ? selectedProject  : undefined,
+    type:     scanType         !== 'all' ? scanType         : undefined,
+    severity: selectedSeverity !== 'all' ? selectedSeverity : undefined,
+    status:   selectedStatus   !== 'all' ? selectedStatus   : undefined,
+    scanner:  selectedTool     !== 'all' ? selectedTool     : undefined,
+    limit:    pageSize,
+  });
+
+  // Flatten all pages into one array then apply client-side search + sort
   const SEVERITY_ORDER: Record<string, number> = { Critical: 0, High: 1, Medium: 2, Low: 3 };
 
-  // Tools available for the current scan type, used to populate the tool filter
-  const toolOptions = useMemo(() => {
-    const scoped = allFindings.filter((f) => scanType === 'all' || f.type === scanType);
-    const tools = Array.from(new Set(scoped.map((f) => f.scanner))).sort();
-    return [
-      { value: 'all', label: 'All Tools' },
-      ...tools.map((t) => ({ value: t, label: t })),
-    ];
-  }, [allFindings, scanType]);
+  const allFindings: Finding[] = useMemo(() => {
+    const pages = data?.pages ?? [];
+    return pages.flatMap((p) => p.findings as Finding[]);
+  }, [data]);
 
   const query = searchQuery.trim().toLowerCase();
 
-  const allFiltered = allFindings
-    .filter((f) => scanType === 'all' || f.type === scanType)
-    .filter((f) => selectedProject === 'all' || f.project === selectedProject)
-    .filter((f) => selectedStatus  === 'all' || f.status   === selectedStatus)
-    .filter((f) => selectedSeverity === 'all' || f.severity === selectedSeverity)
-    .filter((f) => selectedTool === 'all' || f.scanner === selectedTool)
-    .filter((f) => {
+  const displayedFindings = useMemo(() => {
+    const filtered = allFindings.filter((f) => {
+      if (selectedTool !== 'all' && f.scanner !== selectedTool) return false;
       if (!query) return true;
       return (
         f.id.toLowerCase().includes(query) ||
@@ -118,22 +147,43 @@ export function FindingsList({ scanType, onBack, isAdmin = false }: Props) {
         f.location.toLowerCase().includes(query) ||
         f.scanner.toLowerCase().includes(query)
       );
-    })
-    .sort((a, b) => {
+    });
+    return [...filtered].sort((a, b) => {
       const diff = SEVERITY_ORDER[a.severity] - SEVERITY_ORDER[b.severity];
       return sortOrder === 'severity-desc' ? diff : -diff;
     });
+  }, [allFindings, query, selectedTool, sortOrder]);
 
-  // Infinite scroll accumulation
-  const visibleCount = currentPage * pageSize;
-  const visibleRows  = allFiltered.slice(0, visibleCount);
-  const hasMore      = visibleCount < allFiltered.length;
+  // Tool options derived from fetched data
+  const toolOptions = useMemo(() => {
+    const tools = Array.from(new Set(allFindings.map((f) => f.scanner))).sort();
+    return [
+      { value: 'all', label: 'All Tools' },
+      ...tools.map((t) => ({ value: t, label: t })),
+    ];
+  }, [allFindings]);
 
+  // Projects from first page metadata
+  const metadata = data?.pages[0]?.metadata;
+  const projectOptions = useMemo(() => [
+    { value: 'all', label: 'All Projects' },
+    ...(metadata?.projects ?? []).map((p) => ({
+      value: p,
+      label: p.charAt(0).toUpperCase() + p.slice(1),
+    })),
+  ], [metadata]);
+
+  // Total from backend
+  const totalCount = data?.pages[0]?.total ?? 0;
+
+  // IntersectionObserver — triggers fetchNextPage
   const handleIntersection = useCallback(
     (entries: IntersectionObserverEntry[]) => {
-      if (entries[0].isIntersecting && hasMore) loadMorePage();
+      if (entries[0].isIntersecting && hasNextPage && !isFetchingNextPage) {
+        fetchNextPage();
+      }
     },
-    [hasMore, loadMorePage],
+    [hasNextPage, isFetchingNextPage, fetchNextPage],
   );
 
   useEffect(() => {
@@ -141,20 +191,14 @@ export function FindingsList({ scanType, onBack, isAdmin = false }: Props) {
     if (!sentinel) return;
     const observer = new IntersectionObserver(handleIntersection, {
       root: null,
-      rootMargin: '0px',
+      rootMargin: '200px',
       threshold: 0.1,
     });
     observer.observe(sentinel);
     return () => observer.disconnect();
   }, [handleIntersection]);
 
-  const projectOptions = [
-    { value: 'all', label: 'All Projects' },
-    ...(metadata?.projects ?? []).map((p) => ({
-      value: p,
-      label: p.charAt(0).toUpperCase() + p.slice(1),
-    })),
-  ];
+  const colCount = scanType === 'all' ? (isAdmin ? 11 : 10) : (isAdmin ? 10 : 9);
 
   return (
     <>
@@ -218,9 +262,20 @@ export function FindingsList({ scanType, onBack, isAdmin = false }: Props) {
             />
           </div>
           <span className="findings__count">
-            Showing <strong>{visibleRows.length}</strong> of <strong>{allFiltered.length}</strong> findings
+            Showing <strong>{displayedFindings.length}</strong> of <strong>{totalCount}</strong> findings
           </span>
         </div>
+
+        {/* Error state */}
+        {isError && (
+          <div className="findings__error" role="alert">
+            <AlertCircle size={16} />
+            <span>Failed to load findings.</span>
+            <button className="findings__retry-btn" onClick={() => refetch()}>
+              <RefreshCw size={13} /> Retry
+            </button>
+          </div>
+        )}
 
         {/* Table */}
         <div className="findings__table-wrap">
@@ -254,28 +309,33 @@ export function FindingsList({ scanType, onBack, isAdmin = false }: Props) {
               </tr>
             </thead>
             <tbody>
-              {visibleRows.length === 0 ? (
+              {/* Initial loading skeletons */}
+              {isLoading ? (
+                Array.from({ length: 8 }).map((_, i) => (
+                  <TableRowSkeleton key={i} cols={colCount} />
+                ))
+              ) : displayedFindings.length === 0 ? (
                 <tr>
-                  <td colSpan={scanType === 'all' ? 10 : 9} className="findings__empty">
-                    No vulnerabilities found for the selected filters.
+                  <td colSpan={colCount} className="findings__empty">
+                    {isError
+                      ? 'Could not load findings. Please retry.'
+                      : 'No vulnerabilities found for the selected filters.'}
                   </td>
                 </tr>
               ) : (
-                visibleRows.map((finding) => (
+                displayedFindings.map((finding) => (
                   <tr
                     key={finding.id}
-                    className={`findings__row findings__row--${finding.severity.toLowerCase()}${selectedFinding?.id === finding.id ? ' findings__row--selected' : ''}`}
+                    className={`findings__row findings__row--${finding.severity.toLowerCase()}${selectedFindingId === finding.id ? ' findings__row--selected' : ''}`}
                     id={`finding-row-${finding.id}`}
-                    onClick={() => setSelectedFinding(finding)}
+                    onClick={() => setSelectedFindingId(finding.id)}
                     title="Click to view full details"
                     tabIndex={0}
-                    onKeyDown={(e) => e.key === 'Enter' && setSelectedFinding(finding)}
+                    onKeyDown={(e) => e.key === 'Enter' && setSelectedFindingId(finding.id)}
                     role="button"
-                    aria-pressed={selectedFinding?.id === finding.id}
+                    aria-pressed={selectedFindingId === finding.id}
                   >
-                    <td>
-                      <SeverityBadge severity={finding.severity} showDot />
-                    </td>
+                    <td><SeverityBadge severity={finding.severity} showDot /></td>
                     {scanType === 'all' && (
                       <td>
                         <span className={`findings__category-pill findings__category-pill--${finding.type.toLowerCase()}`}>
@@ -289,38 +349,40 @@ export function FindingsList({ scanType, onBack, isAdmin = false }: Props) {
                         <span className="findings__cve">{finding.vulnerability_id}</span>
                       </div>
                     </td>
-                    <td>
-                      <span className="findings__scanner-tag">{finding.scanner}</span>
-                    </td>
-                    <td>
-                      <span className="findings__package">{finding.package_name}</span>
-                    </td>
-                    <td>
-                      <span className="findings__version">{finding.installed_version}</span>
-                    </td>
-                    <td>
-                      <span className="findings__fixed-version">{finding.fixed_version}</span>
-                    </td>
-                    <td>
-                      <span className="findings__type">{finding.vulnerability_type}</span>
-                    </td>
+                    <td><span className="findings__scanner-tag">{finding.scanner}</span></td>
+                    <td><span className="findings__package">{finding.package_name}</span></td>
+                    <td><span className="findings__version">{finding.installed_version}</span></td>
+                    <td><span className="findings__fixed-version">{finding.fixed_version}</span></td>
+                    <td><span className="findings__type">{finding.vulnerability_type}</span></td>
                     <td className="findings__description-cell">
                       <span className="findings__description" title={finding.description}>{finding.description}</span>
                       <span className="findings__location" title={finding.location}>{finding.location}</span>
                     </td>
-                    <td>
-                      <StatusBadge status={finding.status} />
-                    </td>
+                    <td><StatusBadge status={finding.status} /></td>
                     {isAdmin && (
                       <td>
                         <div className="findings__actions" onClick={(e) => e.stopPropagation()}>
-                          <button className="findings__action-btn" title="Cycle finding status" aria-label={`Edit ${finding.id}`} disabled={updateFinding.isPending} onClick={() => {
-                            const nextStatus = finding.status === 'Open' ? 'In Progress' : finding.status === 'In Progress' ? 'Resolved' : 'Open';
-                            updateFinding.mutate({ id: finding.id, update: { status: nextStatus as 'Open' | 'In Progress' | 'Resolved' } });
-                          }}><Pencil size={13} /></button>
-                          <button className="findings__action-btn findings__action-btn--danger" title="Delete finding" aria-label={`Delete ${finding.id}`} disabled={deleteFinding.isPending} onClick={() => {
-                            if (window.confirm(`Delete finding ${finding.id}?`)) deleteFinding.mutate(finding.id);
-                          }}><Trash2 size={13} /></button>
+                          <button
+                            className="findings__action-btn"
+                            title="Edit status"
+                            aria-label={`Edit ${finding.id}`}
+                            disabled={updateFinding.isPending}
+                            onClick={() => {
+                              setEditTarget(finding);
+                              setEditStatus(finding.status);
+                            }}
+                          >
+                            <Pencil size={13} />
+                          </button>
+                          <button
+                            className="findings__action-btn findings__action-btn--danger"
+                            title="Delete finding"
+                            aria-label={`Delete ${finding.id}`}
+                            disabled={deleteFinding.isPending}
+                            onClick={() => setDeleteTarget(finding)}
+                          >
+                            <Trash2 size={13} />
+                          </button>
                         </div>
                       </td>
                     )}
@@ -331,28 +393,94 @@ export function FindingsList({ scanType, onBack, isAdmin = false }: Props) {
           </table>
         </div>
 
-        {/* Invisible sentinel */}
+        {/* Invisible sentinel — triggers next page load */}
         <div ref={sentinelRef} className="findings__scroll-sentinel" aria-hidden="true" />
 
-        {hasMore && (
+        {isFetchingNextPage && (
           <div className="findings__loading-more">
             <Loader2 size={18} className="findings__spinner" />
             <span>Loading more…</span>
           </div>
         )}
 
-        {!hasMore && allFiltered.length > 0 && (
+        {!hasNextPage && displayedFindings.length > 0 && !isLoading && (
           <div className="findings__end-of-list">
-            All {allFiltered.length} findings loaded
+            All {totalCount} findings loaded
           </div>
         )}
       </section>
 
       {/* Detail panel — outside section so it can be fixed-positioned */}
       <FindingDetailPanel
-        finding={selectedFinding}
-        onClose={() => setSelectedFinding(null)}
+        findingId={selectedFindingId}
+        onClose={() => setSelectedFindingId(null)}
       />
+
+      {/* ── Delete confirmation modal ── */}
+      <Modal
+        isOpen={!!deleteTarget}
+        title="Delete Finding"
+        onClose={() => setDeleteTarget(null)}
+        actions={{
+          confirm: {
+            label: deleteFinding.isPending ? 'Deleting…' : 'Delete',
+            variant: 'danger',
+            disabled: deleteFinding.isPending,
+            onClick: () => {
+              if (!deleteTarget) return;
+              deleteFinding.mutate(deleteTarget.id, {
+                onSuccess: () => setDeleteTarget(null),
+              });
+            },
+          },
+        }}
+      >
+        <span className="modal__finding-id">{deleteTarget?.id}</span>
+        <p>
+          Are you sure you want to permanently delete{' '}
+          <span className="modal__danger-text">{deleteTarget?.vulnerability_id}</span>?
+          This action cannot be undone.
+        </p>
+      </Modal>
+
+      {/* ── Edit status modal ── */}
+      <Modal
+        isOpen={!!editTarget}
+        title="Update Finding Status"
+        onClose={() => setEditTarget(null)}
+        actions={{
+          confirm: {
+            label: updateFinding.isPending ? 'Saving…' : 'Save',
+            variant: 'primary',
+            disabled: updateFinding.isPending || editStatus === editTarget?.status,
+            onClick: () => {
+              if (!editTarget) return;
+              updateFinding.mutate(
+                { id: editTarget.id, update: { status: editStatus } },
+                { onSuccess: () => setEditTarget(null) },
+              );
+            },
+          },
+        }}
+      >
+        <span className="modal__finding-id">{editTarget?.id}</span>
+        <div className="modal__field-group">
+          <label className="modal__field-label" htmlFor="edit-status-select">
+            Status
+          </label>
+          <select
+            id="edit-status-select"
+            className="modal__select"
+            value={editStatus}
+            onChange={(e) => setEditStatus(e.target.value)}
+            disabled={updateFinding.isPending}
+          >
+            {STATUS_CHOICES.map((s) => (
+              <option key={s} value={s}>{s}</option>
+            ))}
+          </select>
+        </div>
+      </Modal>
     </>
   );
 }

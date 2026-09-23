@@ -3,6 +3,7 @@ import {
   UserResponseSchema,
   DashboardDataSchema,
   FindingDetailSchema,
+  normalizeFindingId,
 } from './schemas';
 import type {
   LoginInput,
@@ -138,13 +139,35 @@ export async function getFindings(
   params.append('page', String(page));
   params.append('limit', String(limit));
 
-  const data = await fetchWithAuth<any>(`/findings?${params.toString()}`);
-  return DashboardDataSchema.parse(data);
+  const raw = await fetchWithAuth<any>(`/findings?${params.toString()}`);
+
+  // Normalize _id → id for every finding (backend uses Pydantic alias)
+  if (raw?.findings) {
+    raw.findings = raw.findings.map((f: any) => ({
+      ...f,
+      id: normalizeFindingId(f),
+    }));
+  }
+
+  const result = DashboardDataSchema.safeParse(raw);
+  if (!result.success) {
+    console.error('[API] DashboardDataSchema validation failed:', result.error.format());
+    // Return the raw data cast to type so the UI still renders
+    return raw as DashboardData;
+  }
+  return result.data;
 }
 
 export async function getFinding(id: string): Promise<FindingDetail> {
-  const data = await fetchWithAuth<any>(`/findings/${id}`);
-  return FindingDetailSchema.parse(data);
+  const raw = await fetchWithAuth<any>(`/findings/${id}`);
+  // Normalize _id → id
+  const normalized = { ...raw, id: normalizeFindingId(raw) };
+  const result = FindingDetailSchema.safeParse(normalized);
+  if (!result.success) {
+    console.error('[API] FindingDetailSchema validation failed:', result.error.format());
+    return normalized as FindingDetail;
+  }
+  return result.data as FindingDetail;
 }
 
 export async function updateFindingStatus(

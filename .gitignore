@@ -1,3 +1,4 @@
 .agents
 .specify
 venv
+**/__pycache__

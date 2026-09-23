@@ -115,12 +115,6 @@ export function LoginPage({ onLoginSuccess }: LoginPageProps) {
             )}
           </button>
         </form>
-
-        <div className="login-footer">
-          <p className="login-demo-hint">
-            Use test credentials to explore the dashboard
-          </p>
-        </div>
       </div>
     </div>
   );
