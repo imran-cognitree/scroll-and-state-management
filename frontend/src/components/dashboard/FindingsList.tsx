@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef, useCallback, useMemo } from 'react';
-import { ChevronLeft, Loader2, ArrowUp, ArrowDown } from 'lucide-react';
+import { ChevronLeft, Loader2, ArrowUp, ArrowDown, Trash2, Pencil } from 'lucide-react';
+import { useDeleteFinding, useUpdateFinding } from '../../hooks/useFindings';
 import { useDashboardStore } from '../../store/dashboardStore';
 import { SeverityBadge } from '../ui/SeverityBadge';
 import { StatusBadge } from '../ui/StatusBadge';
@@ -12,6 +13,7 @@ import './FindingsList.css';
 interface Props {
   scanType: ScanType | 'all';
   onBack: () => void;
+  isAdmin?: boolean;
 }
 
 const STATUS_OPTIONS = [
@@ -43,7 +45,9 @@ const SCANNER_NAMES: Record<ScanType | 'all', string> = {
   all: 'All Scanners',
 };
 
-export function FindingsList({ scanType, onBack }: Props) {
+export function FindingsList({ scanType, onBack, isAdmin = false }: Props) {
+  const deleteFinding = useDeleteFinding();
+  const updateFinding = useUpdateFinding();
   const metadata        = useDashboardStore((s) => s.metadata);
   const selectedProject = useDashboardStore((s) => s.selectedProject);
   const selectedStatus  = useDashboardStore((s) => s.selectedStatus);
@@ -246,6 +250,7 @@ export function FindingsList({ scanType, onBack }: Props) {
                 <th>TYPE</th>
                 <th>DESCRIPTION</th>
                 <th>STATUS</th>
+                {isAdmin && <th>ACTIONS</th>}
               </tr>
             </thead>
             <tbody>
@@ -306,6 +311,19 @@ export function FindingsList({ scanType, onBack }: Props) {
                     <td>
                       <StatusBadge status={finding.status} />
                     </td>
+                    {isAdmin && (
+                      <td>
+                        <div className="findings__actions" onClick={(e) => e.stopPropagation()}>
+                          <button className="findings__action-btn" title="Cycle finding status" aria-label={`Edit ${finding.id}`} disabled={updateFinding.isPending} onClick={() => {
+                            const nextStatus = finding.status === 'Open' ? 'In Progress' : finding.status === 'In Progress' ? 'Resolved' : 'Open';
+                            updateFinding.mutate({ id: finding.id, update: { status: nextStatus as 'Open' | 'In Progress' | 'Resolved' } });
+                          }}><Pencil size={13} /></button>
+                          <button className="findings__action-btn findings__action-btn--danger" title="Delete finding" aria-label={`Delete ${finding.id}`} disabled={deleteFinding.isPending} onClick={() => {
+                            if (window.confirm(`Delete finding ${finding.id}?`)) deleteFinding.mutate(finding.id);
+                          }}><Trash2 size={13} /></button>
+                        </div>
+                      </td>
+                    )}
                   </tr>
                 ))
               )}
