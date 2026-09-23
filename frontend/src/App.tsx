@@ -1,29 +1,46 @@
-import { useState } from 'react';
-import { Shield, LayoutDashboard, SquareTerminal, Zap, List, Cable } from 'lucide-react';
-import { useDataLoader } from './store/useDataLoader';
+import { useState, useEffect } from 'react';
+import { Shield, LayoutDashboard, SquareTerminal, Zap, List, Cable, LogOut } from 'lucide-react';
+import { QueryClientProvider } from '@tanstack/react-query';
 import { useDashboardStore } from './store/dashboardStore';
 import { VulnerabilityOverview } from './components/dashboard/VulnerabilityOverview';
 import { FindingsList } from './components/dashboard/FindingsList';
+import { LoginPage } from './pages/LoginPage';
+import { AdminView } from './pages/AdminView';
+import { ErrorBoundary } from './components/ErrorBoundary';
+import { queryClient } from './lib/queryClient';
+import { isLoggedIn, clearToken, isAdmin } from './lib/api';
 import type { ScanType, Severity } from './store/types';
 import './styles/index.css';
 import './App.css';
 
-type View = 'overview' | ScanType | 'all';
+type View = 'overview' | ScanType | 'all' | 'admin';
 
-export default function App() {
-  useDataLoader();
+function AppContent() {
 
-  const isLoaded = useDashboardStore((s) => s.isLoaded);
   const setSeverityFilter = useDashboardStore((s) => s.setSeverityFilter);
   const [activeView, setActiveView] = useState<View>('overview');
+  const [isAuthenticated, setIsAuthenticated] = useState(isLoggedIn());
+  const [isAdminUser, setIsAdminUser] = useState(isAdmin());
 
-  if (!isLoaded) {
-    return (
-      <div className="app-loading" role="status" aria-label="Loading dashboard">
-        <Shield size={32} className="app-loading__icon" />
-        <span>Loading Cognitree...</span>
-      </div>
-    );
+  useEffect(() => {
+    setIsAuthenticated(isLoggedIn());
+    setIsAdminUser(isAdmin());
+  }, []);
+
+  const handleLoginSuccess = () => {
+    setIsAuthenticated(true);
+    setIsAdminUser(isAdmin());
+  };
+
+  const handleLogout = () => {
+    clearToken();
+    setIsAuthenticated(false);
+    setIsAdminUser(false);
+    setActiveView('overview');
+  };
+
+  if (!isAuthenticated) {
+    return <LoginPage onLoginSuccess={handleLoginSuccess} />;
   }
 
   /**
@@ -40,6 +57,10 @@ export default function App() {
     setActiveView('overview');
   };
 
+  const handleAdminView = () => {
+    setActiveView('admin');
+  };
+
   return (
     <div className="app">
       {/* Sidebar */}
@@ -53,6 +74,16 @@ export default function App() {
         </div>
 
         <nav className="sidebar__nav">
+          {isAdminUser && (
+            <button
+              className={`sidebar__nav-item ${activeView === 'admin' ? 'sidebar__nav-item--active' : ''}`}
+              onClick={handleAdminView}
+              id="nav-admin"
+            >
+              <Shield size={16} />
+              <span>Admin</span>
+            </button>
+          )}
           <button
             className={`sidebar__nav-item ${activeView === 'overview' ? 'sidebar__nav-item--active' : ''}`}
             onClick={() => handleBack()}
@@ -95,7 +126,7 @@ export default function App() {
           </button>
         </nav>
 
-        {/* Breadcrumb */}
+        {/* Breadcrumb & Logout */}
         <div className="sidebar__breadcrumb">
           <span>/</span>
           <span>
@@ -103,9 +134,22 @@ export default function App() {
               ? 'Vulnerability Overview'
               : activeView === 'all'
                 ? 'All Findings'
-                : `Vulnerability Findings — ${activeView}`}
+                : activeView === 'admin'
+                  ? 'Admin Control Panel'
+                  : `Vulnerability Findings — ${activeView}`}
           </span>
         </div>
+
+        {/* Logout button at bottom */}
+        <button
+          className="sidebar__logout"
+          onClick={handleLogout}
+          id="logout-btn"
+          title="Sign out and return to login"
+        >
+          <LogOut size={16} />
+          <span>Logout</span>
+        </button>
       </aside>
 
       {/* Main content */}
@@ -113,11 +157,23 @@ export default function App() {
         <div className="main__inner">
           {activeView === 'overview' ? (
             <VulnerabilityOverview onViewFindings={handleViewFindings} />
+          ) : activeView === 'admin' ? (
+            <AdminView />
           ) : (
-            <FindingsList scanType={activeView} onBack={handleBack} />
+            <FindingsList scanType={activeView} onBack={handleBack} isAdmin={isAdminUser} />
           )}
         </div>
       </main>
     </div>
+  );
+}
+
+export default function App() {
+  return (
+    <ErrorBoundary>
+      <QueryClientProvider client={queryClient}>
+        <AppContent />
+      </QueryClientProvider>
+    </ErrorBoundary>
   );
 }

@@ -6,7 +6,6 @@ import type {
   ScanType,
   SortOrder,
 } from './types';
-import { SEVERITY_ORDER } from './types';
 
 interface DashboardState {
   metadata: DashboardMetadata | null;

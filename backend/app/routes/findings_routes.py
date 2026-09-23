@@ -88,7 +88,7 @@ async def get_finding(id: str):
 async def update_finding(
     id: str, 
     update_data: FindingStatusUpdate,
-    current_user: UserInDB = Depends(get_current_user)
+    current_user: UserInDB = Depends(require_admin)
 ):
     db = get_database()
     
