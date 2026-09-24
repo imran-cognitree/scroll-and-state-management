@@ -14,7 +14,7 @@ import type {
   FindingStatusUpdate,
 } from './schemas';
 
-const API_BASE = 'http://localhost:8000/api';
+const API_BASE = 'http://127.0.0.1:8000/api';
 
 // Token management
 const TOKEN_KEY = 'vul_dashboard_token';
@@ -78,6 +78,10 @@ async function fetchWithAuth<T>(
     const error = await response.json().catch(() => ({ detail: 'Unknown error' }));
     const message = error.detail || `API Error: ${response.statusText}`;
     throw new Error(message);
+  }
+
+  if (response.status === 204) {
+    return {} as T;
   }
 
   const data = await response.json();
