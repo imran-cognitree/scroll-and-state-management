@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Shield, AlertCircle } from 'lucide-react';
+import { Shield, AlertCircle, Eye, EyeOff } from 'lucide-react';
 import { useAuth } from '../hooks/useAuth';
 import './LoginPage.css';
 
@@ -95,7 +95,7 @@ export function LoginPage({ onLoginSuccess }: LoginPageProps) {
                 title={showPassword ? 'Hide password' : 'Show password'}
                 aria-label={showPassword ? 'Hide password' : 'Show password'}
               >
-                {showPassword ? '✕' : '○'}
+                {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
               </button>
             </div>
           </div>

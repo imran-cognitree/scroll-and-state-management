@@ -16,9 +16,6 @@ interface UseFindingsOptions {
   enabled?: boolean;
 }
 
-/**
- * Infinite-scroll hook for FindingsList — fetches pages from the backend.
- */
 export function useInfiniteFindings(options: Omit<UseFindingsOptions, 'page'> = {}) {
   const { project, type, severity, status, scanner, limit = 50, enabled = true } = options;
 
@@ -37,10 +34,7 @@ export function useInfiniteFindings(options: Omit<UseFindingsOptions, 'page'> = 
   });
 }
 
-/**
- * Fetches ALL findings (high limit) to power the overview dashboard stats.
- * With 383 total findings this is a single lightweight request.
- */
+
 export function useAllFindings(project?: string) {
   return useQuery({
     queryKey: [ALL_FINDINGS_QUERY_KEY, { project }],
@@ -50,9 +44,6 @@ export function useAllFindings(project?: string) {
   });
 }
 
-/**
- * Plain paginated query (non-infinite) — kept for flexibility.
- */
 export function useFindings(options: UseFindingsOptions = {}) {
   const {
     project,

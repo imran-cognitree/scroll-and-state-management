@@ -98,6 +98,8 @@
 }
 
 .login-input {
+  width: 100%;
+  box-sizing: border-box;
   font-family: var(--font-body);
   font-size: 14px;
   padding: var(--space-md);
@@ -132,6 +134,11 @@
   position: relative;
   display: flex;
   align-items: center;
+  width: 100%;
+}
+
+.login-password-wrapper .login-input {
+  padding-right: 48px;
 }
 
 .login-toggle-password {
