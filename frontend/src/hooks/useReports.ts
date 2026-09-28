@@ -3,14 +3,12 @@ import { generateReport, getReportStatus } from '../lib/api';
 
 export const REPORTS_QUERY_KEY = 'reports';
 
-/** Mutation: POST /api/reports — fires the job and returns the task immediately. */
 export function useGenerateReport() {
   const queryClient = useQueryClient();
 
   return useMutation({
     mutationFn: () => generateReport(),
     onSuccess: (task) => {
-      // Seed the cache so the poll query starts with initial data right away
       queryClient.setQueryData([REPORTS_QUERY_KEY, task.task_id], task);
     },
   });
@@ -30,10 +28,8 @@ export function useReportStatus(taskId: string | null) {
       const status = query.state.data?.status;
       return status === 'PENDING' ? 5000 : false;
     },
-    // Don't use the global staleTime — always re-fetch for live status
     staleTime: 0,
     gcTime: 5 * 60 * 1000,
-    // Don't retry on error during polling — surface the failure fast
     retry: 1,
   });
 }
