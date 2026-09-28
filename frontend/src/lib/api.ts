@@ -189,3 +189,20 @@ export async function deleteFinding(id: string): Promise<void> {
     method: 'DELETE',
   });
 }
+
+// Reports API
+export interface ReportTask {
+  task_id: string;
+  status: 'PENDING' | 'SUCCESS' | 'FAILURE';
+  created_at: string;
+  completed_at?: string | null;
+  message?: string | null;
+}
+
+export async function generateReport(): Promise<ReportTask> {
+  return fetchWithAuth<ReportTask>('/reports', { method: 'POST' });
+}
+
+export async function getReportStatus(taskId: string): Promise<ReportTask> {
+  return fetchWithAuth<ReportTask>(`/reports/${taskId}`);
+}

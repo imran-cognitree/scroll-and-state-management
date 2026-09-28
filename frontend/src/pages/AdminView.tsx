@@ -1,4 +1,5 @@
 import { Shield } from 'lucide-react';
+import { ReportGenerator } from '../components/dashboard/ReportGenerator';
 import './AdminView.css';
 
 export function AdminView() {
@@ -31,6 +32,11 @@ export function AdminView() {
             <span>Access audit logs</span>
           </div>
         </div>
+
+        {/* ── Report Generation Section ── */}
+        <div className="admin-view__divider" />
+        <div className="admin-view__section-label">Actions</div>
+        <ReportGenerator />
       </div>
     </div>
   );

@@ -83,3 +83,21 @@
   font-weight: 700;
   flex-shrink: 0;
 }
+
+.admin-view__divider {
+  width: 100%;
+  height: 1px;
+  background: var(--border-glass);
+  margin: var(--space-sm) 0;
+}
+
+.admin-view__section-label {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--on-surface-variant);
+  align-self: flex-start;
+}
+
