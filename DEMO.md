@@ -20,7 +20,7 @@
 ### Setup
 - [vite.config.ts](/frontend/vite.config.ts)
 - [Mock Service Worker](frontend/src/mocks/server.ts)
-- [Mock servive APIs](frontend/src/mocks/handlers.ts)
+- [Mock service APIs](frontend/src/mocks/handlers.ts)
 - [setupTests.ts](/frontend/src/setupTests.ts)
 
 ### MetricStat

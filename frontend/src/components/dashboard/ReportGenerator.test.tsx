@@ -1,6 +1,6 @@
-import { screen, waitFor } from '@testing-library/react';
+import { screen, waitFor, act } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import { http, HttpResponse } from 'msw';
 import { server } from '../../mocks/server';
 import { ReportGenerator } from './ReportGenerator';
@@ -66,5 +66,46 @@ describe('ReportGenerator Integration', () => {
 
         // Ensure user can try again
         expect(screen.getByRole('button', { name: /generate again/i })).toBeInTheDocument();
+    });
+
+    it('shows timeout error if polling takes longer than 30s', async () => {
+        vi.useFakeTimers({ shouldAdvanceTime: true });
+        const user = userEvent.setup({ delay: null });
+
+        // Override to always return PENDING so it times out
+        server.use(
+            http.get('http://127.0.0.1:8000/api/reports/:taskId', () => {
+                return HttpResponse.json({
+                    task_id: 'mock-task-123',
+                    status: 'PENDING',
+                    created_at: new Date().toISOString(),
+                });
+            })
+        );
+
+        renderWithProviders(<ReportGenerator />);
+
+        const generateBtn = screen.getByRole('button', { name: /generate report/i });
+        await user.click(generateBtn);
+
+        // Wait for it to become loading
+        await waitFor(() => {
+            expect(screen.getByRole('button', { name: /processing…/i })).toBeDisabled();
+        });
+
+        // Advance timers by 30s
+        act(() => {
+            vi.advanceTimersByTime(30000);
+        });
+
+        // Expect timeout failure state
+        await waitFor(() => {
+            expect(screen.getByText('Generation Failed')).toBeInTheDocument();
+        });
+
+        expect(screen.getByText('Request timed out after 30 seconds. Please try again.')).toBeInTheDocument();
+        expect(screen.getByRole('button', { name: /generate again/i })).toBeInTheDocument();
+
+        vi.useRealTimers();
     });
 });

@@ -18,13 +18,14 @@ export function useGenerateReport() {
  * Query: GET /api/reports/{taskId} — polls every 5 seconds while the task
  * is still PENDING, then stops automatically once a terminal state is reached.
  */
-export function useReportStatus(taskId: string | null) {
+export function useReportStatus(taskId: string | null, stopPolling = false) {
   return useQuery({
     queryKey: [REPORTS_QUERY_KEY, taskId],
     queryFn: () => getReportStatus(taskId!),
-    enabled: !!taskId,
-    // Poll every 5 s only while the task is still pending
+    enabled: !!taskId && !stopPolling,
+    // Poll every 5 s only while the task is still pending and not stopped
     refetchInterval: (query) => {
+      if (stopPolling) return false;
       const status = query.state.data?.status;
       return status === 'PENDING' ? 5000 : false;
     },

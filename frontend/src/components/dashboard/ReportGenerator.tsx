@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import { FileText, Loader2, CheckCircle2, XCircle, RefreshCw } from 'lucide-react';
 import { useGenerateReport, useReportStatus } from '../../hooks/useReports';
 import { useDashboardStore } from '../../store/dashboardStore';
@@ -7,12 +8,29 @@ export function ReportGenerator() {
   const taskId = useDashboardStore((state) => state.reportTaskId);
   const setTaskId = useDashboardStore((state) => state.setReportTaskId);
 
+  const [isTimeout, setIsTimeout] = useState(false);
+
   const generateMutation = useGenerateReport();
-  const statusQuery = useReportStatus(taskId);
+  const statusQuery = useReportStatus(taskId, isTimeout);
 
   const currentStatus = statusQuery.data?.status ?? (generateMutation.isPending ? 'PENDING' : null);
 
+  useEffect(() => {
+    let timeoutId: ReturnType<typeof setTimeout>;
+
+    if (taskId && currentStatus === 'PENDING') {
+      timeoutId = setTimeout(() => {
+        setIsTimeout(true);
+      }, 30000);
+    }
+
+    return () => {
+      if (timeoutId) clearTimeout(timeoutId);
+    };
+  }, [taskId, currentStatus]);
+
   const handleGenerate = () => {
+    setIsTimeout(false);
     generateMutation.mutate(undefined, {
       onSuccess: (task) => setTaskId(task.task_id),
     });
@@ -20,12 +38,13 @@ export function ReportGenerator() {
 
   const handleReset = () => {
     setTaskId(null);
+    setIsTimeout(false);
     generateMutation.reset();
   };
 
-  const isLoading = generateMutation.isPending || currentStatus === 'PENDING';
-  const isSuccess = currentStatus === 'SUCCESS';
-  const isFailure = currentStatus === 'FAILURE' || generateMutation.isError;
+  const isLoading = (generateMutation.isPending || currentStatus === 'PENDING') && !isTimeout;
+  const isSuccess = currentStatus === 'SUCCESS' && !isTimeout;
+  const isFailure = currentStatus === 'FAILURE' || generateMutation.isError || isTimeout;
 
   const uiState = isLoading ? 'loading' : isSuccess ? 'success' : isFailure ? 'failure' : 'idle';
 
@@ -89,7 +108,9 @@ export function ReportGenerator() {
                 <span className="report-gen__status-label">Generation Failed</span>
               </div>
               <p className="report-gen__status-msg">
-                {statusQuery.data?.message
+                {isTimeout
+                  ? 'Request timed out after 30 seconds. Please try again.'
+                  : statusQuery.data?.message
                   ?? generateMutation.error?.message
                   ?? 'An unexpected error occurred. Please try again.'}
               </p>
