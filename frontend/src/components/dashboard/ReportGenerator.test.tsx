@@ -63,7 +63,7 @@ describe('ReportGenerator Integration', () => {
 
         // The error message from our API mock should be displayed
         expect(screen.getByText('Internal Server Error')).toBeInTheDocument();
-        
+
         // Ensure user can try again
         expect(screen.getByRole('button', { name: /generate again/i })).toBeInTheDocument();
     });
