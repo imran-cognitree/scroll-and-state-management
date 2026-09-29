@@ -25,6 +25,7 @@ export function useAuth(): UseAuthReturn {
       setToken(token.access_token);
       return token;
     },
+    retry: false, // Do not retry login failures
     onSuccess: () => {
       queryClient.clear();
     },
