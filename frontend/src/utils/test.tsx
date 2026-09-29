@@ -8,7 +8,7 @@ export function renderWithProviders(ui: ReactElement) {
     const testQueryClient = new QueryClient({
         defaultOptions: {
             queries: {
-                retry: false, // Turn off retries for tests so they fail fast
+                retry: false,
             },
         },
     });
