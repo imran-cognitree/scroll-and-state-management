@@ -1,10 +1,11 @@
-import { useState } from 'react';
 import { FileText, Loader2, CheckCircle2, XCircle, RefreshCw } from 'lucide-react';
 import { useGenerateReport, useReportStatus } from '../../hooks/useReports';
+import { useDashboardStore } from '../../store/dashboardStore';
 import './ReportGenerator.css';
 
 export function ReportGenerator() {
-  const [taskId, setTaskId] = useState<string | null>(null);
+  const taskId = useDashboardStore((state) => state.reportTaskId);
+  const setTaskId = useDashboardStore((state) => state.setReportTaskId);
 
   const generateMutation = useGenerateReport();
   const statusQuery = useReportStatus(taskId);

@@ -1,4 +1,5 @@
 import { create } from 'zustand';
+import { persist } from 'zustand/middleware';
 import type {
   DashboardData,
   DashboardMetadata,
@@ -22,6 +23,8 @@ interface DashboardState {
   sortOrder: SortOrder;
   currentPage: number;
   pageSize: number;
+  
+  reportTaskId: string | null;
 
   // Actions
   loadData: (data: DashboardData) => void;
@@ -35,36 +38,57 @@ interface DashboardState {
   setPage: (page: number) => void;
   setPageSize: (size: number) => void;
   loadMorePage: () => void;
+  setReportTaskId: (id: string | null) => void;
 }
 
-export const useDashboardStore = create<DashboardState>((set) => ({
-  metadata: null,
-  allFindings: [],
-  isLoaded: false,
-  selectedProject: 'all',
-  selectedStatus: 'all',
-  selectedSeverity: 'all',
-  selectedScanType: 'all',
-  selectedTool: 'all',
-  searchQuery: '',
-  sortOrder: 'severity-desc',
-  currentPage: 1,
-  pageSize: 10,
+export const useDashboardStore = create<DashboardState>()(
+  persist(
+    (set) => ({
+      metadata: null,
+      allFindings: [],
+      isLoaded: false,
+      selectedProject: 'all',
+      selectedStatus: 'all',
+      selectedSeverity: 'all',
+      selectedScanType: 'all',
+      selectedTool: 'all',
+      searchQuery: '',
+      sortOrder: 'severity-desc',
+      currentPage: 1,
+      pageSize: 10,
+      reportTaskId: null,
 
-  loadData: (data) =>
-    set({ metadata: data.metadata, allFindings: data.findings, isLoaded: true }),
+      loadData: (data) =>
+        set({ metadata: data.metadata, allFindings: data.findings, isLoaded: true }),
 
-  setProjectFilter: (project) => set({ selectedProject: project, currentPage: 1 }),
-  setStatusFilter: (status) => set({ selectedStatus: status, currentPage: 1 }),
-  setSeverityFilter: (severity) => set({ selectedSeverity: severity, currentPage: 1 }),
-  setScanTypeFilter: (type) => set({ selectedScanType: type, currentPage: 1 }),
-  setToolFilter: (tool) => set({ selectedTool: tool, currentPage: 1 }),
-  setSearchQuery: (query) => set({ searchQuery: query, currentPage: 1 }),
-  setSortOrder: (order) => set({ sortOrder: order, currentPage: 1 }),
-  setPage: (page) => set({ currentPage: page }),
-  setPageSize: (size) => set({ pageSize: size, currentPage: 1 }),
-  loadMorePage: () => set((state) => ({ currentPage: state.currentPage + 1 })),
-}));
+      setProjectFilter: (project) => set({ selectedProject: project, currentPage: 1 }),
+      setStatusFilter: (status) => set({ selectedStatus: status, currentPage: 1 }),
+      setSeverityFilter: (severity) => set({ selectedSeverity: severity, currentPage: 1 }),
+      setScanTypeFilter: (type) => set({ selectedScanType: type, currentPage: 1 }),
+      setToolFilter: (tool) => set({ selectedTool: tool, currentPage: 1 }),
+      setSearchQuery: (query) => set({ searchQuery: query, currentPage: 1 }),
+      setSortOrder: (order) => set({ sortOrder: order, currentPage: 1 }),
+      setPage: (page) => set({ currentPage: page }),
+      setPageSize: (size) => set({ pageSize: size, currentPage: 1 }),
+      loadMorePage: () => set((state) => ({ currentPage: state.currentPage + 1 })),
+      setReportTaskId: (id) => set({ reportTaskId: id }),
+    }),
+    {
+      name: 'dashboard-storage',
+      partialize: (state) => ({
+        selectedProject: state.selectedProject,
+        selectedStatus: state.selectedStatus,
+        selectedSeverity: state.selectedSeverity,
+        selectedScanType: state.selectedScanType,
+        selectedTool: state.selectedTool,
+        searchQuery: state.searchQuery,
+        sortOrder: state.sortOrder,
+        pageSize: state.pageSize,
+        reportTaskId: state.reportTaskId,
+      }),
+    }
+  )
+);
 
 export function computeSeverityCounts(findings: Finding[]) {
   return {
