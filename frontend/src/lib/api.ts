@@ -206,3 +206,44 @@ export async function generateReport(): Promise<ReportTask> {
 export async function getReportStatus(taskId: string): Promise<ReportTask> {
   return fetchWithAuth<ReportTask>(`/reports/${taskId}`);
 }
+
+/**
+ * Opens an SSE connection to /api/reports/{taskId}/stream and calls
+ * onStatusChange when the server pushes a terminal REPORT_STATUS event.
+ *
+ * Returns a cleanup function that closes the EventSource.
+ */
+export function subscribeToReportStream(
+  taskId: string,
+  onStatusChange: (status: 'SUCCESS' | 'FAILURE') => void,
+  onError?: () => void,
+): () => void {
+  const token = getStoredToken();
+  // EventSource doesn't support custom headers natively, so we pass the
+  // token as a query param. The backend should validate it accordingly.
+  // For this exercise the backend uses cookie/header auth so we attach
+  // the token in the URL for simplicity.
+  const url = `${API_BASE}/reports/${taskId}/stream?token=${token ?? ''}`;
+  const es = new EventSource(url);
+
+  es.addEventListener('REPORT_STATUS', (event: MessageEvent) => {
+    try {
+      const data = JSON.parse(event.data) as { status: 'SUCCESS' | 'FAILURE' };
+      onStatusChange(data.status);
+    } catch {
+      // malformed event — treat as error
+      onError?.();
+    } finally {
+      es.close();
+    }
+  });
+
+  es.onerror = () => {
+    onError?.();
+    es.close();
+  };
+
+  // Return a cleanup function
+  return () => es.close();
+}
+

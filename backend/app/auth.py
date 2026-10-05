@@ -59,3 +59,20 @@ async def require_admin(current_user: UserInDB = Depends(get_current_user)):
             detail="Operation not permitted",
         )
     return current_user
+
+async def get_current_user_from_query(token: str):
+    if not token:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Could not validate credentials",
+            headers={"WWW-Authenticate": "Bearer"},
+        )
+    return await get_current_user(token)
+
+async def require_admin_from_query(current_user: UserInDB = Depends(get_current_user_from_query)):
+    if current_user.role != Role.ADMIN:
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Operation not permitted",
+        )
+    return current_user
