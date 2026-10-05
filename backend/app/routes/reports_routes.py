@@ -8,7 +8,7 @@ from fastapi import APIRouter, BackgroundTasks, Depends, HTTPException
 from fastapi.responses import StreamingResponse
 from pydantic import BaseModel
 
-from app.auth import require_admin
+from app.auth import require_admin, require_admin_from_query
 from app.database import get_database
 from app.models import UserInDB
 
@@ -120,7 +120,7 @@ async def create_report(
 @router.get("/{task_id}/stream")
 async def stream_report_status(
     task_id: str,
-    current_user: UserInDB = Depends(require_admin),
+    current_user: UserInDB = Depends(require_admin_from_query),
 ):
     """
     SSE endpoint — keeps the connection open and pushes a single

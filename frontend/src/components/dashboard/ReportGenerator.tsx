@@ -21,7 +21,7 @@ export function ReportGenerator() {
     if (taskId && currentStatus === 'PENDING') {
       timeoutId = setTimeout(() => {
         setIsTimeout(true);
-      }, 30000);
+      }, 35000);
     }
 
     return () => {
@@ -72,7 +72,7 @@ export function ReportGenerator() {
                 <span className="report-gen__status-label">Processing report…</span>
               </div>
               <p className="report-gen__status-msg">
-                Polling for updates every 5 seconds. This typically takes ~30 seconds.
+                Waiting for server notification. This typically takes ~30 seconds.
               </p>
               {taskId && (
                 <p className="report-gen__task-id">
@@ -109,7 +109,7 @@ export function ReportGenerator() {
               </div>
               <p className="report-gen__status-msg">
                 {isTimeout
-                  ? 'Request timed out after 30 seconds. Please try again.'
+                  ? 'Request timed out after 35 seconds. Please try again.'
                   : statusQuery.data?.message
                   ?? generateMutation.error?.message
                   ?? 'An unexpected error occurred. Please try again.'}
