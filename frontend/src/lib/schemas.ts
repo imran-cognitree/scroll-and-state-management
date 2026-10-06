@@ -44,7 +44,7 @@ export type ScanType = z.infer<typeof ScanTypeSchema>;
 
 export const FindingBaseSchema = z.object({
   _id: z.string().optional(),
-  id: z.string().optional(),
+  id: z.string().default(''),
   type: ScanTypeSchema,
   project: z.string(),
   vulnerability_id: z.string(),
@@ -54,7 +54,7 @@ export const FindingBaseSchema = z.object({
   severity: SeveritySchema,
   description: z.string(),
   fixed_version: z.string(),
-  status: z.string(),
+  status: StatusSchema,
   scanner: z.string(),
   location: z.string(),
   detected_at: z.string(),

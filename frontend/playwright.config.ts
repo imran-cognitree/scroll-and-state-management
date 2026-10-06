@@ -13,8 +13,20 @@ export default defineConfig({
   reporter: 'html',
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
-    baseURL: 'http://localhost:5173',
+    // vite preview (production build) runs on 4173, NOT 5173 (that's dev server)
+    baseURL: 'http://localhost:4173',
     trace: 'on-first-retry',
+    // Capture a screenshot automatically whenever a test fails — invaluable for CI debugging
+    screenshot: 'only-on-failure',
+  },
+
+  // Automatically build & serve the app before running E2E tests.
+  // Playwright will wait until the server is ready, then shut it down when done.
+  webServer: {
+    command: 'pnpm run build && pnpm run preview',
+    url: 'http://localhost:4173',
+    reuseExistingServer: !process.env.CI,
+    timeout: 120 * 1000, // Give the build up to 2 minutes to complete
   },
 
   projects: [
