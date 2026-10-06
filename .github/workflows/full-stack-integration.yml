@@ -1,0 +1,86 @@
+name: Full Stack E2E Integration
+
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch: # Allows manual trigger from GitHub UI
+
+jobs:
+  full-stack-test:
+    name: Full Stack Integration (Frontend + Backend + DB)
+    runs-on: ubuntu-latest
+
+    services:
+      mongodb:
+        image: mongo:latest
+        ports:
+          - 27017:27017
+        env:
+          MONGO_INITDB_ROOT_USERNAME: admin
+          MONGO_INITDB_ROOT_PASSWORD: password
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      # --- BACKEND SETUP ---
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install Backend Dependencies
+        working-directory: ./backend
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install uvicorn
+
+      - name: Start Backend API
+        working-directory: ./backend
+        env:
+          MONGODB_URL: "mongodb://admin:password@localhost:27017"
+        run: |
+          # Start uvicorn in the background
+          python -m uvicorn app.main:app --host 0.0.0.0 --port 8000 &
+          
+          # Wait for the backend to be healthy (the Swagger UI endpoint is always available)
+          echo "Waiting for API to start..."
+          timeout 30 bash -c 'while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' http://localhost:8000/docs)" != "200" ]]; do sleep 1; done' || false
+          echo "API is up!"
+
+      # --- FRONTEND SETUP ---
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+          run_install: false
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'pnpm'
+          cache-dependency-path: 'frontend/pnpm-lock.yaml'
+
+      - name: Install Frontend Dependencies
+        working-directory: ./frontend
+        run: pnpm install
+
+      - name: Install Playwright Browsers
+        working-directory: ./frontend
+        run: pnpm exec playwright install --with-deps
+
+      - name: Run Live Smoke Tests
+        working-directory: ./frontend
+        # This runs ONLY the @live tests against the real backend spun up above
+        run: pnpm exec playwright test --grep "@live"
+
+      - name: Upload Playwright Report
+        uses: actions/upload-artifact@v4
+        if: ${{ !cancelled() }}
+        with:
+          name: fullstack-playwright-report
+          path: frontend/playwright-report/
+          retention-days: 15
