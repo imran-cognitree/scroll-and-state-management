@@ -1,6 +1,6 @@
 ## Asynchronous Processing
 - Polling
-- Web hook
+- SSE
 - Socket
 
 ### Polling
@@ -11,6 +11,19 @@
     - [useGenerateReport hook](/frontend/src/hooks/useReports.ts)
 4. We fetch and poll the status with the taskId
     - [useReportStatus hook](/frontend/src/hooks/useReports.ts)
+
+### Server-Sent Events (NEW)
+1. We click the Generate Report button, and the below hook gets invoked
+    - [useGenerateReport hook](/frontend/src/hooks/useReports.ts)
+2. Keeps the taskId in localstorage and sets the query key with taskId and status. Which in turn invokes the below hook, which opens up the SSE connection
+    - [useReportStatus hook](/frontend/src/hooks/useReports.ts)
+3. After server pushes the final status, we update things accordingly and close the SSE connection.
+
+### SSE Tests
+
+### RBAC Tests
+- [rbac.test.tsx](frontend/src/rbac.test.tsx)
+
 
 ## Unit and Integration Tests
 - Setup
