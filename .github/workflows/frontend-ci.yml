@@ -47,8 +47,8 @@ jobs:
 
       - name: Run E2E Smoke Tests (Playwright)
         # This will automatically run `pnpm run build` and `pnpm run preview` 
-        # before running the tests, as configured in playwright.config.ts
-        run: pnpm test:e2e
+        # We ignore @live tests because this environment has no backend database
+        run: pnpm exec playwright test --grep-invert "@live"
 
       - name: Upload Playwright Report
         uses: actions/upload-artifact@v4
