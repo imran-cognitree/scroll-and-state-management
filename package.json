@@ -1,0 +1,7 @@
+{
+  "name": "scroll-and-state-management",
+  "private": true,
+  "scripts": {
+    "prepare": "cd frontend && node_modules/.bin/husky ../.husky"
+  }
+}
