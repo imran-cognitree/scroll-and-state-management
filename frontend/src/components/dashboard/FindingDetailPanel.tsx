@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
-import { X, ExternalLink, Loader2, AlertCircle, RefreshCw } from 'lucide-react';
+import { X, ExternalLink, AlertCircle, RefreshCw } from 'lucide-react';
+import type { Status } from '../../store/types';
 import { SeverityBadge } from '../ui/SeverityBadge';
 import { StatusBadge } from '../ui/StatusBadge';
 import { useFindingDetail } from '../../hooks/useFindings';
@@ -87,7 +88,7 @@ export function FindingDetailPanel({ findingId, onClose }: Props) {
             {finding && (
               <div className="detail-panel__badges">
                 <SeverityBadge severity={finding.severity} showDot />
-                <StatusBadge status={finding.status} />
+                <StatusBadge status={finding.status as Status} />
               </div>
             )}
           </div>
