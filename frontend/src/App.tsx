@@ -90,7 +90,7 @@ function AppContent() {
             id="nav-dashboard"
           >
             <LayoutDashboard size={16} />
-            <span>Dashboard</span>
+            <span>Dashboardddd</span>
           </button>
           <button
             className={`sidebar__nav-item ${activeView === 'all' ? 'sidebar__nav-item--active' : ''}`}
