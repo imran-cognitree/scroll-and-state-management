@@ -1,24 +1,16 @@
 import { test, expect } from '@playwright/test';
 
-/**
- * RBAC Enforcement — E2E Smoke Tests
- *
- * These tests verify that the frontend correctly enforces role-based access control.
- * All backend API calls are mocked via page.route() for full CI isolation.
- */
-
 const MOCK_USER_TOKEN =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9' +
-  '.eyJzdWIiOiJ1c2VyQGNvZ25pdHJlZS5jb20iLCJyb2xlIjoiVVNFUiIsImV4cCI6OTk5OTk5OTk5OX0' +
-  '.mock-user-signature';
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9' +
+    '.eyJzdWIiOiJ1c2VyQGNvZ25pdHJlZS5jb20iLCJyb2xlIjoiVVNFUiIsImV4cCI6OTk5OTk5OTk5OX0' +
+    '.mock-user-signature';
 
 const MOCK_ADMIN_TOKEN =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9' +
-  '.eyJzdWIiOiJhZG1pbkBjb2duaXRyZWUuY29tIiwicm9sZSI6IkFETUlOIiwiZXhwIjo5OTk5OTk5OTk5fQ' +
-  '.mock-admin-signature';
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9' +
+    '.eyJzdWIiOiJhZG1pbkBjb2duaXRyZWUuY29tIiwicm9sZSI6IkFETUlOIiwiZXhwIjo5OTk5OTk5OTk5fQ' +
+    '.mock-admin-signature';
 
-// Shared helper to mock common APIs
-async function mockCommonApis(page: any) {
+async function mockFindingApi(page: any) {
     await page.route('**/api/findings**', (route: any) => {
         route.fulfill({
             status: 200,
@@ -40,7 +32,7 @@ async function mockCommonApis(page: any) {
     });
 }
 
-async function loginAs(page: any, token: string) {
+async function login(page: any, token: string) {
     await page.route('**/api/auth/login', (route: any) => {
         route.fulfill({
             status: 200,
@@ -58,8 +50,9 @@ async function loginAs(page: any, token: string) {
 test.describe('RBAC Enforcement', () => {
 
     test('standard USER should NOT see the Admin navigation button', async ({ page }) => {
-        await mockCommonApis(page);
-        await loginAs(page, MOCK_USER_TOKEN);
+        await mockFindingApi(page);
+        await login(page, MOCK_USER_TOKEN);
+
 
         // Wait for dashboard to be fully loaded
         await expect(page.getByText('All Findings')).toBeVisible();
@@ -69,8 +62,8 @@ test.describe('RBAC Enforcement', () => {
     });
 
     test('standard USER should NOT see Admin Control Panel content', async ({ page }) => {
-        await mockCommonApis(page);
-        await loginAs(page, MOCK_USER_TOKEN);
+        await mockFindingApi(page);
+        await login(page, MOCK_USER_TOKEN);
 
         await expect(page.getByText('All Findings')).toBeVisible();
 
@@ -80,8 +73,8 @@ test.describe('RBAC Enforcement', () => {
     });
 
     test('ADMIN user should see the Admin navigation button', async ({ page }) => {
-        await mockCommonApis(page);
-        await loginAs(page, MOCK_ADMIN_TOKEN);
+        await mockFindingApi(page);
+        await login(page, MOCK_ADMIN_TOKEN);
 
         await expect(page.getByText('All Findings')).toBeVisible();
 

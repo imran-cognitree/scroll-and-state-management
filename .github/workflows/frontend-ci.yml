@@ -1,4 +1,4 @@
-name: Frontend CI Pipeline
+name: Frontend CI
 
 on:
   push:
@@ -23,7 +23,7 @@ jobs:
         uses: pnpm/action-setup@v4
         with:
           version: 9
-          run_install: false
+          run_install: false # for using cached packages
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -42,16 +42,14 @@ jobs:
         run: pnpm run lint
 
       - name: Run Unit & Integration Tests (Vitest)
-        # We use pnpm exec vitest run so it executes once and doesn't hang in watch mode
         run: pnpm exec vitest run
 
       - name: Run E2E Smoke Tests (Playwright)
-        # This will automatically run `pnpm run build` and `pnpm run preview` 
-        # We ignore @live tests because this environment has no backend database
         run: pnpm exec playwright test --grep-invert "@live"
 
       - name: Upload Playwright Report
         uses: actions/upload-artifact@v4
+
         if: ${{ !cancelled() }} # Always run this step even if tests fail
         with:
           name: playwright-report
