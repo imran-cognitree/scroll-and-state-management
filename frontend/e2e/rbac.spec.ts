@@ -53,6 +53,7 @@ test.describe('RBAC Enforcement', () => {
         await mockFindingApi(page);
         await login(page, MOCK_USER_TOKEN);
 
+
         // Wait for dashboard to be fully loaded
         await expect(page.getByText('All Findings')).toBeVisible();
 
