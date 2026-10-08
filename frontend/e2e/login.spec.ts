@@ -1,19 +1,9 @@
 import { test, expect } from '@playwright/test';
 
-/**
- * Authentication Flow — E2E Smoke Tests
- *
- * All backend API calls are intercepted using page.route() so these tests
- * run 100% in isolation without a real FastAPI server or MongoDB instance.
- * This makes them safe to run in GitHub Actions CI.
- */
-
-// Shared mock tokens
 const MOCK_USER_TOKEN =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9' +
-  '.eyJzdWIiOiJ1c2VyQGNvZ25pdHJlZS5jb20iLCJyb2xlIjoiVVNFUiIsImV4cCI6OTk5OTk5OTk5OX0' +
-  '.mock-user-signature';
-
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9' +
+    '.eyJzdWIiOiJ1c2VyQGNvZ25pdHJlZS5jb20iLCJyb2xlIjoiVVNFUiIsImV4cCI6OTk5OTk5OTk5OX0' +
+    '.mock-user-signature';
 
 test.describe('Authentication Flow', () => {
 
